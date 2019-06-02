@@ -6,7 +6,7 @@ window.dicr = (function(dicr)
     {
         this.options = $.extend({}, {
             aimate: true,
-            autohide: 500
+            autohide: 10000
         }, options)
 
         this.container = $(container);
