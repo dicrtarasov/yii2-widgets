@@ -74,9 +74,9 @@ trait ToastsTrait
 
         $this->view->registerJs(
             "(function(args) {
-                $.each(args.errors, (i, message) => window.dicr.widgets.toasts.createToast('test-danger', message, args.options));
-                $.each(args.warnings, (i, message) => window.dicr.widgets.toasts.createToast('test-warning', message, args.options));
-                $.each(args.success, (i, message) => window.dicr.widgets.toasts.createToast('test-success', message, args.options));
+                $.each(args.errors, (i, message) => window.dicr.widgets.toasts.error(message, args.options));
+                $.each(args.warnings, (i, message) => window.dicr.widgets.toasts.warning(message, args.options));
+                $.each(args.success, (i, message) => window.dicr.widgets.toasts.success(message, args.options));
                 $.each(args.toasts, (i, content) => window.dicr.widgets.toasts.addToast(content, args.options));
             })(" . Json::encode($this->clientOptions) . ")"
         );
