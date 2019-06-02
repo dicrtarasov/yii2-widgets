@@ -32,7 +32,7 @@ trait ToastsTrait
     public $toasts = [];
 
     /** @var int задержка скрытия, 0/false - запретить автоскрытие */
-    public $autohide = 1000;
+    public $autohide = 10000;
 
     /** @var bool анимация */
     public $animation = true;
