@@ -1,0 +1,7 @@
+.dicr-widgets-toasts {
+    display: table;
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 999999;
+}
