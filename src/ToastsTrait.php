@@ -51,7 +51,7 @@ trait ToastsTrait
             $this->options['id'] = $this->getId();
         }
 
-        foreach (['animate', 'autohide'] as $field) {
+        foreach (['animation', 'autohide'] as $field) {
             if (isset($this->{$field})) {
                 $this->clientOptions['options'][$field] = $this->{$field};
             }
