@@ -42,9 +42,9 @@ window.dicr = (function(dicr)
         $toast.appendTo(this.container);
         
         $toast.toast({
-            delay: parseInt(opts.autohide) || 0,
+            animation: Boolean(opts.animation),
             autohide: Boolean(opts.autohide),
-            animation: Boolean(opts.animation)
+            delay: parseInt(opts.autohide) || 0,
         });
         
         $toast.toast('show');
