@@ -50,6 +50,18 @@ trait ToastsTrait
         if (empty($this->options['id'])) {
             $this->options['id'] = $this->getId();
         }
+
+        foreach (['animate', 'autohide'] as $field) {
+            if (isset($this->{$field})) {
+                $this->clientOptions['options'][$field] = $this->{$field};
+            }
+        }
+
+        foreach (['errors', 'warnings', 'success', 'toasts'] as $field) {
+            if (isset($this->{$field})) {
+                $this->clientOptions[$field] = $this->{$field};
+            }
+        }
     }
 
     /**
@@ -62,16 +74,11 @@ trait ToastsTrait
 
         $this->view->registerJs(
             "(function(args) {
-                const options = {
-                    animation: args.animation,
-                    autohide: args.autohide
-                };
-
-                $.each(args.errors, (i, message) => window.dicr.widgets.toasts.createToast('test-danger', message, options));
-                $.each(args.warnings, (i, message) => window.dicr.widgets.toasts.createToast('test-warning', message, options));
-                $.each(args.success, (i, message) => window.dicr.widgets.toasts.createToast('test-success', message, options));
-                $.each(args.toasts, (i, content) => window.dicr.widgets.toasts.addToast(content, options));
-            })(" . Json::encode($this->attributes) . ")"
+                $.each(args.errors, (i, message) => window.dicr.widgets.toasts.createToast('test-danger', message, args.options));
+                $.each(args.warnings, (i, message) => window.dicr.widgets.toasts.createToast('test-warning', message, args.options));
+                $.each(args.success, (i, message) => window.dicr.widgets.toasts.createToast('test-success', message, args.options));
+                $.each(args.toasts, (i, content) => window.dicr.widgets.toasts.addToast(content, args.options));
+            })(" . Json::encode($this->clientOptions) . ")"
         );
 
         return '';
