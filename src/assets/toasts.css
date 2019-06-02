@@ -1,5 +1,8 @@
 .dicr-widgets-toasts {
-    display: table;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: stretch;
+    justify-content: flex-start;
     position: fixed;
     top: 1rem;
     right: 1rem;
