@@ -5,7 +5,7 @@ window.dicr = (function(dicr)
     function Toasts(container, options)
     {
         this.options = $.extend({}, {
-            aimate: true,
+            animate: true,
             autohide: 10000
         }, options)
 
