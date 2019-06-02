@@ -56,7 +56,7 @@ trait ToastsTrait
      * {@inheritDoc}
      * @see \yii\base\Widget::render()
      */
-    public function render()
+    public function run()
     {
         ToastsAsset::register($this->view);
 
@@ -74,6 +74,6 @@ trait ToastsTrait
             })(" . Json::encode($this->attributes) . ")"
         );
 
-        return Html::tag('section', '', $this->options);
+        return '';
     }
 }
