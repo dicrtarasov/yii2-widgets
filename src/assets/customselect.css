@@ -1,0 +1,65 @@
+.dicr-widgets-customselect {
+    display: table;
+    min-width: 5ex;
+    position: relative;
+    cursor: pointer;
+}
+
+/** прячем элемент, не делая его display или visiility none, чтобы сторонне скрипты могли с ним работать */ 
+.dicr-widgets-customselect input {
+    width: 0;
+    max-width: 0;
+    height: 0;
+    max-height: 0;
+    opacity: 0;
+    transform: scale(0);
+    position: absolute;
+    color: transparent;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    box-shadow: none;
+}
+
+.dicr-widgets-customselect-value {
+    line-height: 2.5;
+    border-bottom: 1px solid hsl(0, 0%, 50%);
+}
+
+.dicr-widgets-customselect-value:after {
+    content: "▽";
+    margin-left: 1ex;
+    float: right;
+}
+
+.dicr-widgets-customselect.open .dicr-widgets-customselect-value:after {
+    content: "△";
+    vertical-align: middle;
+}
+
+.dicr-widgets-customselect .placeholder {
+    opacity: 0.5;
+}
+
+.dicr-widgets-customselect-popup {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 10;
+    background-color: #fff;
+    max-height: 10em;
+    overflow: auto;
+    border-radius: 0 0 5px 5px;
+}
+
+.dicr-widgets-customselect.open .dicr-widgets-customselect-popup {
+    display: table;
+}
+
+.dicr-widgets-customselect-item {
+    display: block;
+    line-height: 1.5;
+    padding: 0 1ex;
+    white-space: nowrap;
+}
