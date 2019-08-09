@@ -47,7 +47,7 @@ class CustomSelect extends InputWidget
     public function run()
     {
         $this->view->registerAssetBundle(CustomSelectAsset::class);
-        $this->registerPlugin('dicrCustomSelect');
+        $this->registerPlugin('dicrWidgetsCustomSelect');
 
         ob_start();
         echo Html::beginTag('div', $this->options);
