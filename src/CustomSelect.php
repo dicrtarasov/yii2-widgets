@@ -2,8 +2,8 @@
 namespace dicr\widgets;
 
 use yii\base\InvalidConfigException;
-use yii\helpers\Html;
-use yii\widgets\InputWidget;
+use yii\bootstrap4\Html;
+use yii\bootstrap4\InputWidget;
 
 /**
  * Альтернативный элемент select.
