@@ -1,6 +1,7 @@
 <?php
 namespace dicr\widgets;
 
+use dicr\asset\AutocompleteAsset;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\helpers\Json;

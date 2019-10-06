@@ -13,7 +13,7 @@ use yii\web\JqueryAsset;
 class CustomSelectAsset extends AssetBundle
 {
     /** @var string */
-    public $sourcePath = __DIR__ . '/assets';
+    public $sourcePath = __DIR__ . '/assets/customselect';
 
     /** @var string[] */
     public $css = [

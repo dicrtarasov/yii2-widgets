@@ -13,7 +13,7 @@ use yii\web\JqueryAsset;
 class ToastsAsset extends AssetBundle
 {
     /** @var string */
-    public $sourcePath = '@dicr/widgets/assets';
+    public $sourcePath = __DIR__ . '/assets/toasts';
 
     /** @var string[] */
     public $css = [
