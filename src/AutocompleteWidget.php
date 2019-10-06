@@ -8,13 +8,13 @@ use yii\helpers\Json;
 use yii\widgets\InputWidget;
 
 /**
- * Автодополнение.
+ * Виджет автоподсказок при вооде.
  *
  * @author Igor (Dicr) Tarasov <develop@dicr.org>
  * @version 2019
  * @link https://www.devbridge.com/sourcery/components/jquery-autocomplete/
  */
-class Autocomplete extends InputWidget
+class AutocompleteWidget extends InputWidget
 {
     /** @var array опции скрипта */
     public $clientOptions = [];
