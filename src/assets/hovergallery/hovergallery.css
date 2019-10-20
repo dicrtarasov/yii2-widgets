@@ -1,0 +1,69 @@
+.dicr-widgets-hovergallery {
+    position: relative;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: stretch;
+    --label-default: #ccc;
+    --label-active: #888;
+    overflow: hidden;
+}
+
+.dicr-widgets-hovergallery .slide {
+    flex: 1 1;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-end;
+}
+
+/** изначально картинки и метки скрыты */
+
+.dicr-widgets-hovergallery .slide .image {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+}
+
+.dicr-widgets-hovergallery .slide .label {
+    display: none;
+    height: 5px;
+    background-color: var(--label-default);
+    border: 1px solid #fff;
+    z-index: 1;
+}
+
+/** по-умолчанию видна первая каринка и выделена первая метка */
+
+.dicr-widgets-hovergallery .slide:first-of-type .image {
+    display: block;
+}
+
+.dicr-widgets-hovergallery .slide:first-of-type .label {
+    background-color: var(--label-active);
+}
+
+/** при наведении на галлерею видны все метки */
+
+.dicr-widgets-hovergallery:hover .slide .label {
+    display: block;
+}
+
+/** при наведении мышки на слайд отменяем видимость первого слайда и включаем видимость выделеного */
+.dicr-widgets-hovergallery:hover .slide:first-of-type .image {
+    display: none;
+}
+
+.dicr-widgets-hovergallery:hover .slide:first-of-type .label {
+    background-color: var(--label-default);
+}
+
+.dicr-widgets-hovergallery:hover .slide:hover .image {
+    display: block;
+}
+
+.dicr-widgets-hovergallery:hover .slide:hover .label {
+    background-color: var(--label-active);
+}
