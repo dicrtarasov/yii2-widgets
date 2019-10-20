@@ -29,15 +29,21 @@ class RedactorWidget extends InputWidget
      */
     public $clientOptions = [
         'plugins' => [
-            'aligment', 'filemanager', 'fullscreen', 'imagemanager', 'table', 'video', 'properties'
+            'fullscreen',
+            'fontcolor', 'fontfamily', 'fontsize',
+            'aligment', 'table', 'imagemanager', 'filemanager', 'video',
+            'properties',
         ],
+
         'buttons' => [
-            'html', 'format', 'bold', 'italic', 'underline', 'lists',
-            'indent', 'outdent', 'link', 'image', 'file'
+            'fullscreen', 'format', 'fontcolor', 'fontfamily', 'fontsize', 'bold', 'italic', 'underline', 'ul', 'ol',
+            'link', 'image', 'file', 'video', 'html',
         ],
+
         'imageResizable' => true,
         'imagePosition' => true,
         'multipleUpload' => false,
+        'maxHeight' => '15rem'
     ];
 
     /**
