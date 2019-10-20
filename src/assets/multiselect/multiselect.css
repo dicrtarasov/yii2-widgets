@@ -1,0 +1,31 @@
+.dicr-multiselect-wdget {
+    display: none !important;
+}
+
+.ms-options-wrap {
+    position: relative;
+}
+
+.ms-options-wrap > button:focus, .ms-options-wrap > button {
+    font-size: unset;
+}
+
+.ms-options-wrap > .ms-options {
+    width: auto;
+    min-width: 100%;
+    top: 100%;
+    left: 0;
+    right: auto;
+}
+
+.ms-options-wrap .ms-options > ul > li > label {
+    white-space: nowrap;
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+}
+
+.ms-options-wrap > .ms-options > ul input[type="checkbox"] {
+    top: 0.65rem;
+}
+
+

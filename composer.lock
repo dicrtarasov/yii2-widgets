@@ -143,11 +143,11 @@
         },
         {
             "name": "dicr/yii2-asset",
-            "version": "1.2.0",
+            "version": "1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/dicr/yii2-asset.git",
-                "reference": "308474c0441fcf8805cbb460feb971f6abf66b1a"
+                "reference": "7c1bc88b71dcbadd9f63dbab7c24541187409cc3"
             },
             "require": {
                 "php": ">=7.0",
@@ -178,7 +178,7 @@
             "support": {
                 "source": "https://gitlab.com/dicr/yii2-asset.git"
             },
-            "time": "2019-10-06T03:19:52+00:00"
+            "time": "2019-10-20T05:12:12+00:00"
         },
         {
             "name": "ezyang/htmlpurifier",
@@ -229,16 +229,16 @@
         },
         {
             "name": "yiisoft/yii2",
-            "version": "2.0.27",
+            "version": "2.0.28",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-framework.git",
-                "reference": "6793f8f9b4cd891dbf475cfbb88cf480f74eaa85"
+                "reference": "80bf3a6e04a0128f753cb73ba7255d8e2ae3a02f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/6793f8f9b4cd891dbf475cfbb88cf480f74eaa85",
-                "reference": "6793f8f9b4cd891dbf475cfbb88cf480f74eaa85",
+                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/80bf3a6e04a0128f753cb73ba7255d8e2ae3a02f",
+                "reference": "80bf3a6e04a0128f753cb73ba7255d8e2ae3a02f",
                 "shasum": ""
             },
             "require": {
@@ -325,7 +325,7 @@
                 "framework",
                 "yii2"
             ],
-            "time": "2019-09-18T13:04:16+00:00"
+            "time": "2019-10-08T13:14:18+00:00"
         },
         {
             "name": "yiisoft/yii2-composer",
@@ -1057,16 +1057,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "8.4.0",
+            "version": "8.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "57e5e77b62086033528ee1f4063ae03035f57894"
+                "reference": "366a4a0f2b971fd43b7c351d621e8dd7d7131869"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/57e5e77b62086033528ee1f4063ae03035f57894",
-                "reference": "57e5e77b62086033528ee1f4063ae03035f57894",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/366a4a0f2b971fd43b7c351d621e8dd7d7131869",
+                "reference": "366a4a0f2b971fd43b7c351d621e8dd7d7131869",
                 "shasum": ""
             },
             "require": {
@@ -1136,7 +1136,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2019-10-04T03:12:25+00:00"
+            "time": "2019-10-07T12:57:41+00:00"
         },
         {
             "name": "sebastian/code-unit-reverse-lookup",
