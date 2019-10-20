@@ -1,0 +1,47 @@
+<?php
+namespace dicr\widgets\redactor;
+
+use yii\base\Action;
+use yii\helpers\FileHelper;
+use yii\web\HttpException;
+
+class FileManagerJsonAction extends Action
+{
+    public function init()
+    {
+        if (!\Yii::$app->request->isAjax) {
+            throw new HttpException(403, 'This action allow only ajaxRequest');
+        }
+    }
+
+    public function run()
+    {
+        $config = ['recursive' => true];
+        if (!is_null(\Yii::$app->controller->module->imageAllowExtensions)) {
+            $onlyExtensions = array_map(function ($ext) {
+                return '*.' . $ext;
+            }, \Yii::$app->controller->module->imageAllowExtensions);
+            $config['only'] = $onlyExtensions;
+        }
+
+        $filesPath = FileHelper::findFiles(\Yii::$app->controller->module->saveDir, $config);
+
+        if (is_array($filesPath) && count($filesPath)) {
+            $result = [];
+            foreach ($filesPath as $filePath) {
+                $url = \Yii::$app->controller->module->getUrl(pathinfo($filePath, PATHINFO_BASENAME));
+                $fileName = pathinfo($filePath, PATHINFO_FILENAME);
+
+                $result[] = [
+                    'title' => $fileName,
+                    'name' => $fileName,
+                    'url' => $url,
+                    'size' => \Yii::$app->formatter->asShortSize(filesize($filePath)),
+                    'id' => count($result) + 1
+                ];
+            }
+
+            return $result;
+        }
+    }
+}
