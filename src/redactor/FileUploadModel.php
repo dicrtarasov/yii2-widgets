@@ -1,14 +1,28 @@
 <?php
+/**
+ * @copyright 2019-2019 Dicr http://dicr.org
+ * @author Igor A Tarasov <develop@dicr.org>
+ * @license proprietary
+ * @version 20.10.19 21:30:09
+ */
+
+declare(strict_types = 1);
 namespace dicr\widgets\redactor;
 
+use RuntimeException;
+use Throwable;
+use Yii;
+use yii\base\Model;
 use yii\helpers\Inflector;
 use yii\web\UploadedFile;
+use function count;
 
 /**
- * @author Nghia Nguyen <yiidevelop@hotmail.com>
- * @since 2.0
+ * Class FileUploadModel
+ *
+ * @package dicr\widgets\redactor
  */
-class FileUploadModel extends \yii\base\Model
+class FileUploadModel extends Model
 {
     /** @var UploadedFile[] */
     public $files;
@@ -20,7 +34,7 @@ class FileUploadModel extends \yii\base\Model
     public function rules()
     {
         return [
-            ['files', 'each', 'rule' => ['file', 'extensions' => \Yii::$app->controller->module->fileAllowExtensions]]
+            ['files', 'each', 'rule' => ['file', 'extensions' => Yii::$app->controller->module->fileAllowExtensions]]
         ];
     }
 
@@ -50,15 +64,15 @@ class FileUploadModel extends \yii\base\Model
         $ret = [];
 
         try {
-            if (!$this->validate()) {
-                throw new \Exception('validate');
+            if (! $this->validate()) {
+                throw new RuntimeException('validate');
             }
 
             foreach ($this->files as $i => $file) {
                 $name = self::getFileName($file);
 
-                if (!$file->saveAs(\Yii::$app->controller->module->getFilePath($name), true)) {
-                    throw new \Exception('save error');
+                if (! $file->saveAs(Yii::$app->controller->module->getFilePath($name), true)) {
+                    throw new RuntimeException('save error');
                 }
 
                 $key = 'file';
@@ -67,12 +81,12 @@ class FileUploadModel extends \yii\base\Model
                 }
 
                 $ret[$key] = [
-                    'url' => \Yii::$app->controller->module->getUrl($name),
+                    'url' => Yii::$app->controller->module->getUrl($name),
                     'name' => $name,
                     'id' => md5(date('YmdHis'))
                 ];
             }
-        } catch (\Throwable $ex) {
+        } /** @noinspection BadExceptionsProcessingInspection */ catch (Throwable $ex) {
             $ret = ['error' => 'Unable to save file'];
         }
 
@@ -87,7 +101,7 @@ class FileUploadModel extends \yii\base\Model
      */
     protected static function getFileName(UploadedFile $file)
     {
-        $fileName = substr(uniqid(md5(rand()), true), 0, 10);
+        $fileName = substr(uniqid(md5(mt_rand()), true), 0, 10);
         $fileName .= '-' . Inflector::slug($file->baseName);
         $fileName .= '.' . $file->extension;
         return $fileName;

@@ -1,3 +1,10 @@
+/*
+ * @copyright 2019-2019 Dicr http://dicr.org
+ * @author Igor A Tarasov <develop@dicr.org>
+ * @license proprietary
+ * @version 02.06.19 14:25:55
+ */
+
 .dicr-widgets-toasts {
     display: flex;
     flex-flow: column nowrap;

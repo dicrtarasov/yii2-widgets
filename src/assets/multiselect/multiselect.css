@@ -1,4 +1,11 @@
-.dicr-multiselect-wdget {
+/*
+ * @copyright 2019-2019 Dicr http://dicr.org
+ * @author Igor A Tarasov <develop@dicr.org>
+ * @license proprietary
+ * @version 13.05.19 16:31:02
+ */
+
+.dicr-multiselect-widget {
     display: none !important;
 }
 
@@ -7,7 +14,7 @@
 }
 
 .ms-options-wrap > button:focus, .ms-options-wrap > button {
-    font-size: unset;
+    font-size: inherit;
 }
 
 .ms-options-wrap > .ms-options {

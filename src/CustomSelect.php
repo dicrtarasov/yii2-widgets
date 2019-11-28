@@ -1,16 +1,22 @@
 <?php
+/**
+ * @copyright 2019-2019 Dicr http://dicr.org
+ * @author Igor A Tarasov <develop@dicr.org>
+ * @license proprietary
+ * @version 06.10.19 07:49:37
+ */
+
+declare(strict_types = 1);
 namespace dicr\widgets;
 
 use yii\base\InvalidConfigException;
 use yii\helpers\Html;
 use yii\helpers\Json;
 use yii\widgets\InputWidget;
+use function is_array;
 
 /**
  * Альтернативный элемент select.
- *
- * @author Igor (Dicr) Tarasov <develop@dicr.org>
- * @version 2019
  */
 class CustomSelect extends InputWidget
 {
@@ -25,13 +31,13 @@ class CustomSelect extends InputWidget
 
     /**
      * {@inheritDoc}
+     * @throws \yii\base\InvalidConfigException
+     * @throws \yii\base\InvalidConfigException
      * @see \yii\widgets\InputWidget::init()
      */
     public function init()
     {
         parent::init();
-
-        Html::addCssClass($this->options, 'dicr-widgets-customselect');
 
         if (empty($this->options['id'])) {
             $this->options['id'] = $this->id;
@@ -39,30 +45,30 @@ class CustomSelect extends InputWidget
 
         if (empty($this->values)) {
             $this->values = [];
-        } elseif (!is_array($this->values)) {
+        } elseif (! is_array($this->values)) {
             throw new InvalidConfigException('values');
         }
 
         if (isset($this->placeholder)) {
             $this->clientOptions['placeholder'] = $this->placeholder;
         }
+
+        Html::addCssClass($this->options, 'dicr-widgets-customselect');
     }
 
     /**
      * {@inheritDoc}
+     * @throws \yii\base\InvalidConfigException
      * @see \yii\base\Widget::run()
      */
     public function run()
     {
         $this->view->registerAssetBundle(CustomSelectAsset::class);
 
-        $this->view->registerJs(
-            "$('#{$this->options['id']}').dicrWidgetsCustomSelect(" . Json::encode($this->clientOptions) . ")"
-        );
+        $this->view->registerJs("$('#{$this->options['id']}').dicrWidgetsCustomSelect(" .
+                                Json::encode($this->clientOptions) . ')');
 
-        ob_start();
         echo Html::beginTag('section', $this->options);
-
         $value = null;
 
         if ($this->hasModel()) {
@@ -77,6 +83,7 @@ class CustomSelect extends InputWidget
         $isPlaceholder = false;
 
         if (isset($value)) {
+            /** @noinspection OffsetOperationsInspection */
             $label = $this->values[$value] ?? '';
         } elseif (isset($this->placeholder) && $this->placeholder !== false) {
             $label = $this->placeholder;
@@ -98,7 +105,7 @@ class CustomSelect extends InputWidget
             ]);
         }
 
-        if (!empty($this->values)) {
+        if (! empty($this->values)) {
             foreach ((array)$this->values as $val => $label) {
                 echo Html::tag('div', Html::encode($label), [
                     'class' => 'dicr-widgets-customselect-item',
@@ -109,6 +116,5 @@ class CustomSelect extends InputWidget
 
         echo Html::endTag('div');   // popup
         echo Html::endTag('section');   // widget
-        return ob_get_clean();
     }
 }

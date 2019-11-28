@@ -1,10 +1,15 @@
+/*
+ * @copyright 2019-2019 Dicr http://dicr.org
+ * @author Igor A Tarasov <develop@dicr.org>
+ * @license proprietary
+ * @version 20.10.19 10:03:14
+ */
+
 .dicr-widgets-hovergallery {
     position: relative;
     display: flex;
     flex-flow: row nowrap;
     align-items: stretch;
-    --label-default: #ccc;
-    --label-active: #888;
     overflow: hidden;
 }
 
@@ -30,7 +35,7 @@
 .dicr-widgets-hovergallery .slide .label {
     display: none;
     height: 5px;
-    background-color: var(--label-default);
+    background-color: #ccc;
     border: 1px solid #fff;
     z-index: 1;
 }
@@ -42,7 +47,7 @@
 }
 
 .dicr-widgets-hovergallery .slide:first-of-type .label {
-    background-color: var(--label-active);
+    background-color: #888;
 }
 
 /** при наведении на галлерею видны все метки */
@@ -57,7 +62,7 @@
 }
 
 .dicr-widgets-hovergallery:hover .slide:first-of-type .label {
-    background-color: var(--label-default);
+    background-color: #ccc;
 }
 
 .dicr-widgets-hovergallery:hover .slide:hover .image {
@@ -65,5 +70,5 @@
 }
 
 .dicr-widgets-hovergallery:hover .slide:hover .label {
-    background-color: var(--label-active);
+    background-color: #888;
 }

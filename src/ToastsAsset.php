@@ -1,4 +1,12 @@
 <?php
+/**
+ * @copyright 2019-2019 Dicr http://dicr.org
+ * @author Igor A Tarasov <develop@dicr.org>
+ * @license proprietary
+ * @version 06.10.19 08:25:33
+ */
+
+declare(strict_types = 1);
 namespace dicr\widgets;
 
 use yii\web\AssetBundle;
@@ -6,9 +14,6 @@ use yii\web\JqueryAsset;
 
 /**
  * Toasts Asset.
- *
- * @author Igor (Dicr) Tarasov <develop@dicr.org>
- * @version 2019
  */
 class ToastsAsset extends AssetBundle
 {

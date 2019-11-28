@@ -1,4 +1,12 @@
 <?php
+/**
+ * @copyright 2019-2019 Dicr http://dicr.org
+ * @author Igor A Tarasov <develop@dicr.org>
+ * @license proprietary
+ * @version 20.10.19 10:16:01
+ */
+
+declare(strict_types = 1);
 namespace dicr\widgets;
 
 use yii\web\AssetBundle;
@@ -6,8 +14,6 @@ use yii\web\AssetBundle;
 /**
  * Assets for Jquery Multiselect widget.
  *
- * @author Igor (Dicr) Tarasov <develop@dicr.org>
- * @version 2019
  * @link https://github.com/nobleclem/jQuery-MultiSelect
  */
 class MultiselectAsset extends AssetBundle

@@ -1,13 +1,18 @@
 <?php
+/**
+ * @copyright 2019-2019 Dicr http://dicr.org
+ * @author Igor A Tarasov <develop@dicr.org>
+ * @license proprietary
+ * @version 20.10.19 05:59:30
+ */
+
+declare(strict_types = 1);
 namespace dicr\widgets;
 
 use yii\web\AssetBundle;
 
 /**
  * Ресурсы галлереи.
- *
- * @author Igor (Dicr) Tarasov <develop@dicr.org>
- * @version 2019
  */
 class HoverGalleryAsset extends AssetBundle
 {

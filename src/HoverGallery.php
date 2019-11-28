@@ -1,19 +1,30 @@
 <?php
+/**
+ * @copyright 2019-2019 Dicr http://dicr.org
+ * @author Igor A Tarasov <develop@dicr.org>
+ * @license proprietary
+ * @version 20.10.19 10:01:24
+ */
+
+declare(strict_types = 1);
 namespace dicr\widgets;
 
 use yii\base\InvalidConfigException;
 use yii\base\Widget;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
+use function get_class;
+use function is_array;
+use function is_string;
 
 /**
  * Виджет галлереи избражений, переключающихся при наведении мышки.
- *
- * @author Igor (Dicr) Tarasov <develop@dicr.org>
- * @version 2019
  */
 class HoverGallery extends Widget
 {
+    /** @var array опции тэга виджета */
+    public $options;
+
     /** @var string корневой тег галлереи */
     public $tag = 'figure';
 
@@ -28,6 +39,9 @@ class HoverGallery extends Widget
 
     /**
      * {@inheritDoc}
+     * @throws \yii\base\InvalidConfigException
+     * @throws \yii\base\InvalidConfigException
+     * @throws \yii\base\InvalidConfigException
      * @see \yii\base\Widget::init()
      */
     public function init()
@@ -41,7 +55,7 @@ class HoverGallery extends Widget
         }
 
         // проверяем артинки
-        foreach ($this->images as $i => $image) {
+        foreach ($this->images as $i => &$image) {
             if (empty($image)) {
                 unset($this->images[$i]);
             } elseif (is_array($image)) {
@@ -49,11 +63,13 @@ class HoverGallery extends Widget
                     throw new InvalidConfigException('не указан адрес картиинки в элементе 0 параметров');
                 }
             } elseif (is_string($image)) {
-                $this->images[$i] = [$image];
+                $image = [$image];
             } else {
                 throw new InvalidConfigException('неизвестный тип image: ' . get_class($image));
             }
         }
+
+        unset($image);
 
         Html::addCssClass($this->options, 'dicr-widgets-hovergallery');
     }
@@ -78,11 +94,8 @@ class HoverGallery extends Widget
             $options = $image;
             Html::addCssClass($options, 'image');
 
-            Html::tag('div',
-                Html::img($src, $options) .
-                Html::tag('div', '', ['class' => 'label']),
-                ['class' => 'slide']
-            );
+            Html::tag('div', Html::img($src, $options) . Html::tag('div', '', ['class' => 'label']),
+                ['class' => 'slide']);
         }
 
         echo Html::endTag($this->tag);

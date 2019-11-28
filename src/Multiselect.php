@@ -1,4 +1,12 @@
 <?php
+/**
+ * @copyright 2019-2019 Dicr http://dicr.org
+ * @author Igor A Tarasov <develop@dicr.org>
+ * @license proprietary
+ * @version 20.10.19 10:17:09
+ */
+
+declare(strict_types = 1);
 namespace dicr\widgets;
 
 use yii\helpers\Html;
@@ -8,8 +16,6 @@ use yii\widgets\InputWidget;
 /**
  * JQuery Multiselect widget.
  *
- * @author Igor (Dicr) Tarasov <develop@dicr.org>
- * @version 2019
  * @link https://github.com/nobleclem/jQuery-MultiSelect
  */
 class Multiselect extends InputWidget
@@ -37,25 +43,28 @@ class Multiselect extends InputWidget
 
     /**
      * {@inheritDoc}
+     * @throws \yii\base\InvalidConfigException
+     * @throws \Exception
      * @see \yii\widgets\InputWidget::init()
      */
     public function init()
     {
         parent::init();
 
-        Html::addCssClass($this->options, ['dicr-multiselect-wdget']);
-
-        if (!isset($this->options['id'])) {
-            $this->options['id'] = 'dicr-multiselect-widget-' . rand(1, 999999);
+        if (! isset($this->options['id'])) {
+            $this->options['id'] = 'dicr-multiselect-widget-' . random_int(1, 999999);
         }
 
-        if (!isset($this->options['multiple'])) {
+        if (! isset($this->options['multiple'])) {
             $this->options['multiple'] = true;
         }
+
+        Html::addCssClass($this->options, ['dicr-multiselect-widget']);
     }
 
     /**
      * {@inheritDoc}
+     * @throws \yii\base\InvalidConfigException
      * @see \yii\base\Widget::run()
      */
     public function run()
@@ -66,9 +75,7 @@ class Multiselect extends InputWidget
 
         $this->view->registerAssetBundle(MultiselectAsset::class);
 
-        $this->view->registerJs(
-            "$('#{$this->options['id']}').multiselect(" . Json::encode($this->clientOptions) . ")"
-        );
+        $this->view->registerJs("$('#{$this->options['id']}').multiselect(" . Json::encode($this->clientOptions) . ')');
 
         if ($this->hasModel()) {
             return Html::activeDropDownList($this->model, $this->attribute, $this->items, $this->options);

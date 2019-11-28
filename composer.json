@@ -1,41 +1,45 @@
 {
-	"name" : "dicr/yii2-widgets",
-	"description" : "Виджеты для Yii2",
-	"type" : "yii2-extension",
-	"authors" : [{
-			"name" : "Igor Tarasov",
-			"email" : "develop@dicr.org",
-			"homepage" : "http://dicr.org",
-			"role" : "developer"
-		}
-	],
-	"minimum-stability" : "stable",
-	"require" : {
-		"php" : ">=7.0",
-		"yiisoft/yii2" : "~2.0",
-		"dicr/yii2-asset" : "~1.2"
-	},
-	"autoload" : {
-		"psr-4" : {
-			"dicr\\widgets\\" : "src"
-		}
-	},
-	"keywords" : [
-		"php yii2 widgets"
-	],
-	"repositories" : [{
-			"type" : "composer",
-			"url" : "https://asset-packagist.org"
-		}, {
-			"type" : "git",
-			"url" : "https://gitlab.com/dicr/yii2-asset.git"
-		}
-	],
-	"homepage" : "https://gitlab.com/dicr/yii2-widgets",
-	"support" : {
-		"source" : "https://gitlab.com/dicr/yii2-widgets.git"
-	},
-	"require-dev" : {
-		"phpunit/phpunit" : "~8.3"
-	}
+    "type": "yii2-extension",
+    "name": "dicr/yii2-widgets",
+    "license": "GPL-2.0",
+    "description": "Виджеты для Yii2",
+    "authors": [
+        {
+            "name": "Igor Tarasov",
+            "email": "develop@dicr.org",
+            "homepage": "http://dicr.org",
+            "role": "developer"
+        }
+    ],
+    "homepage": "https://gitlab.com/dicr/yii2-widgets",
+    "support": {
+        "source": "https://gitlab.com/dicr/yii2-widgets.git"
+    },
+    "keywords": [
+        "php yii2 widgets"
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=7.2",
+        "yiisoft/yii2": "~2.0",
+        "dicr/yii2-asset": "~1.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "dicr\\widgets\\": "src"
+        }
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        }, {
+            "type": "git",
+            "url": "https://gitlab.com/dicr/yii2-asset.git"
+        }
+    ],
+    "require-dev": {
+        "roave/security-advisories": "dev-master",
+        "phpunit/phpunit": "~8.3"
+    }
 }

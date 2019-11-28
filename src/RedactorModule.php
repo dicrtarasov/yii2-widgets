@@ -1,6 +1,15 @@
 <?php
+/**
+ * @copyright 2019-2019 Dicr http://dicr.org
+ * @author Igor A Tarasov <develop@dicr.org>
+ * @license proprietary
+ * @version 20.10.19 23:51:41
+ */
+
+declare(strict_types = 1);
 namespace dicr\widgets;
 
+use Yii;
 use yii\base\InvalidConfigException;
 use yii\base\Module;
 use yii\helpers\FileHelper;
@@ -9,10 +18,6 @@ use yii\helpers\FileHelper;
  * Модуль редактора.
  *
  * @property-read string $saveDir
- *
- * @author Nghia Nguyen <yiidevelop@hotmail.com>
- * @author Igor Tarasov <develop@dicr.org>
- * @since 2.0
  */
 class RedactorModule extends Module
 {
@@ -33,28 +38,37 @@ class RedactorModule extends Module
 
     /**
      * {@inheritDoc}
+     * @throws \yii\base\InvalidConfigException
+     * @throws \yii\base\InvalidConfigException
+     * @throws \yii\base\InvalidConfigException
      * @see \yii\base\Module::init()
      */
     public function init()
     {
         parent::init();
 
-        $this->uploadDir = \Yii::getAlias($this->uploadDir, true);
+        $this->uploadDir = Yii::getAlias($this->uploadDir, true);
         if (empty($this->uploadDir)) {
             throw new InvalidConfigException('upload directory not exists: ' . $this->uploadDir);
-        } elseif (!is_dir($this->uploadDir)) {
+        }
+
+        if (! is_dir($this->uploadDir)) {
             throw new InvalidConfigException('not a directory: ' . $this->uploadDir);
-        } elseif (!is_writable($this->uploadDir)) {
+        }
+
+        if (! is_writable($this->uploadDir)) {
             throw new InvalidConfigException('not writeable: ' . $this->uploadDir);
         }
 
-        $this->uploadUrl = \Yii::getAlias($this->uploadUrl, true);
+        $this->uploadUrl = Yii::getAlias($this->uploadUrl, true);
     }
 
     /**
      * Возвращает папку для загрузки файлов
      *
      * @return string
+     * @throws \yii\base\InvalidConfigException
+     * @throws \yii\base\Exception
      */
     public function getSaveDir()
     {
@@ -62,11 +76,11 @@ class RedactorModule extends Module
 
         // добавляем путь владельца
         if ($this->separateOwner) {
-            $dir .= DIRECTORY_SEPARATOR . (int)\Yii::$app->user->id;
+            $dir .= DIRECTORY_SEPARATOR . (int)Yii::$app->user->id;
         }
 
         // создаем директорию
-        if (!@file_exists($dir) && !FileHelper::createDirectory($dir, 0775, true)) {
+        if (! @file_exists($dir) && ! FileHelper::createDirectory($dir, 0775, true)) {
             throw new InvalidConfigException('$uploadDir does not exist and default path creation failed');
         }
 
@@ -78,7 +92,6 @@ class RedactorModule extends Module
      *
      * @param string $filename
      * @return string
-     * @throws InvalidConfigException
      */
     public function getFilePath(string $filename)
     {
@@ -96,7 +109,7 @@ class RedactorModule extends Module
         $url = $this->uploadUrl;
 
         if ($this->separateOwner) {
-            $url .= '/' . (int)\Yii::$app->user->id;
+            $url .= '/' . (int)Yii::$app->user->id;
         }
 
         $url .= '/' . $filename;

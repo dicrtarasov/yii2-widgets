@@ -1,4 +1,12 @@
 <?php
+/**
+ * @copyright 2019-2019 Dicr http://dicr.org
+ * @author Igor A Tarasov <develop@dicr.org>
+ * @license proprietary
+ * @version 02.06.19 14:24:25
+ */
+
+declare(strict_types = 1);
 namespace dicr\widgets;
 
 use yii\helpers\Html;
@@ -13,9 +21,6 @@ use yii\helpers\Json;
  * {
  *     use ToastsTrait;
  * }
- *
- * @author Igor (Dicr) Tarasov <develop@dicr.org>
- * @version 2019
  */
 trait ToastsTrait
 {
@@ -72,14 +77,12 @@ trait ToastsTrait
     {
         ToastsAsset::register($this->view);
 
-        $this->view->registerJs(
-            "(function(args) {
+        $this->view->registerJs("(function(args) {
                 $.each(args.errors, (i, message) => window.dicr.widgets.toasts.error(message, 'Ошибка', args.options));
                 $.each(args.warnings, (i, message) => window.dicr.widgets.toasts.warning(message, 'Предупреждение', args.options));
                 $.each(args.success, (i, message) => window.dicr.widgets.toasts.success(message, 'Готово', args.options));
                 $.each(args.toasts, (i, content) => window.dicr.widgets.toasts.addToast(content, args.options));
-            })(" . Json::encode($this->clientOptions) . ")"
-        );
+            })(" . Json::encode($this->clientOptions) . ')');
 
         return '';
     }

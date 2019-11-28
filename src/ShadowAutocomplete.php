@@ -1,4 +1,12 @@
 <?php
+/**
+ * @copyright 2019-2019 Dicr http://dicr.org
+ * @author Igor A Tarasov <develop@dicr.org>
+ * @license proprietary
+ * @version 06.10.19 19:45:17
+ */
+
+declare(strict_types = 1);
 namespace dicr\widgets;
 
 use dicr\asset\AutocompleteAsset;
@@ -12,8 +20,6 @@ use yii\widgets\InputWidget;
 /**
  * Автоподсказка по текстовому полю при заполнении значения скрытого поля, например id.
  *
- * @author Igor (Dicr) Tarasov <develop@dicr.org>
- * @version 2019
  * @link https://www.devbridge.com/sourcery/components/jquery-autocomplete/
  */
 class ShadowAutocomplete extends InputWidget
@@ -29,6 +35,9 @@ class ShadowAutocomplete extends InputWidget
 
     /**
      * {@inheritDoc}s
+     *
+     * @throws \yii\base\InvalidConfigException
+     * @throws \yii\base\InvalidConfigException
      * @see \yii\base\Widget::init()
      */
     public function init()
@@ -59,6 +68,7 @@ class ShadowAutocomplete extends InputWidget
 
     /**
      * {@inheritDoc}
+     * @throws \yii\base\InvalidConfigException
      * @see \yii\base\Widget::run()
      */
     public function run()
@@ -70,18 +80,15 @@ class ShadowAutocomplete extends InputWidget
         $this->view->registerAssetBundle(AutocompleteAsset::class);
 
         // подключаем плагин к видимому полю
-        $this->view->registerJs(
-            "$('#{$this->options['id']}').devbridgeAutocomplete(" . Json::encode($this->clientOptions) . ")"
-        );
+        $this->view->registerJs("$('#{$this->options['id']}').devbridgeAutocomplete(" .
+                                Json::encode($this->clientOptions) . ')');
 
         // дополнительно обрабатываем очистку видимого поля
-        $this->view->registerJs(
-            "$('#{$this->options['id']}').on('change', function() {
+        $this->view->registerJs("$('#{$this->options['id']}').on('change', function() {
                 if ($(this).val().trim().length < 1) {
                     $('#{$this->options['id']}-shadow').val('');
                 }
-            })"
-        );
+            })");
 
         ob_start();
 

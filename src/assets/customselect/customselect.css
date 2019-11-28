@@ -1,3 +1,10 @@
+/*
+ * @copyright 2019-2019 Dicr http://dicr.org
+ * @author Igor A Tarasov <develop@dicr.org>
+ * @license proprietary
+ * @version 09.08.19 06:10:21
+ */
+
 .dicr-widgets-customselect {
     display: table;
     min-width: 5ex;
@@ -5,7 +12,7 @@
     cursor: pointer;
 }
 
-/** прячем элемент, не делая его display или visiility none, чтобы сторонне скрипты могли с ним работать */ 
+/** прячем элемент, не делая его display или visibility none, чтобы сторонне скрипты могли с ним работать */
 .dicr-widgets-customselect input {
     width: 0;
     max-width: 0;
