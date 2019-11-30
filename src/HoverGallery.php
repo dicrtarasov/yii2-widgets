@@ -37,6 +37,9 @@ class HoverGallery extends Widget
      */
     public $images;
 
+    /** @var float соотношение сторон картинок */
+    public $ratio = 4 / 3;
+
     /**
      * {@inheritDoc}
      * @throws \yii\base\InvalidConfigException
@@ -71,6 +74,17 @@ class HoverGallery extends Widget
 
         unset($image);
 
+        // соотношение сторон
+        $this->ratio = (float)$this->ratio;
+        if ($this->ratio <= 0) {
+            throw new InvalidConfigException('ratio');
+        }
+
+        // резервируем место для картинки заданного соотношения
+        Html::addCssStyle($this->options, [
+            'padding-bottom' => round(100 / $this->ratio) . '%'
+        ]);
+
         Html::addCssClass($this->options, 'dicr-widgets-hovergallery');
     }
 
@@ -84,21 +98,60 @@ class HoverGallery extends Widget
             return '';
         }
 
-        HoverGalleryAsset::register($this->view);
+        $this->registerAssets();
 
         ob_start();
+
         echo Html::beginTag($this->tag, $this->options);
+        $this->renderSlides();
+        echo Html::endTag($this->tag);
 
-        foreach ($this->images as $image) {
-            $src = ArrayHelper::remove($image, 0);
-            $options = $image;
-            Html::addCssClass($options, 'image');
+        return ob_get_clean();
+    }
 
-            Html::tag('div', Html::img($src, $options) . Html::tag('div', '', ['class' => 'label']),
-                ['class' => 'slide']);
+    /**
+     * Регистрирует ресурсы.
+     */
+    protected function registerAssets()
+    {
+        HoverGalleryAsset::register($this->view);
+    }
+
+    /**
+     * Рендерит слайды.
+     */
+    protected function renderSlides()
+    {
+        if (empty($this->images)) {
+            return;
         }
 
-        echo Html::endTag($this->tag);
-        return ob_get_clean();
+        echo Html::beginTag('div', ['class' => 'gallery-slides']);
+
+        foreach ($this->images as $image) {
+            $this->renderSlide($image);
+        }
+
+        echo Html::endTag('div');
+    }
+
+    /**
+     * Рендерит слайд.
+     *
+     * @param array $options 0 - url картинки, остальное - опции картинки
+     */
+    protected function renderSlide(array $options)
+    {
+        $src = ArrayHelper::remove($options, 0);
+        if (empty($src)) {
+            return;
+        }
+
+        Html::addCssClass($options, 'gallery-image');
+
+        echo Html::beginTag('div', ['class' => 'gallery-slide']);
+        echo Html::img($src, $options);
+        echo Html::tag('div', '', ['class' => 'gallery-label']);
+        echo Html::endTag('div');
     }
 }
