@@ -5,16 +5,27 @@
  * @version 20.10.19 10:03:14
  */
 
+/** при помощи margin-bottom придает виджету нужное соотношение сторон */
 .dicr-widgets-hovergallery {
+    display: block;
+    overflow: hidden;
     position: relative;
+}
+
+/** абсолютным позиционирование слайдов к родителю делаем нужное соотношение сторон */
+.dicr-widgets-hovergallery > .gallery-slides {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     display: flex;
     flex-flow: row nowrap;
     align-items: stretch;
-    overflow: hidden;
 }
 
-.dicr-widgets-hovergallery .slide {
-    flex: 1 1;
+.dicr-widgets-hovergallery > .gallery-slides > .gallery-slide {
+    flex: 1 1 auto;
     display: flex;
     flex-flow: column nowrap;
     justify-content: flex-end;
@@ -22,8 +33,11 @@
 
 /** изначально картинки и метки скрыты */
 
-.dicr-widgets-hovergallery .slide .image {
+.dicr-widgets-hovergallery > .gallery-slides > .gallery-slide > .gallery-image {
     display: none;
+    width: 100%;
+    height: auto;
+    /** картинка позиционируется по отношению к виджету */
     position: absolute;
     top: 0;
     left: 0;
@@ -32,7 +46,7 @@
     pointer-events: none;
 }
 
-.dicr-widgets-hovergallery .slide .label {
+.dicr-widgets-hovergallery > .gallery-slides > .gallery-slide > .gallery-label {
     display: none;
     height: 5px;
     background-color: #ccc;
@@ -42,33 +56,34 @@
 
 /** по-умолчанию видна первая каринка и выделена первая метка */
 
-.dicr-widgets-hovergallery .slide:first-of-type .image {
+.dicr-widgets-hovergallery > .gallery-slides > .gallery-slide:first-of-type > .gallery-image {
     display: block;
 }
 
-.dicr-widgets-hovergallery .slide:first-of-type .label {
+.dicr-widgets-hovergallery > .gallery-slides > .gallery-slide:first-of-type > .gallery-label {
     background-color: #888;
 }
 
 /** при наведении на галлерею видны все метки */
 
-.dicr-widgets-hovergallery:hover .slide .label {
+.dicr-widgets-hovergallery:hover > .gallery-slides > .gallery-slide > .gallery-label {
     display: block;
 }
 
-/** при наведении мышки на слайд отменяем видимость первого слайда и включаем видимость выделеного */
-.dicr-widgets-hovergallery:hover .slide:first-of-type .image {
+/** при наведении мышки на слайд отменяем видимость первого слайда*/
+.dicr-widgets-hovergallery:hover > .gallery-slides > .gallery-slide:first-of-type > .gallery-image {
     display: none;
 }
 
-.dicr-widgets-hovergallery:hover .slide:first-of-type .label {
+.dicr-widgets-hovergallery:hover > .gallery-slides > .gallery-slide:first-of-type > .gallery-label {
     background-color: #ccc;
 }
 
-.dicr-widgets-hovergallery:hover .slide:hover .image {
+/** включаем виимость выделенного слайда */
+.dicr-widgets-hovergallery:hover > .gallery-slides > .gallery-slide:hover > .gallery-image {
     display: block;
 }
 
-.dicr-widgets-hovergallery:hover .slide:hover .label {
+.dicr-widgets-hovergallery:hover > .gallery-slides > .gallery-slide:hover > .gallery-label {
     background-color: #888;
 }
