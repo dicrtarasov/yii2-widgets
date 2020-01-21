@@ -1,11 +1,12 @@
 <?php
-declare(strict_types = 1);
 /**
- * @copyright 2019-2019 Dicr http://dicr.org
+ * @copyright 2019-2020 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
  * @license proprietary
- * @version 20.10.19 21:28:36
+ * @version 21.01.20 18:30:04
  */
+
+declare(strict_types = 1);
 
 namespace dicr\widgets\redactor;
 
@@ -19,6 +20,7 @@ use yii\web\Response;
  */
 class UploadController extends Controller
 {
+    /** @inheritDoc */
     public $enableCsrfValidation = false;
 
     /**

@@ -1,12 +1,13 @@
 <?php
 /**
- * @copyright 2019-2019 Dicr http://dicr.org
+ * @copyright 2019-2020 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
  * @license proprietary
- * @version 20.10.19 21:30:09
+ * @version 21.01.20 18:37:16
  */
 
 declare(strict_types = 1);
+
 namespace dicr\widgets\redactor;
 
 use RuntimeException;
@@ -19,13 +20,24 @@ use function count;
 
 /**
  * Class FileUploadModel
- *
- * @package dicr\widgets\redactor
  */
 class FileUploadModel extends Model
 {
     /** @var UploadedFile[] */
     public $files;
+
+    /** @var string[] разрешенные расширения */
+    protected $allowedExtensions;
+
+    /**
+     * Инициализация.
+     */
+    public function init()
+    {
+        parent::init();
+
+        $this->allowedExtensions = Yii::$app->controller->module->fileAllowExtensions;
+    }
 
     /**
      * {@inheritDoc}
@@ -34,7 +46,7 @@ class FileUploadModel extends Model
     public function rules()
     {
         return [
-            ['files', 'each', 'rule' => ['file', 'extensions' => Yii::$app->controller->module->fileAllowExtensions]]
+            ['files', 'each', 'rule' => ['file', 'extensions' => $this->allowedExtensions]]
         ];
     }
 
@@ -46,12 +58,12 @@ class FileUploadModel extends Model
      */
     public function beforeValidate()
     {
-        if (parent::beforeValidate()) {
-            $this->files = UploadedFile::getInstancesByName('file');
-            return true;
+        if (! parent::beforeValidate()) {
+            return false;
         }
 
-        return false;
+        $this->files = UploadedFile::getInstancesByName('file');
+        return true;
     }
 
     /**
@@ -69,10 +81,15 @@ class FileUploadModel extends Model
             }
 
             foreach ($this->files as $i => $file) {
+                // имя файла
                 $name = self::getFileName($file);
 
-                if (! $file->saveAs(Yii::$app->controller->module->getFilePath($name), true)) {
-                    throw new RuntimeException('save error');
+                // полный путь файла
+                $path = Yii::$app->controller->module->getFilePath($name);
+
+                // сохраняем
+                if (! $file->saveAs($path, true)) {
+                    throw new RuntimeException('ошибка загрузки файла: ' . $path);
                 }
 
                 $key = 'file';
@@ -87,7 +104,10 @@ class FileUploadModel extends Model
                 ];
             }
         } /** @noinspection BadExceptionsProcessingInspection */ catch (Throwable $ex) {
-            $ret = ['error' => 'Unable to save file'];
+            $ret = [
+                'error' => $ex->getMessage(),
+                'debug' => (string)$ex
+            ];
         }
 
         return $ret;
@@ -96,12 +116,12 @@ class FileUploadModel extends Model
     /**
      * Генерирует имя файла.
      *
-     * @param \yii\web\UploadedFile $file
+     * @param UploadedFile $file
      * @return string
      */
     protected static function getFileName(UploadedFile $file)
     {
-        $fileName = substr(uniqid(md5(mt_rand()), true), 0, 10);
+        $fileName = substr(uniqid(md5((string)mt_rand()), true), 0, 10);
         $fileName .= '-' . Inflector::slug($file->baseName);
         $fileName .= '.' . $file->extension;
         return $fileName;

@@ -1,18 +1,21 @@
 <?php
 /**
- * @copyright 2019-2019 Dicr http://dicr.org
+ * @copyright 2019-2020 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
  * @license proprietary
- * @version 20.10.19 23:51:41
+ * @version 21.01.20 18:37:16
  */
 
 declare(strict_types = 1);
+
 namespace dicr\widgets;
 
 use Yii;
+use yii\base\Exception;
 use yii\base\InvalidConfigException;
 use yii\base\Module;
 use yii\helpers\FileHelper;
+use const DIRECTORY_SEPARATOR;
 
 /**
  * Модуль редактора.
@@ -21,16 +24,22 @@ use yii\helpers\FileHelper;
  */
 class RedactorModule extends Module
 {
+    /** @inheritDoc */
     public $controllerNamespace = 'dicr\widgets\redactor';
 
+    /** @inheritDoc */
     public $defaultRoute = 'upload';
 
+    /** @var string директория для загрузки картинок */
     public $uploadDir = '@webroot/uploads';
 
+    /** @var string базовый URL загруженных картинок */
     public $uploadUrl = '@web/uploads';
 
+    /** @var array расширения картинок, разрешенных для загрузки */
     public $imageAllowExtensions = ['jpg', 'png', 'gif', 'bmp', 'svg'];
 
+    /** @var array расширения файлов, разрешеных для загрузки */
     public $fileAllowExtensions;
 
     /** @var bool раздельно хранить файлы пользоваелей */
@@ -38,9 +47,9 @@ class RedactorModule extends Module
 
     /**
      * {@inheritDoc}
-     * @throws \yii\base\InvalidConfigException
-     * @throws \yii\base\InvalidConfigException
-     * @throws \yii\base\InvalidConfigException
+     * @throws InvalidConfigException
+     * @throws InvalidConfigException
+     * @throws InvalidConfigException
      * @see \yii\base\Module::init()
      */
     public function init()
@@ -61,14 +70,17 @@ class RedactorModule extends Module
         }
 
         $this->uploadUrl = Yii::getAlias($this->uploadUrl, true);
+        if (empty($this->uploadUrl)) {
+            throw new InvalidConfigException('invalid upload url');
+        }
     }
 
     /**
-     * Возвращает папку для загрузки файлов
+     * Возвращает папку для загрузки файлов.
      *
      * @return string
-     * @throws \yii\base\InvalidConfigException
-     * @throws \yii\base\Exception
+     * @throws InvalidConfigException
+     * @throws Exception
      */
     public function getSaveDir()
     {
@@ -80,7 +92,7 @@ class RedactorModule extends Module
         }
 
         // создаем директорию
-        if (! @file_exists($dir) && ! FileHelper::createDirectory($dir, 0775, true)) {
+        if (! file_exists($dir) && ! FileHelper::createDirectory($dir, 0775, true)) {
             throw new InvalidConfigException('$uploadDir does not exist and default path creation failed');
         }
 

@@ -1,11 +1,12 @@
 <?php
-declare(strict_types = 1);
 /**
- * @copyright 2019-2019 Dicr http://dicr.org
+ * @copyright 2019-2020 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
  * @license proprietary
- * @version 20.10.19 21:25:48
+ * @version 21.01.20 18:25:32
  */
+
+declare(strict_types = 1);
 
 namespace dicr\widgets\redactor;
 
@@ -18,13 +19,12 @@ use Yii;
 class ImageUploadModel extends FileUploadModel
 {
     /**
-     * @return array
+     * Инициализация.
      */
-    public function rules()
+    public function init()
     {
-        return [
-            ['files', 'each', 'rule' => ['file', 'extensions' => Yii::$app->controller->module->imageAllowExtensions]]
-        ];
-    }
+        parent::init();
 
+        $this->allowedExtensions = Yii::$app->controller->module->imageAllowExtensions;
+    }
 }

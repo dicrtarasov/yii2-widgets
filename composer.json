@@ -15,9 +15,7 @@
     "support": {
         "source": "https://gitlab.com/dicr/yii2-widgets.git"
     },
-    "keywords": [
-        "php yii2 widgets"
-    ],
+    "keywords": ["dicr", "php", "yii2", "widgets"],
     "minimum-stability": "stable",
     "require": {
         "php": ">=7.2",
