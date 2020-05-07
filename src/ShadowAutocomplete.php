@@ -1,9 +1,9 @@
 <?php
 /**
- * @copyright 2019-2019 Dicr http://dicr.org
+ * @copyright 2019-2020 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
  * @license proprietary
- * @version 06.10.19 19:45:17
+ * @version 08.05.20 01:29:35
  */
 
 declare(strict_types = 1);
@@ -57,12 +57,12 @@ class ShadowAutocomplete extends InputWidget
 
         // при изменении подсказки удаляем значение скрытого поля
         $this->clientOptions['onInvalidateSelection'] = new JsExpression("function() {
-            $('#{$this->options['id']}-shadow').val('');
+            $('#{$this->options['id']}-shadow').val('').trigger('change');
         }");
 
         // при выборе подсказки заполняем значение скрытого поля
         $this->clientOptions['onSelect'] = new JsExpression("function(suggestion) {
-            $('#{$this->options['id']}-shadow').val(suggestion.{$this->shadowValueField});
+            $('#{$this->options['id']}-shadow').val(suggestion.{$this->shadowValueField}).trigger('change');
         }");
     }
 
@@ -81,7 +81,7 @@ class ShadowAutocomplete extends InputWidget
 
         // подключаем плагин к видимому полю
         $this->view->registerJs("$('#{$this->options['id']}').devbridgeAutocomplete(" .
-                                Json::encode($this->clientOptions) . ')');
+            Json::encode($this->clientOptions) . ')');
 
         // дополнительно обрабатываем очистку видимого поля
         $this->view->registerJs("$('#{$this->options['id']}').on('change', function() {
