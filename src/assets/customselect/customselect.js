@@ -1,20 +1,18 @@
 /*
- * @copyright 2019-2019 Dicr http://dicr.org
+ * @copyright 2019-2020 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
  * @license proprietary
- * @version 09.08.19 06:11:49
+ * @version 12.05.20 21:26:32
  */
 
-(function ($) {
+(function (window, $) {
     'use strict';
 
     if ($.fn.dicrWidgetsCustomSelect === 'function') {
         return;
     }
 
-    $.fn.dicrWidgetsCustomSelect = function (options) {
-        const placeholder = options.placeholder || '';
-
+    $.fn.dicrWidgetsCustomSelect = function () {
         return this.each(function () {
             const $module = $(this);
             const $input = $('input', $module);
@@ -39,4 +37,4 @@
             });
         });
     };
-})(jQuery);
+})(window, jQuery);

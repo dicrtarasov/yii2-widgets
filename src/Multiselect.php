@@ -1,9 +1,9 @@
 <?php
 /**
- * @copyright 2019-2019 Dicr http://dicr.org
+ * @copyright 2019-2020 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
  * @license proprietary
- * @version 20.10.19 10:17:09
+ * @version 12.05.20 21:35:06
  */
 
 declare(strict_types = 1);
@@ -17,6 +17,7 @@ use yii\widgets\InputWidget;
  * JQuery Multiselect widget.
  *
  * @link https://github.com/nobleclem/jQuery-MultiSelect
+ * @noinspection PhpUnused
  */
 class Multiselect extends InputWidget
 {

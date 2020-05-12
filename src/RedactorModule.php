@@ -3,7 +3,7 @@
  * @copyright 2019-2020 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
  * @license proprietary
- * @version 21.01.20 18:37:16
+ * @version 12.05.20 21:35:10
  */
 
 declare(strict_types = 1);
@@ -21,6 +21,7 @@ use const DIRECTORY_SEPARATOR;
  * Модуль редактора.
  *
  * @property-read string $saveDir
+ * @noinspection PhpUnused
  */
 class RedactorModule extends Module
 {
@@ -39,10 +40,10 @@ class RedactorModule extends Module
     /** @var array расширения картинок, разрешенных для загрузки */
     public $imageAllowExtensions = ['jpg', 'png', 'gif', 'bmp', 'svg'];
 
-    /** @var array расширения файлов, разрешеных для загрузки */
+    /** @var array расширения файлов, разрешенных для загрузки */
     public $fileAllowExtensions;
 
-    /** @var bool раздельно хранить файлы пользоваелей */
+    /** @var bool раздельно хранить файлы пользователей */
     public $separateOwner = false;
 
     /**

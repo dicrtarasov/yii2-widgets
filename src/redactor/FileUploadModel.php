@@ -3,7 +3,7 @@
  * @copyright 2019-2020 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
  * @license proprietary
- * @version 21.01.20 18:37:16
+ * @version 12.05.20 21:11:39
  */
 
 declare(strict_types = 1);
@@ -103,7 +103,7 @@ class FileUploadModel extends Model
                     'id' => md5(date('YmdHis'))
                 ];
             }
-        } /** @noinspection BadExceptionsProcessingInspection */ catch (Throwable $ex) {
+        } catch (Throwable $ex) {
             $ret = [
                 'error' => $ex->getMessage(),
                 'debug' => (string)$ex

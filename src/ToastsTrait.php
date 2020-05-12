@@ -1,9 +1,9 @@
 <?php
 /**
- * @copyright 2019-2019 Dicr http://dicr.org
+ * @copyright 2019-2020 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
  * @license proprietary
- * @version 02.06.19 14:24:25
+ * @version 12.05.20 21:35:15
  */
 
 declare(strict_types = 1);
@@ -21,6 +21,8 @@ use yii\helpers\Json;
  * {
  *     use ToastsTrait;
  * }
+ *
+ * @noinspection PhpUnused
  */
 trait ToastsTrait
 {
@@ -33,18 +35,17 @@ trait ToastsTrait
     /** @var string[] сообщения об успехе */
     public $success = [];
 
-    /** @var string[] произвольный контент внури <div class="toast"></div> */
+    /** @var string[] произвольный контент внутри <div class="toast"></div> */
     public $toasts = [];
 
-    /** @var int задержка скрытия, 0/false - запретить автоскрытие */
-    public $autohide = 10000;
+    /** @var int задержка скрытия, 0/false - запретить авто-скрытие */
+    public $autoHide = 10000;
 
     /** @var bool анимация */
     public $animation = true;
 
     /**
-     * {@inheritDoc}
-     * @see \yii\base\Widget::init()
+     * @inheritDoc
      */
     public function init()
     {
@@ -56,7 +57,7 @@ trait ToastsTrait
             $this->options['id'] = $this->getId();
         }
 
-        foreach (['animation', 'autohide'] as $field) {
+        foreach (['animation', 'autoHide'] as $field) {
             if (isset($this->{$field})) {
                 $this->clientOptions['options'][$field] = $this->{$field};
             }
@@ -70,8 +71,7 @@ trait ToastsTrait
     }
 
     /**
-     * {@inheritDoc}
-     * @see \yii\base\Widget::render()
+     * @inheritDoc
      */
     public function run()
     {

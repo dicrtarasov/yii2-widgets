@@ -3,7 +3,12 @@
  * @copyright 2019-2020 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
  * @license proprietary
- * @version 21.01.20 18:30:04
+ * @version 12.05.20 21:33:45
+ */
+
+/*
+ * @author Nghia Nguyen <yiidevelop@hotmail.com>
+ * @since 2.0
  */
 
 declare(strict_types = 1);
@@ -15,8 +20,9 @@ use yii\web\Controller;
 use yii\web\Response;
 
 /**
- * @author Nghia Nguyen <yiidevelop@hotmail.com>
- * @since 2.0
+ * Контроллер загрузки файлов.
+ *
+ * @noinspection PhpUnused
  */
 class UploadController extends Controller
 {

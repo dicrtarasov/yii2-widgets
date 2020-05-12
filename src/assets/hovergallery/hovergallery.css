@@ -1,8 +1,8 @@
 /*
- * @copyright 2019-2019 Dicr http://dicr.org
+ * @copyright 2019-2020 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
  * @license proprietary
- * @version 20.10.19 10:03:14
+ * @version 12.05.20 21:27:57
  */
 
 /** при помощи margin-bottom придает виджету нужное соотношение сторон */
@@ -54,7 +54,7 @@
     z-index: 1;
 }
 
-/** по-умолчанию видна первая каринка и выделена первая метка */
+/** по-умолчанию видна первая картинка и выделена первая метка */
 
 .dicr-widgets-hovergallery > .gallery-slides > .gallery-slide:first-of-type > .gallery-image {
     display: block;
@@ -64,7 +64,7 @@
     background-color: #888;
 }
 
-/** при наведении на галлерею видны все метки */
+/** при наведении на галерею видны все метки */
 
 .dicr-widgets-hovergallery:hover > .gallery-slides > .gallery-slide > .gallery-label {
     display: block;
@@ -79,7 +79,7 @@
     background-color: #ccc;
 }
 
-/** включаем виимость выделенного слайда */
+/** включаем видимость выделенного слайда */
 .dicr-widgets-hovergallery:hover > .gallery-slides > .gallery-slide:hover > .gallery-image {
     display: block;
 }

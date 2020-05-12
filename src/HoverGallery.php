@@ -1,9 +1,9 @@
 <?php
 /**
- * @copyright 2019-2019 Dicr http://dicr.org
+ * @copyright 2019-2020 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
  * @license proprietary
- * @version 20.10.19 10:01:24
+ * @version 12.05.20 21:35:00
  */
 
 declare(strict_types = 1);
@@ -18,22 +18,24 @@ use function is_array;
 use function is_string;
 
 /**
- * Виджет галлереи избражений, переключающихся при наведении мышки.
+ * Виджет галереи изображений, переключающихся при наведении мышки.
+ *
+ * @noinspection PhpUnused
  */
 class HoverGallery extends Widget
 {
-    /** @var array опции тэга виджета */
+    /** @var array опции тега виджета */
     public $options;
 
-    /** @var string корневой тег галлереи */
+    /** @var string корневой тег галереи */
     public $tag = 'figure';
 
     /**
      * @var string[]|array[] картинки
      *
      * Каждый элемент может быть либо:
-     * - string url -каринки
-     * - array 0 => url каринки, остальные - опции для Html::img
+     * - string url - картинки
+     * - array 0 => url картинки, остальные - опции для Html::img
      */
     public $images;
 
@@ -57,13 +59,13 @@ class HoverGallery extends Widget
             throw new InvalidConfigException('tag');
         }
 
-        // проверяем артинки
+        // проверяем картинки
         foreach ($this->images as $i => &$image) {
             if (empty($image)) {
                 unset($this->images[$i]);
             } elseif (is_array($image)) {
                 if (empty($image[0])) {
-                    throw new InvalidConfigException('не указан адрес картиинки в элементе 0 параметров');
+                    throw new InvalidConfigException('не указан адрес картинки в элементе 0 параметров');
                 }
             } elseif (is_string($image)) {
                 $image = [$image];

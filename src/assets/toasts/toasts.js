@@ -1,8 +1,8 @@
 /*
- * @copyright 2019-2019 Dicr http://dicr.org
+ * @copyright 2019-2020 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
  * @license proprietary
- * @version 02.06.19 13:54:06
+ * @version 12.05.20 21:36:07
  */
 
 window.dicr = (function (dicr) {
@@ -18,6 +18,7 @@ window.dicr = (function (dicr) {
         if (this.container.length < 1) {
             this.container = $('.dicr-widgets.toasts', window.document.body);
             if (this.container.length < 1) {
+                // noinspection XHTMLIncompatabilitiesJS
                 this.container = $('<section></section>').appendTo(document.body);
             }
         }
@@ -26,31 +27,34 @@ window.dicr = (function (dicr) {
     }
 
     /**
-     * Добавляет тост с произвольным контентом и инициализирует
+     * Добавляет тост с произвольным контентом и инициализирует.
      *
-     * @param {jQueryObject|string} content
+     * @param {jQuery<HTMLElement>|HTMLElement|string} content
      * @param {object|null} opts
      */
     Toasts.prototype.addToast = function (content, opts) {
+        // noinspection AssignmentToFunctionParameterJS
         opts = $.extend({}, this.options, opts || {});
 
-        const $toast = $(`<div class="toast"></div>`).append(
-            $(content)
-        );
+        // noinspection JSDeclarationsAtScopeStart
+        const $toast = $(`<div class="toast"></div>`).append($(content));
 
         $toast.on('hidden.bs.toast', function (e) {
+            // noinspection JSUnresolvedFunction
             $(e.target).toast('dispose');
             $(e.target).remove();
         });
 
         $toast.appendTo(this.container);
 
+        // noinspection JSUnresolvedFunction,JSUnresolvedVariable,SpellCheckingInspection
         $toast.toast({
             animation: Boolean(opts.animation),
             autohide: Boolean(opts.autohide),
             delay: parseInt(opts.autohide) || 0,
         });
 
+        // noinspection JSUnresolvedFunction
         $toast.toast('show');
 
         return $toast;
@@ -77,24 +81,42 @@ window.dicr = (function (dicr) {
         );
     };
 
+    // noinspection JSUnusedGlobalSymbols
+
     /**
-     * Добавить тост с ошибкой
+     * Добавить тост с ошибкой.
+     *
+     * @param {string} message
+     * @param {string} header
+     * @param {Object} opts
      */
     Toasts.prototype.error = function (message, header = 'Ошибка', opts = {}) {
         return this.createToast('text-danger', header, message, opts);
     };
 
+    // noinspection JSUnusedGlobalSymbols
+
     /**
-     * Добавить тост с предупреждением
+     * Добавить тост с предупреждением.
+     *
+     * @param {string} message
+     * @param {string} header
+     * @param {Object} opts
      */
     Toasts.prototype.warning = function (message, header = 'Предупреждение', opts = {}) {
         return this.createToast('text-warning', header, message, opts);
     };
 
+    // noinspection JSUnusedGlobalSymbols
+
     /**
-     * Добавить тост с успехом
+     * Добавить тост с успехом,
+     *
+     * @param {string} message
+     * @param {string} header
+     * @param {Object} opts
      */
-    Toasts.prototype.success = function (message, header = 'Готово!', opts) {
+    Toasts.prototype.success = function (message, header = 'Готово!', opts = {}) {
         return this.createToast('text-success', header, message, opts);
     };
 

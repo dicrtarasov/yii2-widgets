@@ -1,9 +1,9 @@
 <?php
 /**
- * @copyright 2019-2019 Dicr http://dicr.org
+ * @copyright 2019-2020 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
  * @license proprietary
- * @version 21.10.19 00:00:12
+ * @version 12.05.20 21:31:09
  */
 
 declare(strict_types = 1);
@@ -24,6 +24,7 @@ use function in_array;
  * @property string $sourcePath
  * @property \dicr\asset\RedactorAsset $assetBundle
  * @property \dicr\widgets\RedactorModule $module
+ * @noinspection PhpUnused
  */
 class RedactorWidget extends InputWidget
 {
@@ -120,7 +121,7 @@ class RedactorWidget extends InputWidget
 
         // регистрируем плагин
         $this->view->registerJs("$('#{$this->options['id']}').redactor(" . Json::encode($this->clientOptions ?: []) .
-                                ');');
+            ');');
 
         return $this->hasModel() ? Html::activeTextarea($this->model, $this->attribute, $this->options) :
             Html::textarea($this->name, $this->value, $this->options);

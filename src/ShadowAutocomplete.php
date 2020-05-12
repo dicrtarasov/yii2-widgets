@@ -3,7 +3,7 @@
  * @copyright 2019-2020 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
  * @license proprietary
- * @version 08.05.20 01:29:35
+ * @version 12.05.20 21:31:41
  */
 
 declare(strict_types = 1);
@@ -18,9 +18,10 @@ use yii\web\JsExpression;
 use yii\widgets\InputWidget;
 
 /**
- * Автоподсказка по текстовому полю при заполнении значения скрытого поля, например id.
+ * Авто-подсказка по текстовому полю при заполнении значения скрытого поля, например id.
  *
  * @link https://www.devbridge.com/sourcery/components/jquery-autocomplete/
+ * @noinspection PhpUnused
  */
 class ShadowAutocomplete extends InputWidget
 {

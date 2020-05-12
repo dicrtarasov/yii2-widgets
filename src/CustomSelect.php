@@ -1,9 +1,9 @@
 <?php
 /**
- * @copyright 2019-2019 Dicr http://dicr.org
+ * @copyright 2019-2020 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
  * @license proprietary
- * @version 06.10.19 07:49:37
+ * @version 12.05.20 21:34:56
  */
 
 declare(strict_types = 1);
@@ -17,6 +17,8 @@ use function is_array;
 
 /**
  * Альтернативный элемент select.
+ *
+ * @noinspection PhpUnused
  */
 class CustomSelect extends InputWidget
 {

@@ -1,9 +1,9 @@
 <?php
 /**
- * @copyright 2019-2019 Dicr http://dicr.org
+ * @copyright 2019-2020 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
  * @license proprietary
- * @version 06.10.19 19:44:55
+ * @version 12.05.20 21:34:50
  */
 
 declare(strict_types = 1);
@@ -16,9 +16,10 @@ use yii\helpers\Json;
 use yii\widgets\InputWidget;
 
 /**
- * Виджет автоподсказок при вооде.
+ * Виджет авто-подсказок при вводе.
  *
  * @link https://www.devbridge.com/sourcery/components/jquery-autocomplete/
+ * @noinspection PhpUnused
  */
 class AutocompleteWidget extends InputWidget
 {
@@ -44,18 +45,17 @@ class AutocompleteWidget extends InputWidget
 
     /**
      * {@inheritDoc}
-     * @throws \yii\base\InvalidConfigException
      * @see \yii\base\Widget::run()
      */
     public function run()
     {
-        $this->view->registerAssetBundle(AutocompleteAsset::class);
+        AutocompleteAsset::register($this->view);
 
-        $this->view->registerJs("$('#{$this->options['id']}').devbridgeAutocomplete(" .
-                                Json::encode($this->clientOptions) . ')');
+        $this->view->registerJs(
+            "$('#{$this->options['id']}').devbridgeAutocomplete(" . Json::encode($this->clientOptions) . ')'
+        );
 
         $type = ArrayHelper::remove($this->options, 'type', 'search');
-
         return $this->renderInputHtml($type);
     }
 }
