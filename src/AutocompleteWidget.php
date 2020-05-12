@@ -3,7 +3,7 @@
  * @copyright 2019-2020 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
  * @license proprietary
- * @version 12.05.20 21:34:50
+ * @version 12.05.20 21:49:26
  */
 
 declare(strict_types = 1);
@@ -27,10 +27,9 @@ class AutocompleteWidget extends InputWidget
     public $clientOptions = [];
 
     /**
-     * {@inheritDoc}s
+     * @inheritDoc
      *
      * @throws \yii\base\InvalidConfigException
-     * @see \yii\base\Widget::init()
      */
     public function init()
     {
@@ -44,8 +43,7 @@ class AutocompleteWidget extends InputWidget
     }
 
     /**
-     * {@inheritDoc}
-     * @see \yii\base\Widget::run()
+     * @inheritDoc
      */
     public function run()
     {
