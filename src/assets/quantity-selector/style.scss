@@ -1,0 +1,53 @@
+/*!
+ * @copyright 2019-2020 Dicr http://dicr.org
+ * @author Igor A Tarasov <develop@dicr.org>
+ * @license proprietary
+ * @version 01.05.20 00:15:35
+ */
+
+// @author Igor A Tarasov <develop@dicr.org>, http://dicr.org
+// @version 30.04.20 14:05:54
+
+.widget-quantity-selector {
+    display: inline-flex;
+    flex-flow: row nowrap;
+    align-items: stretch;
+
+    .button {
+        font-size: 1.8rem;
+        font-weight: bold;
+        line-height: 1;
+        color: #CBCBCB;
+        background: #fff;
+        padding: 0.55rem 0.93rem;
+        border: 1px solid #F2F2F2;
+        border-radius: 5px;
+        z-index: 1;
+
+        &:hover {
+            border-color: #006dbc;
+        }
+    }
+
+    .input {
+        font-size: 1.375rem;
+        line-height: 1;
+        color: #000;
+        background: #fff;
+        padding: 0.5rem 0.5rem;
+        border: 1px solid #F2F2F2;
+        margin: 0 -0.5rem;
+        -moz-appearance: textfield;
+        text-align: center;
+        width: 5rem;
+
+        &::-webkit-outer-spin-button, &::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        &:focus {
+            outline: none;
+        }
+    }
+}

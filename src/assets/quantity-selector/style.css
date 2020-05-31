@@ -1,0 +1,10 @@
+/*
+ * @copyright 2019-2020 Dicr http://dicr.org
+ * @author Igor A Tarasov <develop@dicr.org>
+ * @license proprietary
+ * @version 31.05.20 06:37:22
+ */
+
+.widget-quantity-selector{display:inline-flex;flex-flow:row nowrap;align-items:stretch}.widget-quantity-selector .button{font-size:1.8rem;font-weight:bold;line-height:1;color:#CBCBCB;background:#fff;padding:0.55rem 0.93rem;border:1px solid #F2F2F2;border-radius:5px;z-index:1}.widget-quantity-selector .button:hover{border-color:#006dbc}.widget-quantity-selector .input{font-size:1.375rem;line-height:1;color:#000;background:#fff;padding:0.5rem 0.5rem;border:1px solid #F2F2F2;margin:0 -0.5rem;-moz-appearance:textfield;text-align:center;width:5rem}.widget-quantity-selector .input::-webkit-outer-spin-button,.widget-quantity-selector .input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}.widget-quantity-selector .input:focus{outline:none}
+
+/*# sourceMappingURL=style.css.map */
