@@ -3,7 +3,7 @@
  * @copyright 2019-2020 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
  * @license proprietary
- * @version 12.05.20 21:31:41
+ * @version 04.06.20 21:40:21
  */
 
 declare(strict_types = 1);
@@ -16,6 +16,9 @@ use yii\helpers\Html;
 use yii\helpers\Json;
 use yii\web\JsExpression;
 use yii\widgets\InputWidget;
+use function ob_get_clean;
+use function ob_start;
+use function trim;
 
 /**
  * Авто-подсказка по текстовому полю при заполнении значения скрытого поля, например id.
@@ -35,11 +38,9 @@ class ShadowAutocomplete extends InputWidget
     public $clientOptions = [];
 
     /**
-     * {@inheritDoc}s
-     *
+     * @inheritDoc
      * @throws \yii\base\InvalidConfigException
      * @throws \yii\base\InvalidConfigException
-     * @see \yii\base\Widget::init()
      */
     public function init()
     {
@@ -56,21 +57,28 @@ class ShadowAutocomplete extends InputWidget
             $this->options['id'] = $this->id;
         }
 
+        // отменяем отправку формы при наличии значения
+        $this->clientOptions['triggerSelectOnValidInput'] = false;
+
         // при изменении подсказки удаляем значение скрытого поля
         $this->clientOptions['onInvalidateSelection'] = new JsExpression("function() {
-            $('#{$this->options['id']}-shadow').val('').trigger('change');
+            $('#{$this->options['id']}-shadow').val('');
         }");
 
         // при выборе подсказки заполняем значение скрытого поля
         $this->clientOptions['onSelect'] = new JsExpression("function(suggestion) {
-            $('#{$this->options['id']}-shadow').val(suggestion.{$this->shadowValueField}).trigger('change');
+            $('#{$this->options['id']}-shadow').val(suggestion.{$this->shadowValueField});
         }");
+
+        // при изменении значения поля сбрасываем поле выбранного значения
+        $this->view->registerJs("$('#{$this->options['id']}').on('change', function() {
+            $('#{$this->options['id']}-shadow').val(''); 
+        })");
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      * @throws \yii\base\InvalidConfigException
-     * @see \yii\base\Widget::run()
      */
     public function run()
     {
