@@ -1,9 +1,7 @@
 <?php
 /**
- * @copyright 2019-2020 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
- * @license proprietary
- * @version 12.05.20 21:34:56
+ * @version 11.06.20 22:30:02
  */
 
 declare(strict_types = 1);
@@ -11,9 +9,10 @@ namespace dicr\widgets;
 
 use yii\base\InvalidConfigException;
 use yii\helpers\Html;
-use yii\helpers\Json;
 use yii\widgets\InputWidget;
 use function is_array;
+use function ob_get_clean;
+use function ob_start;
 
 /**
  * Альтернативный элемент select.
@@ -25,17 +24,13 @@ class CustomSelect extends InputWidget
     /** @var string[] ассоциативный массив значений val => label */
     public $values;
 
-    /** @var string placeholder */
+    /** @var string текст не выбранного значения */
     public $placeholder;
-
-    /** @var array опции javascript */
-    public $clientOptions = [];
 
     /**
      * {@inheritDoc}
      * @throws \yii\base\InvalidConfigException
      * @throws \yii\base\InvalidConfigException
-     * @see \yii\widgets\InputWidget::init()
      */
     public function init()
     {
@@ -51,72 +46,67 @@ class CustomSelect extends InputWidget
             throw new InvalidConfigException('values');
         }
 
-        if (isset($this->placeholder)) {
-            $this->clientOptions['placeholder'] = $this->placeholder;
-        }
-
-        Html::addCssClass($this->options, 'dicr-widgets-customselect');
+        $this->placeholder = (string)$this->placeholder;
+        Html::addCssClass($this->options, 'dicr-widgets-custom-select');
     }
 
     /**
-     * {@inheritDoc}
-     * @throws \yii\base\InvalidConfigException
-     * @see \yii\base\Widget::run()
+     * @inheritDoc
      */
     public function run()
     {
-        $this->view->registerAssetBundle(CustomSelectAsset::class);
+        CustomSelectAsset::register($this->view);
 
-        $this->view->registerJs("$('#{$this->options['id']}').dicrWidgetsCustomSelect(" .
-                                Json::encode($this->clientOptions) . ')');
+        $this->view->registerJs('$("#' . $this->options['id'] . '")).dicrWidgetsCustomSelect()');
 
+        ob_start();
         echo Html::beginTag('section', $this->options);
+
+        // определяем название поля ввода и значение
+        $inputName = null;
         $value = null;
 
         if ($this->hasModel()) {
-            echo Html::activeHiddenInput($this->model, $this->attribute);
-            $value = Html::getAttributeValue($this->model, $this->attribute);
+            $inputName = Html::getInputName($this->model, $this->attribute);
+            $value = (string)Html::getAttributeValue($this->model, $this->attribute);
         } else {
-            echo Html::hiddenInput($this->name, $this->value);
-            $value = $this->value;
+            $inputName = $this->name;
+            $value = (string)$this->value;
         }
 
-        $label = '';
-        $isPlaceholder = false;
-
-        if (isset($value)) {
-            /** @noinspection OffsetOperationsInspection */
-            $label = $this->values[$value] ?? '';
-        } elseif (isset($this->placeholder) && $this->placeholder !== false) {
+        // определяем метку текущего значения
+        $label = $this->values[$value] ?? '';
+        if ($label === '') {
             $label = $this->placeholder;
-            $isPlaceholder = true;
         }
 
-        // видимое значение
-        echo Html::tag('div', Html::encode($label), [
-            'class' => 'dicr-widgets-customselect-value' . ($isPlaceholder ? ' placeholder' : '')
+        // кнопка открытия списка
+        echo Html::button(Html::encode($label), [
+            'class' => [$value === '' ? 'placeholder' : '']
         ]);
 
         // всплывающий список
-        echo Html::beginTag('div', ['class' => 'dicr-widgets-customselect-popup']);
+        echo Html::beginTag('div', ['class' => 'popup']);
 
-        if (isset($this->placeholder) && $this->placeholder !== false) {
-            echo Html::tag('div', Html::encode($this->placeholder), [
-                'class' => 'dicr-widgets-customselect-item placeholder',
-                'data-value' => ''
-            ]);
+        if ($this->placeholder !== '') {
+            echo Html::label(
+                Html::radio($inputName, $value === '', ['value' => '']) .
+                Html::encode($this->placeholder), null, ['class' => 'placeholder']
+            );
         }
 
         if (! empty($this->values)) {
-            foreach ((array)$this->values as $val => $label) {
-                echo Html::tag('div', Html::encode($label), [
-                    'class' => 'dicr-widgets-customselect-item',
-                    'data-value' => $val
-                ]);
+            foreach ($this->values as $val => $label) {
+                echo Html::label(
+                    Html::radio($inputName, $value === (string)$val, ['value' => $val]) .
+                    Html::encode($label)
+                );
             }
         }
 
         echo Html::endTag('div');   // popup
+
         echo Html::endTag('section');   // widget
+        return ob_get_clean();
     }
 }

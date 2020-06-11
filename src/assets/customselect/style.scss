@@ -1,0 +1,40 @@
+// @author Igor A Tarasov <develop@dicr.org>
+// @version 11.06.20 22:28:41
+
+.dicr-widgets-custom-select {
+    display: table;
+    min-width: 5ex;
+    position: relative;
+    cursor: pointer;
+
+    .popup {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        z-index: 999;
+        background: #fff;
+        overflow: auto;
+
+        label {
+            display: block;
+            cursor: pointer;
+
+            /** прячем элемент, не делая его display или visibility none, чтобы сторонне скрипты могли с ним работать */
+            input {
+                display: none;
+            }
+        }
+    }
+
+    button {
+
+    }
+
+    &.active {
+        .popup {
+            display: block;
+        }
+    }
+}
+

@@ -1,9 +1,7 @@
 <?php
 /**
- * @copyright 2019-2019 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
- * @license proprietary
- * @version 06.10.19 08:25:16
+ * @version 11.06.20 22:24:12
  */
 
 declare(strict_types = 1);
@@ -22,12 +20,12 @@ class CustomSelectAsset extends AssetBundle
 
     /** @var string[] */
     public $css = [
-        'customselect.css',
+        'style.css',
     ];
 
     /** @var string[] */
     public $js = [
-        'customselect.js'
+        'script.js'
     ];
 
     /** @var string[] */
