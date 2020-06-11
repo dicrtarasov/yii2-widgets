@@ -1,7 +1,7 @@
 <?php
 /**
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 11.06.20 22:30:02
+ * @version 11.06.20 22:34:48
  */
 
 declare(strict_types = 1);
@@ -57,7 +57,7 @@ class CustomSelect extends InputWidget
     {
         CustomSelectAsset::register($this->view);
 
-        $this->view->registerJs('$("#' . $this->options['id'] . '")).dicrWidgetsCustomSelect()');
+        $this->view->registerJs('$("#' . $this->options['id'] . '").dicrWidgetsCustomSelect();');
 
         ob_start();
         echo Html::beginTag('section', $this->options);
