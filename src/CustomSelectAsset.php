@@ -1,7 +1,7 @@
 <?php
 /**
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 11.06.20 22:24:12
+ * @version 12.06.20 00:25:16
  */
 
 declare(strict_types = 1);
@@ -16,7 +16,7 @@ use yii\web\JqueryAsset;
 class CustomSelectAsset extends AssetBundle
 {
     /** @var string */
-    public $sourcePath = __DIR__ . '/assets/customselect';
+    public $sourcePath = __DIR__ . '/assets/custom-select';
 
     /** @var string[] */
     public $css = [

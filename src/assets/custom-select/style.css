@@ -1,0 +1,8 @@
+/*
+ * @author Igor A Tarasov <develop@dicr.org>
+ * @version 12.06.20 00:25:40
+ */
+
+.dicr-widgets-custom-select{display:table;min-width:5ex;position:relative;cursor:pointer}.dicr-widgets-custom-select .popup{display:none;position:absolute;top:100%;left:0;z-index:999;background:#fff;overflow:auto}.dicr-widgets-custom-select .popup label{display:block;cursor:pointer}.dicr-widgets-custom-select .popup label input{display:none}.dicr-widgets-custom-select button{display:block}.dicr-widgets-custom-select.active .popup{display:block}
+
+/*# sourceMappingURL=style.css.map */

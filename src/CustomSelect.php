@@ -1,7 +1,7 @@
 <?php
 /**
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 11.06.20 22:34:48
+ * @version 12.06.20 00:25:00
  */
 
 declare(strict_types = 1);
@@ -28,7 +28,7 @@ class CustomSelect extends InputWidget
     public $placeholder;
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      * @throws \yii\base\InvalidConfigException
      * @throws \yii\base\InvalidConfigException
      */
