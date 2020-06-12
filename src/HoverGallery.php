@@ -1,9 +1,7 @@
 <?php
 /**
- * @copyright 2019-2020 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
- * @license proprietary
- * @version 12.05.20 21:35:00
+ * @version 13.06.20 02:08:23
  */
 
 declare(strict_types = 1);
@@ -16,6 +14,8 @@ use yii\helpers\Html;
 use function get_class;
 use function is_array;
 use function is_string;
+use function ob_get_clean;
+use function ob_start;
 
 /**
  * Виджет галереи изображений, переключающихся при наведении мышки.
@@ -35,7 +35,7 @@ class HoverGallery extends Widget
      *
      * Каждый элемент может быть либо:
      * - string url - картинки
-     * - array 0 => url картинки, остальные - опции для Html::img
+     * - array [0 => url картинки, остальные - опции для Html::img]
      */
     public $images;
 
@@ -43,11 +43,10 @@ class HoverGallery extends Widget
     public $ratio = 4 / 3;
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      * @throws \yii\base\InvalidConfigException
      * @throws \yii\base\InvalidConfigException
      * @throws \yii\base\InvalidConfigException
-     * @see \yii\base\Widget::init()
      */
     public function init()
     {
@@ -84,15 +83,14 @@ class HoverGallery extends Widget
 
         // резервируем место для картинки заданного соотношения
         Html::addCssStyle($this->options, [
-            'padding-bottom' => round(100 / $this->ratio) . '%'
+            'padding-bottom' => (int)round(100 / $this->ratio) . '%'
         ]);
 
-        Html::addCssClass($this->options, 'dicr-widgets-hovergallery');
+        Html::addCssClass($this->options, 'dicr-widgets-hover-gallery');
     }
 
     /**
-     * {@inheritDoc}
-     * @see \yii\base\Widget::run()
+     * @inheritDoc
      */
     public function run()
     {
@@ -100,34 +98,27 @@ class HoverGallery extends Widget
             return '';
         }
 
-        $this->registerAssets();
+        HoverGalleryAsset::register($this->view);
 
         ob_start();
-
         echo Html::beginTag($this->tag, $this->options);
-        $this->renderSlides();
+        echo $this->renderSlides();
         echo Html::endTag($this->tag);
-
         return ob_get_clean();
     }
 
     /**
-     * Регистрирует ресурсы.
-     */
-    protected function registerAssets()
-    {
-        HoverGalleryAsset::register($this->view);
-    }
-
-    /**
      * Рендерит слайды.
+     *
+     * @return string
      */
     protected function renderSlides()
     {
         if (empty($this->images)) {
-            return;
+            return '';
         }
 
+        ob_start();
         echo Html::beginTag('div', ['class' => 'gallery-slides']);
 
         foreach ($this->images as $image) {
@@ -135,25 +126,29 @@ class HoverGallery extends Widget
         }
 
         echo Html::endTag('div');
+        return ob_get_clean();
     }
 
     /**
      * Рендерит слайд.
      *
      * @param array $options 0 - url картинки, остальное - опции картинки
+     * @return string
      */
     protected function renderSlide(array $options)
     {
         $src = ArrayHelper::remove($options, 0);
         if (empty($src)) {
-            return;
+            return '';
         }
 
         Html::addCssClass($options, 'gallery-image');
 
+        ob_start();
         echo Html::beginTag('div', ['class' => 'gallery-slide']);
         echo Html::img($src, $options);
         echo Html::tag('div', '', ['class' => 'gallery-label']);
         echo Html::endTag('div');
+        return ob_get_clean();
     }
 }

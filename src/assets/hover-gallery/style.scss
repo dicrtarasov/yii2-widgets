@@ -1,0 +1,97 @@
+// @author Igor A Tarasov <develop@dicr.org>
+// @version 13.06.20 02:18:13
+
+//
+// при помощи margin-bottom в опциях виджета необходимо придает виджету нужное соотношение сторон
+.dicr-widgets-hover-gallery {
+    display: block;
+    overflow: hidden;
+    position: relative;
+
+    // абсолютным позиционирование слайдов к родителю делаем нужное соотношение сторон
+    .gallery-slides {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: stretch;
+
+        .gallery-slide {
+            flex: 1 1 auto;
+            display: flex;
+            flex-flow: column nowrap;
+            justify-content: flex-end;
+
+            // изначально картинки и метки скрыты
+            .gallery-image {
+                display: none;
+                width: 100%;
+                height: auto;
+                // картинка позиционируется по отношению к виджету
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                pointer-events: none;
+            }
+
+            .gallery-label {
+                display: none;
+                height: 5px;
+                background-color: #ccc;
+                border: 1px solid #fff;
+                z-index: 1;
+            }
+
+            // по-умолчанию видна первая картинка и выделена первая метка
+            &:first-of-type {
+                .gallery-image {
+                    display: block;
+                }
+
+                .gallery-label {
+                    background-color: #888;
+                }
+            }
+        }
+    }
+
+    // при наведении мышки на слайд
+    &:hover {
+        .gallery-slides {
+            .gallery-slide {
+                // видны все метки
+                .gallery-label {
+                    display: block;
+                }
+
+                // отменяем видимость первого слайда
+                &:first-of-type {
+                    .gallery-image {
+                        display: none;
+                    }
+
+                    .gallery-label {
+                        background-color: #ccc;
+                    }
+                }
+
+                // включаем видимость выделенного слайда
+                &:hover {
+                    .gallery-image {
+                        display: block;
+                    }
+
+                    .gallery-label {
+                        background-color: #888;
+                    }
+                }
+            }
+        }
+    }
+}
+

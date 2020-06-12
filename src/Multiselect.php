@@ -1,9 +1,7 @@
 <?php
 /**
- * @copyright 2019-2020 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
- * @license proprietary
- * @version 12.05.20 21:35:06
+ * @version 13.06.20 02:19:30
  */
 
 declare(strict_types = 1);
@@ -64,9 +62,8 @@ class Multiselect extends InputWidget
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      * @throws \yii\base\InvalidConfigException
-     * @see \yii\base\Widget::run()
      */
     public function run()
     {
