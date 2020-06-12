@@ -1,7 +1,7 @@
 <?php
 /**
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 13.06.20 02:08:23
+ * @version 13.06.20 03:08:34
  */
 
 declare(strict_types = 1);
@@ -122,7 +122,7 @@ class HoverGallery extends Widget
         echo Html::beginTag('div', ['class' => 'gallery-slides']);
 
         foreach ($this->images as $image) {
-            $this->renderSlide($image);
+            echo $this->renderSlide($image);
         }
 
         echo Html::endTag('div');
