@@ -1,16 +1,9 @@
-/*!
- * @copyright 2019-2020 Dicr http://dicr.org
- * @author Igor A Tarasov <develop@dicr.org>
- * @license proprietary
- * @version 31.05.20 06:37:22
- */
-
-/*
- * @author Igor A Tarasov <develop@dicr.org>
- * @version 16.02.20 06:22:18
- */
+// @author Igor A Tarasov <develop@dicr.org>
+// @version 13.06.20 06:43:33
 
 .widget-popover {
+    position: relative;
+
     > .popup {
         display: none;
         position: absolute;
