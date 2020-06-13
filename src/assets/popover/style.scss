@@ -1,5 +1,5 @@
 // @author Igor A Tarasov <develop@dicr.org>
-// @version 13.06.20 06:43:33
+// @version 13.06.20 06:52:21
 
 .widget-popover {
     position: relative;
@@ -58,7 +58,7 @@
                 &:before {
                     top: 100%;
                     left: 50%;
-                    transform: rotate(45deg) translate(-0.25rem, -0.25rem);
+                    transform: rotate(45deg) translate(-6%, 66%);
                     border-width: 0 1px 1px 0;
                 }
             }
