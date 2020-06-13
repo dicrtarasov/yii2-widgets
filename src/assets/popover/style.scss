@@ -1,5 +1,5 @@
 // @author Igor A Tarasov <develop@dicr.org>
-// @version 13.06.20 06:52:21
+// @version 13.06.20 07:09:38
 
 .widget-popover {
     position: relative;
@@ -58,7 +58,7 @@
                 &:before {
                     top: 100%;
                     left: 50%;
-                    transform: rotate(45deg) translate(-6%, 66%);
+                    transform: rotate(45deg) translate(-65%, 5%);
                     border-width: 0 1px 1px 0;
                 }
             }
@@ -75,7 +75,7 @@
                 &:before {
                     bottom: 100%;
                     left: 50%;
-                    transform: rotate(45deg) translate(0.25rem, 0.25rem);
+                    transform: rotate(45deg) translate(5%, 60%);
                     border-width: 1px 0 0 1px;
                 }
             }
@@ -92,7 +92,7 @@
                 &:before {
                     left: 100%;
                     top: 50%;
-                    transform: rotate(45deg) translate(-0.25rem, 0.25rem);
+                    transform: rotate(45deg) translate(-65%, -5%);
                     border-width: 1px 1px 0 0;
                 }
             }
@@ -109,7 +109,7 @@
                 &:before {
                     right: 100%;
                     top: 50%;
-                    transform: rotate(45deg) translate(0.25rem, -0.25rem);
+                    transform: rotate(45deg) translate(-5%, -65%);
                     border-width: 0 0 1px 1px;
                 }
             }
