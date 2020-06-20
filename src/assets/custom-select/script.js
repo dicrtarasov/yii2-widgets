@@ -1,6 +1,6 @@
 /*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 11.06.20 22:30:54
+ * @version 20.06.20 18:26:57
  */
 
 (function (window, $) {
@@ -9,39 +9,49 @@
     /**
      * Искусственный элемент select.
      *
-     * @param {HTMLElement} widget
      * @constructor
      */
-    function CustomSelectWidget(widget)
+    function CustomSelectWidget()
     {
-        const $widget = $(widget);
-        const $button = $widget.children('button');
+        /** @var {string} селектор класса виджета */
+        const selector = '.dicr-widget-custom-select';
 
-        $button.on('click', function (e) {
-            e.preventDefault();
-            $widget.toggleClass('active');
-        });
+        // глобальный обработчик
+        $(window.document)
+            // отменяем предыдущие обработчики
+            .off(selector)
 
-        $('input', $widget).on('change', function () {
-            $button.text($(this).closest('label').text());
-            $button.toggleClass('placeholder', $(this).val() === '');
-        });
+            // обработка кликов
+            .on('click' + selector, function (e) {
+                // закрываем все виджеты по клику на документ
+                $(window.document).find(selector).removeClass('active');
 
-        $(window.document).on('click', function (e) {
-            if (e.target !== $button[0]) {
-                $widget.removeClass('active');
-            }
-        });
+                // виджет на который был клик
+                const $target = $(e.target);
+                const $widget = $target.closest(selector);
+                if ($widget.length < 1) {
+                    return;
+                }
+
+                // если клик по кнопке, то открываем виджет
+                if ($target.is('button')) {
+                    e.preventDefault();
+                    $widget.addClass('active');
+                }
+            })
+
+            // смена текста кнопки при выборе значения
+            .on('change' + selector, selector + ' input', function () {
+                const $label = $(this).closest('label');
+                const $widget = $(this).closest(selector);
+                const $button = $('button', $widget);
+
+                $button.text($label.text());
+                $button.toggleClass('placeholder', $(this).val() === '');
+            });
     }
 
-    /**
-     * Плагин jQuery.
-     *
-     * @returns {jQuery}
-     */
-    $.fn.dicrWidgetsCustomSelect = function () {
-        return this.each(function () {
-            $(this).data('widget', new CustomSelectWidget(this));
-        });
-    };
+    // регистрируем функцию
+    window.app = window.app || {};
+    window.app.dicrWidgetCustomSelect = window.app.dicrWidgetCustomSelect || new CustomSelectWidget();
 })(window, jQuery);

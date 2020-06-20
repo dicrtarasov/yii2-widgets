@@ -1,7 +1,7 @@
 <?php
 /**
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 12.06.20 00:25:00
+ * @version 20.06.20 18:26:46
  */
 
 declare(strict_types = 1);
@@ -47,7 +47,7 @@ class CustomSelect extends InputWidget
         }
 
         $this->placeholder = (string)$this->placeholder;
-        Html::addCssClass($this->options, 'dicr-widgets-custom-select');
+        Html::addCssClass($this->options, 'dicr-widget-custom-select');
     }
 
     /**
