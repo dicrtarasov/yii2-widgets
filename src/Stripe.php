@@ -1,7 +1,7 @@
 <?php
 /**
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 24.06.20 11:41:29
+ * @version 24.06.20 15:12:22
  */
 
 declare(strict_types = 1);
@@ -170,11 +170,13 @@ class Stripe extends Widget
         echo Html::beginTag('div', ['class' => 'stripe-arrows']);
 
         echo Html::a('', 'javascript:', [
-            'class' => ['arrow', 'prev', $this->id . '-prev']
+            'class' => ['arrow', 'prev', $this->id . '-prev'],
+            'title' => 'Назад'
         ]);
 
         echo Html::a('', 'javascript:', [
-            'class' => ['arrow', 'next', $this->id . '-next']
+            'class' => ['arrow', 'next', $this->id . '-next'],
+            'title' => 'Вперед'
         ]);
 
         echo Html::endTag('div');
