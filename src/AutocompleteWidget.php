@@ -1,7 +1,7 @@
 <?php
 /**
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 24.06.20 14:52:50
+ * @version 24.06.20 15:59:54
  */
 
 declare(strict_types = 1);
@@ -13,6 +13,7 @@ use yii\helpers\Html;
 use yii\helpers\Json;
 use yii\web\JsExpression;
 use yii\widgets\InputWidget;
+use function array_merge;
 
 /**
  * Виджет авто-подсказок при вводе.
@@ -40,9 +41,12 @@ class AutocompleteWidget extends InputWidget
             $this->options['id'] = $this->id;
         }
 
-        $this->clientOptions['onSelect'] = new JsExpression('function(suggestion) {
-            $(this).trigger("change");
-        }');
+        $this->clientOptions = array_merge([
+            'triggerSelectOnValidInput' => false,
+            'onSelect' => new JsExpression('function(suggestion) {
+                $(this).trigger("change");
+            }')
+        ], $this->clientOptions);
     }
 
     /**
@@ -53,7 +57,7 @@ class AutocompleteWidget extends InputWidget
         AutocompleteAsset::register($this->view);
 
         $this->view->registerJs(
-            "$('#{$this->options['id']}').devbridgeAutocomplete(" . Json::encode($this->clientOptions) . ')'
+            "$('#{$this->options['id']}').devbridgeAutocomplete(" . Json::encode($this->clientOptions) . ');'
         );
 
         $type = ArrayHelper::remove($this->options, 'type', 'search');
