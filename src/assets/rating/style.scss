@@ -1,0 +1,31 @@
+// @author Igor A Tarasov <develop@dicr.org>
+// @version 24.06.20 22:41:12
+
+.dicr-widget-rating {
+    display: inline-flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-items: center;
+
+    .rating-stars {
+        flex: 0 0 auto;
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: flex-start;
+        align-items: center;
+
+        .star {
+            flex: 0 0 auto;
+            display: block;
+            font-size: inherit;
+            line-height: 1;
+        }
+    }
+
+    .rating-count {
+        flex: 0 0 auto;
+        margin-left: 1ex;
+        font-size: 90%;
+    }
+}
+

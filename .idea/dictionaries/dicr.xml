@@ -11,6 +11,8 @@
       <w>fontfamily</w>
       <w>hovergallery</w>
       <w>imagemanager</w>
+      <w>itemscope</w>
+      <w>itemtype</w>
       <w>multiselect</w>
       <w>nghia</w>
       <w>roave</w>
@@ -21,6 +23,7 @@
       <w>всплывашки</w>
       <w>всплывашкой</w>
       <w>кастомного</w>
+      <w>микроразметку</w>
       <w>рендерит</w>
     </words>
   </dictionary>
