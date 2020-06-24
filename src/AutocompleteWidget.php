@@ -1,9 +1,7 @@
 <?php
 /**
- * @copyright 2019-2020 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
- * @license proprietary
- * @version 12.05.20 21:49:26
+ * @version 24.06.20 14:52:50
  */
 
 declare(strict_types = 1);
@@ -13,6 +11,7 @@ use dicr\asset\AutocompleteAsset;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\helpers\Json;
+use yii\web\JsExpression;
 use yii\widgets\InputWidget;
 
 /**
@@ -40,6 +39,10 @@ class AutocompleteWidget extends InputWidget
         if (! isset($this->options['id'])) {
             $this->options['id'] = $this->id;
         }
+
+        $this->clientOptions['onSelect'] = new JsExpression('function(suggestion) {
+            $(this).trigger("change");
+        }');
     }
 
     /**
