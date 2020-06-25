@@ -1,6 +1,6 @@
 /*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 24.06.20 22:56:33
+ * @version 26.06.20 03:00:41
  */
 
 (function (window, $) {
@@ -29,5 +29,5 @@
     }
 
     window.app = window.app || {};
-    window.app.dicrWidgetRatingInput = window.app.dicr.dicrWidgetRatingInput || new RatingInput();
+    window.app.dicrWidgetRatingInput = window.app.dicrWidgetRatingInput || new RatingInput();
 })(window, jQuery);
