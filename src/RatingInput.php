@@ -1,7 +1,7 @@
 <?php
 /**
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 24.06.20 22:50:07
+ * @version 26.06.20 05:22:08
  */
 
 declare(strict_types = 1);
@@ -33,11 +33,16 @@ class RatingInput extends InputWidget
     {
         parent::init();
 
+        if (! isset($this->options['id'])) {
+            $this->options['id'] = $this->id;
+        }
+
         Html::addCssClass($this->options, 'dicr-widget-rating-input');
     }
 
     /**
      * @inheritDoc
+     * @noinspection PhpUnusedParameterInspection
      */
     public function run()
     {
@@ -49,13 +54,20 @@ class RatingInput extends InputWidget
         $range = range(1, 5);
         $items = array_combine($range, $range);
 
+        // значение поля ввода
+        $inputValue = $this->hasModel() ? (int)$this->model->{$this->attribute} : (int)$this->value;
+
         $options = [
             'tag' => false,
-            'unselect' => '0',
-            'itemOptions' => [
-                'label' => '',
-                'labelOptions' => ['class' => 'far fa-star']
-            ]
+            'item' => static function($index, $label, $name, $checked, $value) use ($inputValue) {
+                $input = Html::radio($name, $checked, ['value' => $value]);
+                $value = (int)$value;
+
+                return Html::label($input, null, [
+                    'class' => ['fa-star', $value <= $inputValue ? 'fas' : 'far'],
+                    'title' => $label
+                ]);
+            }
         ];
 
         echo $this->hasModel() ?
