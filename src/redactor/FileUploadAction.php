@@ -1,24 +1,21 @@
 <?php
-declare(strict_types = 1);
 /**
- * @copyright 2019-2019 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
- * @license proprietary
- * @version 20.10.19 21:30:17
+ * @version 04.07.20 12:54:30
  */
 
+declare(strict_types = 1);
 namespace dicr\widgets\redactor;
 
 use yii\base\Action;
 
 /**
- * @author Nghia Nguyen <yiidevelop@hotmail.com>
- * @since 2.0
+ * Upload action
  */
 class FileUploadAction extends Action
 {
     /**
-     * run
+     * Run
      */
     public function run()
     {
@@ -31,5 +28,4 @@ class FileUploadAction extends Action
 
         return $ret;
     }
-
 }

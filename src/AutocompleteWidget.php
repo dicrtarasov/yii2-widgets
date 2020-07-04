@@ -1,18 +1,16 @@
 <?php
 /**
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 24.06.20 15:59:54
+ * @version 04.07.20 05:57:32
  */
 
 declare(strict_types = 1);
 namespace dicr\widgets;
 
-use dicr\asset\AutocompleteAsset;
-use yii\helpers\ArrayHelper;
-use yii\helpers\Html;
-use yii\helpers\Json;
+use dicr\assets\AutocompleteAsset;
+use dicr\helpers\ArrayHelper;
+use dicr\helpers\Html;
 use yii\web\JsExpression;
-use yii\widgets\InputWidget;
 use function array_merge;
 
 /**
@@ -23,13 +21,8 @@ use function array_merge;
  */
 class AutocompleteWidget extends InputWidget
 {
-    /** @var array опции скрипта */
-    public $clientOptions = [];
-
     /**
      * @inheritDoc
-     *
-     * @throws \yii\base\InvalidConfigException
      */
     public function init()
     {
@@ -56,11 +49,10 @@ class AutocompleteWidget extends InputWidget
     {
         AutocompleteAsset::register($this->view);
 
-        $this->view->registerJs(
-            "$('#{$this->options['id']}').devbridgeAutocomplete(" . Json::encode($this->clientOptions) . ');'
-        );
+        $this->registerPlugin('devbridgeAutocomplete');
 
         $type = ArrayHelper::remove($this->options, 'type', 'search');
+
         return $this->renderInputHtml($type);
     }
 }

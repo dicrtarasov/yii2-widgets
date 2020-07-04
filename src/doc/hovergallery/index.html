@@ -1,0 +1,73 @@
+<!--
+  ~ @author Igor A Tarasov <develop@dicr.org>
+  ~ @version 04.07.20 12:56:25
+  -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>Hover Gallery by Dicr</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../src/assets/hovergallery.css"/>
+</head>
+<body>
+    <div class="container">
+        <h1>Hover Gallery</h1>
+
+        <p>Галлерея изображений, которые переключаются при перемещении мышки по картинке слева направо.</p>
+
+        <h2>Демонстрация</h2>
+
+        <div class="hovergallery" style="width: 600px; height: 400px; outline: 1px solid #ccc">
+            <div class="hovergallery-slide">
+                <img class="hovergallery-image" src="img/img1.jpg"/>
+                <div class="hovergallery-label"></div>
+            </div>
+            <div class="hovergallery-slide">
+                <img class="hovergallery-image" src="img/img2.jpg"/>
+                <div class="hovergallery-label"></div>
+            </div>
+            <div class="hovergallery-slide">
+                <img class="hovergallery-image" src="img/img3.jpg"/>
+                <div class="hovergallery-label"></div>
+            </div>
+            <div class="hovergallery-slide">
+                <img class="hovergallery-image" src="img/img4.jpg"/>
+                <div class="hovergallery-label"></div>
+            </div>
+            <div class="hovergallery-slide">
+                <img class="hovergallery-image" src="img/img5.jpg"/>
+                <div class="hovergallery-label"></div>
+            </div>
+        </div>
+
+        <p>* проведите мышкой по картинке.</p>
+
+        <h2>Использование</h2>
+
+        <p>Галлерея реализована полностью на CSS, поэтому достаточно создать html-разметку блока и подключиь стили
+            галлереи:</p>
+
+        <xmp>
+            <link rel="stylesheet" href="hovergallery.css"/>
+
+            <div class="hovergallery">
+                <div class="hovergallery-slide">
+                    <img class="hovergallery-image" src="img/img1.jpg"/>
+                    <div class="hovergallery-label"></div>
+                </div>
+                <div class="hovergallery-slide">
+                    <img class="hovergallery-image" src="img/img2.jpg"/>
+                    <div class="hovergallery-label"></div>
+                </div>
+                <div class="hovergallery-slide">
+                    <img class="hovergallery-image" src="img/img3.jpg"/>
+                    <div class="hovergallery-label"></div>
+                </div>
+            </div>
+        </xmp>
+    </div>
+</body>
+</html>

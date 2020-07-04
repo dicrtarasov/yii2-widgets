@@ -1,7 +1,7 @@
 <?php
 /**
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 13.06.20 02:06:20
+ * @version 04.07.20 05:57:33
  */
 
 declare(strict_types = 1);

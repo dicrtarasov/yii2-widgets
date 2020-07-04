@@ -1,16 +1,15 @@
 <?php
 /**
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 24.06.20 22:40:19
+ * @version 04.07.20 05:57:32
  */
 
 declare(strict_types = 1);
 namespace dicr\widgets;
 
+use dicr\helpers\Html;
 use Yii;
 use yii\base\InvalidConfigException;
-use yii\base\Widget;
-use yii\helpers\Html;
 use function is_numeric;
 use function ob_get_clean;
 
@@ -35,9 +34,6 @@ class RatingWidget extends Widget
 
     /** @var bool показывать текст */
     public $showText = false;
-
-    /** @var array опции тега */
-    public $options;
 
     /**
      * @inheritDoc
@@ -82,10 +78,6 @@ class RatingWidget extends Widget
                 $this->options['itemscope'] = true;
                 $this->options['itemtype'] = 'http://schema.org/Rating';
             }
-        }
-
-        if (! isset($this->options['id'])) {
-            $this->options['id'] = $this->id;
         }
 
         Html::addCssClass($this->options, 'dicr-widget-rating');

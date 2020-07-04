@@ -1,13 +1,13 @@
 <?php
 /**
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 24.06.20 11:40:23
+ * @version 04.07.20 05:57:32
  */
 
 declare(strict_types = 1);
 namespace dicr\widgets;
 
-use dicr\asset\SlickAsset;
+use dicr\assets\SlickAsset;
 use yii\web\AssetBundle;
 use yii\web\JqueryAsset;
 

@@ -1,15 +1,14 @@
 <?php
 /**
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 26.06.20 02:42:39
+ * @version 04.07.20 09:27:14
  */
 
 declare(strict_types = 1);
 namespace dicr\widgets;
 
+use dicr\helpers\Html;
 use yii\base\InvalidConfigException;
-use yii\helpers\Html;
-use yii\widgets\InputWidget;
 use function is_array;
 use function ob_get_clean;
 use function ob_start;
@@ -29,8 +28,8 @@ class CustomSelect extends InputWidget
 
     /**
      * @inheritDoc
-     * @throws \yii\base\InvalidConfigException
-     * @throws \yii\base\InvalidConfigException
+     * @throws InvalidConfigException
+     * @throws InvalidConfigException
      */
     public function init()
     {
@@ -47,6 +46,7 @@ class CustomSelect extends InputWidget
         }
 
         $this->placeholder = (string)$this->placeholder;
+
         Html::addCssClass($this->options, 'dicr-widget-custom-select');
     }
 

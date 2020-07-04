@@ -1,6 +1,6 @@
 /*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 26.06.20 03:00:41
+ * @version 04.07.20 05:57:32
  */
 
 (function (window, $) {

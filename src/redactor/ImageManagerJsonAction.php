@@ -1,4 +1,9 @@
 <?php
+/**
+ * @author Igor A Tarasov <develop@dicr.org>
+ * @version 04.07.20 09:27:14
+ */
+
 declare(strict_types = 1);
 /**
  * @copyright 2019-2019 Dicr http://dicr.org
@@ -9,8 +14,11 @@ declare(strict_types = 1);
 
 namespace dicr\widgets\redactor;
 
+use dicr\widgets\RedactorModule;
 use Yii;
 use yii\base\Action;
+use yii\base\Exception;
+use yii\base\InvalidConfigException;
 use yii\helpers\FileHelper;
 use yii\web\HttpException;
 use function count;
@@ -24,7 +32,7 @@ use function is_array;
 class ImageManagerJsonAction extends Action
 {
     /**
-     * @throws \yii\web\HttpException
+     * @throws HttpException
      */
     public function init()
     {
@@ -34,21 +42,35 @@ class ImageManagerJsonAction extends Action
     }
 
     /**
+     * Модуль редактора.
+     *
+     * @return RedactorModule
+     */
+    protected function module()
+    {
+        /** @noinspection PhpIncompatibleReturnTypeInspection */
+        return $this->controller->module;
+    }
+
+    /**
      * @return array|null
+     * @throws Exception
+     * @throws InvalidConfigException
      */
     public function run()
     {
         $onlyExtensions = array_map(static function($ext) {
             return '*.' . $ext;
-        }, Yii::$app->controller->module->imageAllowExtensions);
-        $filesPath = FileHelper::findFiles(Yii::$app->controller->module->getSaveDir(), [
+        }, $this->module()->imageAllowExtensions);
+
+        $filesPath = FileHelper::findFiles($this->module()->getSaveDir(), [
             'recursive' => true,
             'only' => $onlyExtensions
         ]);
         if (is_array($filesPath) && count($filesPath)) {
             $result = [];
             foreach ($filesPath as $filePath) {
-                $url = Yii::$app->controller->module->getUrl(pathinfo($filePath, PATHINFO_BASENAME));
+                $url = $this->module()->getUrl(pathinfo($filePath, PATHINFO_BASENAME));
                 $result[] = [
                     'thumb' => $url,
                     'url' => $url,

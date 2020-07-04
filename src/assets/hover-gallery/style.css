@@ -1,6 +1,6 @@
 /*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 13.06.20 03:06:44
+ * @version 04.07.20 12:51:10
  */
 
 .dicr-widgets-hover-gallery{display:block;overflow:hidden;position:relative}.dicr-widgets-hover-gallery .gallery-slides{position:absolute;top:0;left:0;right:0;bottom:0;display:flex;flex-flow:row nowrap;align-items:stretch}.dicr-widgets-hover-gallery .gallery-slides .gallery-slide{flex:1 1 auto;display:flex;flex-flow:column nowrap;justify-content:flex-end}.dicr-widgets-hover-gallery .gallery-slides .gallery-slide .gallery-image{display:none;width:100%;height:auto;position:absolute;top:0;left:0;right:0;bottom:0;pointer-events:none}.dicr-widgets-hover-gallery .gallery-slides .gallery-slide .gallery-label{display:none;height:5px;background-color:#ccc;border:1px solid #fff;z-index:1}.dicr-widgets-hover-gallery .gallery-slides .gallery-slide:first-of-type .gallery-image{display:block}.dicr-widgets-hover-gallery .gallery-slides .gallery-slide:first-of-type .gallery-label{background-color:#888}.dicr-widgets-hover-gallery:hover .gallery-slides .gallery-slide .gallery-label{display:block}.dicr-widgets-hover-gallery:hover .gallery-slides .gallery-slide:first-of-type .gallery-image{display:none}.dicr-widgets-hover-gallery:hover .gallery-slides .gallery-slide:first-of-type .gallery-label{background-color:#ccc}.dicr-widgets-hover-gallery:hover .gallery-slides .gallery-slide:hover .gallery-image{display:block}.dicr-widgets-hover-gallery:hover .gallery-slides .gallery-slide:hover .gallery-label{background-color:#888}

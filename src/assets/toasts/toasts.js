@@ -1,14 +1,13 @@
 /*
- * @copyright 2019-2020 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
- * @license proprietary
- * @version 04.06.20 21:42:32
+ * @version 04.07.20 05:57:32
  */
 
 window.dicr = (function (dicr) {
     'use strict';
 
-    function Toasts(container, options) {
+    function Toasts(container, options)
+    {
         // noinspection SpellCheckingInspection
         this.options = $.extend({}, {
             animation: true,

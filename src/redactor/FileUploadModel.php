@@ -1,15 +1,13 @@
 <?php
 /**
- * @copyright 2019-2020 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
- * @license proprietary
- * @version 12.05.20 21:11:39
+ * @version 04.07.20 12:54:58
  */
 
 declare(strict_types = 1);
-
 namespace dicr\widgets\redactor;
 
+use dicr\widgets\RedactorModule;
 use RuntimeException;
 use Throwable;
 use Yii;
@@ -36,7 +34,18 @@ class FileUploadModel extends Model
     {
         parent::init();
 
-        $this->allowedExtensions = Yii::$app->controller->module->fileAllowExtensions;
+        $this->allowedExtensions = $this->module()->fileAllowExtensions;
+    }
+
+    /**
+     * Модуль редактора.
+     *
+     * @return RedactorModule
+     */
+    protected function module()
+    {
+        /** @noinspection PhpIncompatibleReturnTypeInspection */
+        return Yii::$app->controller->module;
     }
 
     /**
@@ -85,10 +94,10 @@ class FileUploadModel extends Model
                 $name = self::getFileName($file);
 
                 // полный путь файла
-                $path = Yii::$app->controller->module->getFilePath($name);
+                $path = $this->module()->getFilePath($name);
 
                 // сохраняем
-                if (! $file->saveAs($path, true)) {
+                if (! $file->saveAs($path)) {
                     throw new RuntimeException('ошибка загрузки файла: ' . $path);
                 }
 
@@ -98,7 +107,7 @@ class FileUploadModel extends Model
                 }
 
                 $ret[$key] = [
-                    'url' => Yii::$app->controller->module->getUrl($name),
+                    'url' => $this->module()->getUrl($name),
                     'name' => $name,
                     'id' => md5(date('YmdHis'))
                 ];

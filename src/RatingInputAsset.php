@@ -1,13 +1,13 @@
 <?php
 /**
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 24.06.20 22:43:14
+ * @version 04.07.20 05:57:33
  */
 
 declare(strict_types = 1);
 namespace dicr\widgets;
 
-use dicr\asset\FontAwesomeAsset;
+use dicr\assets\FontAwesomeAsset;
 use yii\web\AssetBundle;
 use yii\web\JqueryAsset;
 

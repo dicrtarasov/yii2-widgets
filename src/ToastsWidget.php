@@ -1,16 +1,13 @@
 <?php
 /**
- * @copyright 2019-2020 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
- * @license proprietary
- * @version 31.05.20 06:16:29
+ * @version 04.07.20 05:57:32
  */
 
 declare(strict_types = 1);
 namespace dicr\widgets;
 
-use yii\base\Widget;
-use yii\helpers\Html;
+use dicr\helpers\Html;
 use yii\helpers\Json;
 
 /**
@@ -38,22 +35,12 @@ class ToastsWidget extends Widget
     /** @var bool анимация */
     public $animation = true;
 
-    /** @var array опции тега виджета */
-    public $options = [];
-
-    /** @var array опции javascript */
-    public $clientOptions = [];
-
     /**
      * @inheritDoc
      */
     public function init()
     {
         parent::init();
-
-        if (empty($this->options['id'])) {
-            $this->options['id'] = $this->getId();
-        }
 
         foreach (['animation', 'autoHide'] as $field) {
             if (isset($this->{$field})) {

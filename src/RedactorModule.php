@@ -1,9 +1,7 @@
 <?php
 /**
- * @copyright 2019-2020 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
- * @license proprietary
- * @version 12.05.20 21:35:10
+ * @version 04.07.20 05:57:32
  */
 
 declare(strict_types = 1);
@@ -57,7 +55,7 @@ class RedactorModule extends Module
     {
         parent::init();
 
-        $this->uploadDir = Yii::getAlias($this->uploadDir, true);
+        $this->uploadDir = Yii::getAlias($this->uploadDir);
         if (empty($this->uploadDir)) {
             throw new InvalidConfigException('upload directory not exists: ' . $this->uploadDir);
         }
@@ -70,7 +68,7 @@ class RedactorModule extends Module
             throw new InvalidConfigException('not writeable: ' . $this->uploadDir);
         }
 
-        $this->uploadUrl = Yii::getAlias($this->uploadUrl, true);
+        $this->uploadUrl = Yii::getAlias($this->uploadUrl);
         if (empty($this->uploadUrl)) {
             throw new InvalidConfigException('invalid upload url');
         }
@@ -93,7 +91,7 @@ class RedactorModule extends Module
         }
 
         // создаем директорию
-        if (! file_exists($dir) && ! FileHelper::createDirectory($dir, 0775, true)) {
+        if (! file_exists($dir) && ! FileHelper::createDirectory($dir)) {
             throw new InvalidConfigException('$uploadDir does not exist and default path creation failed');
         }
 

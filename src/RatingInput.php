@@ -1,15 +1,13 @@
 <?php
 /**
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 26.06.20 05:22:08
+ * @version 04.07.20 05:57:32
  */
 
 declare(strict_types = 1);
-
 namespace dicr\widgets;
 
-use yii\helpers\Html;
-use yii\widgets\InputWidget;
+use dicr\helpers\Html;
 use function array_combine;
 use function ob_get_clean;
 use function ob_start;
@@ -27,15 +25,10 @@ class RatingInput extends InputWidget
 
     /**
      * @inheritDoc
-     * @throws \yii\base\InvalidConfigException
      */
     public function init()
     {
         parent::init();
-
-        if (! isset($this->options['id'])) {
-            $this->options['id'] = $this->id;
-        }
 
         Html::addCssClass($this->options, 'dicr-widget-rating-input');
     }

@@ -1,21 +1,18 @@
 <?php
 /**
- * @copyright 2019-2020 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
- * @license proprietary
- * @version 04.06.20 21:40:21
+ * @version 04.07.20 09:27:14
  */
 
 declare(strict_types = 1);
 namespace dicr\widgets;
 
-use dicr\asset\AutocompleteAsset;
+use dicr\assets\AutocompleteAsset;
+use dicr\helpers\ArrayHelper;
+use dicr\helpers\Html;
 use yii\base\InvalidConfigException;
-use yii\helpers\ArrayHelper;
-use yii\helpers\Html;
 use yii\helpers\Json;
 use yii\web\JsExpression;
-use yii\widgets\InputWidget;
 use function ob_get_clean;
 use function ob_start;
 use function trim;
@@ -34,13 +31,10 @@ class ShadowAutocomplete extends InputWidget
     /** @var string начальное значение, отображаемое в поле подсказки */
     public $initialDisplayValue = '';
 
-    /** @var array опции скрипта */
-    public $clientOptions = [];
-
     /**
      * @inheritDoc
-     * @throws \yii\base\InvalidConfigException
-     * @throws \yii\base\InvalidConfigException
+     * @throws InvalidConfigException
+     * @throws InvalidConfigException
      */
     public function init()
     {
@@ -78,7 +72,7 @@ class ShadowAutocomplete extends InputWidget
 
     /**
      * @inheritDoc
-     * @throws \yii\base\InvalidConfigException
+     * @throws InvalidConfigException
      */
     public function run()
     {

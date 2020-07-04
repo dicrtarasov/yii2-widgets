@@ -1,15 +1,14 @@
 <?php
 /**
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 13.06.20 06:43:49
+ * @version 04.07.20 05:57:32
  */
 
 declare(strict_types = 1);
 
 namespace dicr\widgets;
 
-use yii\base\Widget;
-use yii\helpers\Html;
+use dicr\helpers\Html;
 use function ob_get_clean;
 use function ob_start;
 use function trim;
@@ -44,9 +43,6 @@ class Popover extends Widget
     /** @var string|null содержимое всплывашки */
     public $popup;
 
-    /** @var array опции виджета */
-    public $options = [];
-
     /**
      * @inheritDoc
      */
@@ -55,6 +51,7 @@ class Popover extends Widget
         parent::init();
 
         Html::addCssClass($this->options, ['widget-popover', $this->position]);
+
         ob_start();
     }
 

@@ -1,15 +1,14 @@
 <?php
 /**
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 24.06.20 11:39:13
+ * @version 04.07.20 05:57:33
  */
 
 declare(strict_types = 1);
 
 namespace dicr\widgets;
 
-use yii\helpers\Html;
-use yii\widgets\InputWidget;
+use dicr\helpers\Html;
 use function array_filter;
 use function is_numeric;
 use function ob_get_clean;
@@ -35,7 +34,6 @@ class QuantitySelector extends InputWidget
 
     /**
      * @inheritDoc
-     * @throws \yii\base\InvalidConfigException
      */
     public function init()
     {

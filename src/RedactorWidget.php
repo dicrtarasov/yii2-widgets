@@ -1,29 +1,25 @@
 <?php
 /**
- * @copyright 2019-2020 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
- * @license proprietary
- * @version 12.05.20 21:31:09
+ * @version 04.07.20 09:27:14
  */
 
 declare(strict_types = 1);
 namespace dicr\widgets;
 
-use dicr\asset\RedactorAsset;
+use dicr\assets\RedactorAsset;
+use dicr\helpers\Html;
+use dicr\helpers\Url;
 use Yii;
-use yii\helpers\Html;
-use yii\helpers\Json;
-use yii\helpers\Url;
 use yii\web\JsExpression;
-use yii\widgets\InputWidget;
 use function in_array;
 
 /**
  * Redactor Widget.
  *
  * @property string $sourcePath
- * @property \dicr\asset\RedactorAsset $assetBundle
- * @property \dicr\widgets\RedactorModule $module
+ * @property RedactorAsset $assetBundle
+ * @property RedactorModule $module
  * @noinspection PhpUnused
  */
 class RedactorWidget extends InputWidget
@@ -71,9 +67,7 @@ class RedactorWidget extends InputWidget
     ];
 
     /**
-     * {@inheritDoc}
-     * @throws \yii\base\InvalidConfigException
-     * @see \yii\widgets\InputWidget::init()
+     * @inheritDoc
      */
     public function init()
     {
@@ -109,8 +103,7 @@ class RedactorWidget extends InputWidget
     }
 
     /**
-     * {@inheritDoc}
-     * @see \yii\base\Widget::run()
+     * @inheritDoc
      */
     public function run()
     {
@@ -120,8 +113,7 @@ class RedactorWidget extends InputWidget
         $asset->addPluginsResources($this->clientOptions['plugins'] ?? []);
 
         // регистрируем плагин
-        $this->view->registerJs("$('#{$this->options['id']}').redactor(" . Json::encode($this->clientOptions ?: []) .
-            ');');
+        $this->registerPlugin('redactor');
 
         return $this->hasModel() ? Html::activeTextarea($this->model, $this->attribute, $this->options) :
             Html::textarea($this->name, $this->value, $this->options);

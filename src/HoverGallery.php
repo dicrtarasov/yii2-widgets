@@ -1,16 +1,15 @@
 <?php
 /**
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 13.06.20 03:08:34
+ * @version 04.07.20 09:27:14
  */
 
 declare(strict_types = 1);
 namespace dicr\widgets;
 
+use dicr\helpers\ArrayHelper;
+use dicr\helpers\Html;
 use yii\base\InvalidConfigException;
-use yii\base\Widget;
-use yii\helpers\ArrayHelper;
-use yii\helpers\Html;
 use function get_class;
 use function is_array;
 use function is_string;
@@ -24,9 +23,6 @@ use function ob_start;
  */
 class HoverGallery extends Widget
 {
-    /** @var array опции тега виджета */
-    public $options;
-
     /** @var string корневой тег галереи */
     public $tag = 'figure';
 
@@ -44,9 +40,9 @@ class HoverGallery extends Widget
 
     /**
      * @inheritDoc
-     * @throws \yii\base\InvalidConfigException
-     * @throws \yii\base\InvalidConfigException
-     * @throws \yii\base\InvalidConfigException
+     * @throws InvalidConfigException
+     * @throws InvalidConfigException
+     * @throws InvalidConfigException
      */
     public function init()
     {

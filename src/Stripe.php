@@ -1,15 +1,13 @@
 <?php
 /**
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 24.06.20 15:12:22
+ * @version 04.07.20 05:57:32
  */
 
 declare(strict_types = 1);
-
 namespace dicr\widgets;
 
-use yii\base\Widget;
-use yii\helpers\Html;
+use dicr\helpers\Html;
 use yii\helpers\Json;
 use function array_merge;
 use function ob_get_clean;
@@ -33,12 +31,6 @@ class Stripe extends Widget
     /** @var string[] блоки ленты */
     public $slides;
 
-    /** @var array */
-    public $options;
-
-    /** @var array */
-    public $slickOptions = [];
-
     /**
      * @inheritDoc
      */
@@ -50,7 +42,7 @@ class Stripe extends Widget
             $this->options['id'] = $this->id;
         }
 
-        $this->slickOptions = array_merge([
+        $this->clientOptions = array_merge([
             'autoplay' => false,
             'autoplaySpeed' => 5000,
             'prevArrow' => '.' . $this->id . '-prev',
@@ -80,7 +72,7 @@ class Stripe extends Widget
                     ]
                 ],
             ]
-        ], $this->slickOptions);
+        ], $this->clientOptions);
 
         Html::addCssClass($this->options, 'widget-stripe');
     }
@@ -97,7 +89,7 @@ class Stripe extends Widget
         StripeAsset::register($this->view);
 
         $this->view->registerJs(
-            '$("#' . $this->id . ' .stripe-slides").slick(' . Json::encode($this->slickOptions) . ');'
+            '$("#' . $this->id . ' .stripe-slides").slick(' . Json::encode($this->clientOptions) . ');'
         );
 
         ob_start();

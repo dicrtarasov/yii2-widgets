@@ -1,9 +1,7 @@
 <?php
 /**
- * @copyright 2019-2019 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
- * @license proprietary
- * @version 20.10.19 10:16:01
+ * @version 04.07.20 05:57:32
  */
 
 declare(strict_types = 1);
@@ -28,6 +26,6 @@ class MultiselectAsset extends AssetBundle
 
     /** @var string[] */
     public $depends = [
-        \dicr\asset\MultiselectAsset::class
+        \dicr\assets\MultiselectAsset::class
     ];
 }

@@ -1,9 +1,7 @@
 <?php
 /**
- * @copyright 2019-2020 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
- * @license proprietary
- * @version 12.05.20 21:34:30
+ * @version 04.07.20 05:57:32
  */
 
 /**
@@ -14,8 +12,6 @@
 declare(strict_types = 1);
 
 namespace dicr\widgets\redactor;
-
-use Yii;
 
 /**
  * Class ImageUploadModel
@@ -31,6 +27,6 @@ class ImageUploadModel extends FileUploadModel
     {
         parent::init();
 
-        $this->allowedExtensions = Yii::$app->controller->module->imageAllowExtensions;
+        $this->allowedExtensions = $this->module()->imageAllowExtensions;
     }
 }

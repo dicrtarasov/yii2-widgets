@@ -1,13 +1,6 @@
 /*
- * @copyright 2019-2020 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
- * @license proprietary
- * @version 31.05.20 06:26:21
- */
-
-/*
- * @author Igor A Tarasov <develop@dicr.org>, http://dicr.org
- * @version 30.04.20 14:38:34
+ * @version 04.07.20 05:57:32
  */
 
 (function (window, $) {

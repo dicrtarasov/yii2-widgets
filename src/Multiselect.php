@@ -1,15 +1,16 @@
 <?php
 /**
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 13.06.20 02:19:30
+ * @version 04.07.20 09:27:14
  */
 
 declare(strict_types = 1);
 namespace dicr\widgets;
 
-use yii\helpers\Html;
+use dicr\helpers\Html;
+use Exception;
+use yii\base\InvalidConfigException;
 use yii\helpers\Json;
-use yii\widgets\InputWidget;
 
 /**
  * JQuery Multiselect widget.
@@ -35,16 +36,8 @@ class Multiselect extends InputWidget
     ];
 
     /**
-     * @var array опции плагина multiselect
-     * @see https://github.com/nobleclem/jQuery-MultiSelect
-     */
-    public $clientOptions = [];
-
-    /**
-     * {@inheritDoc}
-     * @throws \yii\base\InvalidConfigException
-     * @throws \Exception
-     * @see \yii\widgets\InputWidget::init()
+     * @inheritDoc
+     * @throws Exception
      */
     public function init()
     {
@@ -63,7 +56,7 @@ class Multiselect extends InputWidget
 
     /**
      * @inheritDoc
-     * @throws \yii\base\InvalidConfigException
+     * @throws InvalidConfigException
      */
     public function run()
     {
