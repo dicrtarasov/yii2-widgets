@@ -1,13 +1,12 @@
 <?php
 /**
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 04.07.20 09:27:14
+ * @version 04.07.20 22:36:58
  */
 
 declare(strict_types = 1);
 namespace dicr\widgets;
 
-use dicr\helpers\Html;
 use Exception;
 use yii\base\InvalidConfigException;
 use yii\helpers\Json;

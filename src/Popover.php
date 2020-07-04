@@ -1,14 +1,13 @@
 <?php
 /**
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 04.07.20 05:57:32
+ * @version 04.07.20 22:37:03
  */
 
 declare(strict_types = 1);
 
 namespace dicr\widgets;
 
-use dicr\helpers\Html;
 use function ob_get_clean;
 use function ob_start;
 use function trim;

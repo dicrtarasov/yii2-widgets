@@ -1,15 +1,14 @@
 <?php
 /**
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 04.07.20 09:27:14
+ * @version 04.07.20 22:36:48
  */
 
 declare(strict_types = 1);
 namespace dicr\widgets;
 
-use dicr\helpers\ArrayHelper;
-use dicr\helpers\Html;
 use yii\base\InvalidConfigException;
+use yii\helpers\ArrayHelper;
 use function get_class;
 use function is_array;
 use function is_string;

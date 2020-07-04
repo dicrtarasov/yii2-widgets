@@ -1,12 +1,17 @@
 /*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 04.07.20 05:57:32
+ * @version 04.07.20 22:23:53
  */
 
-window.dicr = (function (dicr) {
+(function (window, $) {
     'use strict';
 
-    function Toasts(container, options)
+    /**
+     * @param {HTMLElement|jQuery<HTMLElement>|string} container
+     * @param {object} options
+     * @constructor
+     */
+    function Toasts(container = '', options = {})
     {
         // noinspection SpellCheckingInspection
         this.options = $.extend({}, {
@@ -15,6 +20,7 @@ window.dicr = (function (dicr) {
         }, options);
 
         this.container = $(container);
+
         if (this.container.length < 1) {
             this.container = $('.dicr-widgets.toasts', window.document.body);
             if (this.container.length < 1) {
@@ -63,10 +69,10 @@ window.dicr = (function (dicr) {
     /**
      * Добавляет тост с заданным классом и текстом
      *
-     * @param {*} textClass
-     * @param {*} header
-     * @param {*} message
-     * @param {*} opts
+     * @param {string} textClass
+     * @param {string} header
+     * @param {string} message
+     * @param {object} opts
      */
     Toasts.prototype.createToast = function (textClass, header, message, opts) {
         return this.addToast(
@@ -120,8 +126,7 @@ window.dicr = (function (dicr) {
         return this.createToast('text-success', header, message, opts);
     };
 
-    dicr.widgets = dicr.widgets || {};
-    dicr.widgets.toasts = new Toasts();
-
-    return dicr;
-})(window.dicr || {});
+    window.dicr = window.dicr || {};
+    window.dicr.widgets = window.dicr.widgets || {};
+    window.dicr.widgets.toasts = window.dicr.widgets.toasts || new Toasts();
+})(window, jQuery);

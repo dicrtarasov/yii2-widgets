@@ -18,7 +18,7 @@ php composer.phar require --prefer-dist yiidoc/yii2-redactor "*"
  "yiidoc/yii2-redactor": "*"
 ```
 
-to the require section of your composer.json.
+To the *require* section of your composer.json.
 
 Configure
 -----------------
@@ -30,9 +30,7 @@ Add to config file (config/web.php or common\config\main.php)
         'redactor' => 'yii\redactor\RedactorModule',
     ],
 ```
-or if you want to change the upload directory.
-to path/to/uploadfolder
-default value `@webroot/uploads`
+Or if you want to change the upload directory to path/to/upload/folder default value `@webroot/uploads`
 
 ```
     'modules' => [
@@ -45,7 +43,7 @@ default value `@webroot/uploads`
     ],
 ```
 
-note: You need to create uploads folder and chmod and set security for folder upload
+Note: You need to create uploads folder and chmod and set security for folder upload
 reference: [Protect Your Uploads Folder with .htaccess](http://tomolivercv.wordpress.com/2011/07/24/protect-your-uploads-folder-with-htaccess/),
 [How to Setup Secure Media Uploads](http://digwp.com/2012/09/secure-media-uploads/)
 
@@ -55,7 +53,7 @@ Config view/form
 <?= $form->field($model, 'body')->widget(\yii\redactor\widgets\Redactor::className()) ?>
 ```
 
-or not use ActiveField
+Or not use ActiveField
 
 ```
 <?= \yii\redactor\widgets\Redactor::widget([
@@ -63,7 +61,7 @@ or not use ActiveField
     'attribute' => 'body'
 ]) ?>
 ```    
-or config advanced redactor reference [Docs](http://imperavi.com/redactor/docs/)
+Or config advanced redactor reference [Docs](http://imperavi.com/redactor/docs/)
 
 ```
 <?= $form->field($model, 'body')->widget(\yii\redactor\widgets\Redactor::className(), [
@@ -77,7 +75,7 @@ or config advanced redactor reference [Docs](http://imperavi.com/redactor/docs/)
 ])?>
 ```
 
-Bummer! i was tested on my project but not have many time to write document on file and usage.
-If you have problem please create a [issue](https://github.com/yiidoc/yii2-redactor/issues)
+Bummer! I was tested on my project but not have many time to write the document on file and usage.
+If you have problem, then please create [issue](https://github.com/yiidoc/yii2-redactor/issues)
 
 Thanks!

@@ -1,14 +1,12 @@
 <?php
 /**
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 04.07.20 05:57:33
+ * @version 04.07.20 22:37:08
  */
 
 declare(strict_types = 1);
-
 namespace dicr\widgets;
 
-use dicr\helpers\Html;
 use function array_filter;
 use function is_numeric;
 use function ob_get_clean;

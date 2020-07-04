@@ -1,13 +1,12 @@
 <?php
 /**
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 04.07.20 05:57:32
+ * @version 04.07.20 22:37:19
  */
 
 declare(strict_types = 1);
 namespace dicr\widgets;
 
-use dicr\helpers\Html;
 use Yii;
 use yii\base\InvalidConfigException;
 use function is_numeric;
@@ -45,7 +44,7 @@ class RatingWidget extends Widget
 
         // если значение не установлено, то не отображаем виджет
         if (isset($this->value)) {
-            if (! is_numeric($this->value) || $this->value < 0 || $this->value > 5) {
+            if (! is_numeric($this->value) || ($this->value < 0) || ($this->value > 5)) {
                 throw new InvalidConfigException('value');
             }
 
@@ -53,7 +52,7 @@ class RatingWidget extends Widget
         }
 
         if (isset($this->count)) {
-            if (! is_numeric($this->count) || $this->count < 0) {
+            if (! is_numeric($this->count) || ($this->count < 0)) {
                 throw new InvalidConfigException('count');
             }
 
@@ -64,7 +63,7 @@ class RatingWidget extends Widget
             if (! isset($this->options['title'])) {
                 if ($this->value > 0) {
                     $this->options['title'] = sprintf('%.1f', $this->value);
-                    if (isset($this->count) && $this->count > 0) {
+                    if (isset($this->count) && ($this->count > 0)) {
                         $this->options['title'] .= ' - ' . $this->count . ' ' . Yii::t('app', 'отзывов');
                     }
                 } else {
@@ -73,7 +72,7 @@ class RatingWidget extends Widget
                 }
             }
 
-            if ($this->schema && $this->value > 0) {
+            if ($this->schema && ($this->value > 0)) {
                 $this->options['itemprop'] = 'reviewRating';
                 $this->options['itemscope'] = true;
                 $this->options['itemtype'] = 'http://schema.org/Rating';
@@ -97,7 +96,7 @@ class RatingWidget extends Widget
         ob_start();
         echo Html::beginTag($this->tag, $this->options);
 
-        if ($this->schema && $this->value > 0) {
+        if ($this->schema && ($this->value > 0)) {
             echo Html::tag('meta', ['itemprop' => 'worstRating', 'content' => 1]);
             echo Html::tag('meta', ['itemprop' => 'bestRating', 'content' => 5]);
             echo Html::tag('meta', ['itemprop' => 'ratingValue', 'content' => $this->value]);
@@ -124,7 +123,7 @@ class RatingWidget extends Widget
         if ($this->showText && isset($this->count)) {
             echo Html::tag('span',
                 '(' .
-                ($this->count > 0 ?
+                (($this->count > 0) ?
                     Yii::$app->formatter->asInteger($this->count) :
                     Yii::t('app', 'нет')
                 ) . ' ' . Yii::t('app', 'отзывов') . ')', [

@@ -1,16 +1,15 @@
 <?php
 /**
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 04.07.20 09:27:14
+ * @version 04.07.20 22:37:24
  */
 
 declare(strict_types = 1);
 namespace dicr\widgets;
 
-use dicr\assets\RedactorAsset;
-use dicr\helpers\Html;
-use dicr\helpers\Url;
+use dicr\asset\RedactorAsset;
 use Yii;
+use yii\helpers\Url;
 use yii\web\JsExpression;
 use function in_array;
 

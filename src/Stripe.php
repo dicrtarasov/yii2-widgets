@@ -1,13 +1,12 @@
 <?php
 /**
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 04.07.20 05:57:32
+ * @version 04.07.20 22:37:37
  */
 
 declare(strict_types = 1);
 namespace dicr\widgets;
 
-use dicr\helpers\Html;
 use yii\helpers\Json;
 use function array_merge;
 use function ob_get_clean;

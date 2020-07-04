@@ -1,15 +1,14 @@
 <?php
 /**
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 04.07.20 05:57:32
+ * @version 04.07.20 22:36:30
  */
 
 declare(strict_types = 1);
 namespace dicr\widgets;
 
-use dicr\assets\AutocompleteAsset;
-use dicr\helpers\ArrayHelper;
-use dicr\helpers\Html;
+use dicr\asset\AutocompleteAsset;
+use yii\helpers\ArrayHelper;
 use yii\web\JsExpression;
 use function array_merge;
 

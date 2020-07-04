@@ -1,13 +1,12 @@
 <?php
 /**
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 04.07.20 05:57:32
+ * @version 04.07.20 22:37:14
  */
 
 declare(strict_types = 1);
 namespace dicr\widgets;
 
-use dicr\helpers\Html;
 use function array_combine;
 use function ob_get_clean;
 use function ob_start;
@@ -57,7 +56,7 @@ class RatingInput extends InputWidget
                 $value = (int)$value;
 
                 return Html::label($input, null, [
-                    'class' => ['fa-star', $value <= $inputValue ? 'fas' : 'far'],
+                    'class' => ['fa-star', ($value <= $inputValue) ? 'fas' : 'far'],
                     'title' => $label
                 ]);
             }

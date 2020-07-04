@@ -1,16 +1,15 @@
 <?php
 /**
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 04.07.20 09:27:14
+ * @version 04.07.20 22:37:30
  */
 
 declare(strict_types = 1);
 namespace dicr\widgets;
 
-use dicr\assets\AutocompleteAsset;
-use dicr\helpers\ArrayHelper;
-use dicr\helpers\Html;
+use dicr\asset\AutocompleteAsset;
 use yii\base\InvalidConfigException;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
 use yii\web\JsExpression;
 use function ob_get_clean;

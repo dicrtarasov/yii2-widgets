@@ -1,13 +1,12 @@
 <?php
 /**
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 04.07.20 09:27:14
+ * @version 04.07.20 22:36:40
  */
 
 declare(strict_types = 1);
 namespace dicr\widgets;
 
-use dicr\helpers\Html;
 use yii\base\InvalidConfigException;
 use function is_array;
 use function ob_get_clean;
@@ -80,7 +79,7 @@ class CustomSelect extends InputWidget
 
         // кнопка открытия списка
         echo Html::button(Html::encode($label), [
-            'class' => [$value === '' ? 'placeholder' : '']
+            'class' => [($value === '') ? 'placeholder' : '']
         ]);
 
         // всплывающий список
