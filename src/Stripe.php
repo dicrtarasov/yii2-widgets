@@ -1,28 +1,31 @@
 <?php
 /**
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 23.07.20 21:31:29
+ * @version 27.07.20 00:57:25
  */
 
 declare(strict_types = 1);
 namespace dicr\widgets;
 
+use Exception;
 use yii\helpers\Json;
 use function array_merge;
 use function ob_get_clean;
+use function ob_start;
 
 /**
  * Лента карточек с прокруткой.
- *
- * @noinspection PhpUnused
  */
 class Stripe extends Widget
 {
+    /** @var string HTML-код иконки в заголовке */
+    public $icon;
+
     /** @var string */
     public $title;
 
     /** @var bool стрелки в заголовке виджета */
-    public $titleArrows = false;
+    public $headArrows = false;
 
     /** @var bool стрелки в теле виджета */
     public $bodyArrows = true;
@@ -32,18 +35,13 @@ class Stripe extends Widget
 
     /**
      * @inheritDoc
+     * @throws Exception
      */
     public function init()
     {
         parent::init();
 
-        if (! isset($this->options['id'])) {
-            $this->options['id'] = $this->id;
-        }
-
         $this->clientOptions = array_merge([
-            'autoplay' => false,
-            'autoplaySpeed' => 5000,
             'prevArrow' => '.' . $this->id . '-prev',
             'nextArrow' => '.' . $this->id . '-next',
             'slidesToShow' => 4,
@@ -106,18 +104,22 @@ class Stripe extends Widget
      */
     protected function renderHead()
     {
-        if (empty($this->title) && ! $this->titleArrows) {
+        if (empty($this->icon) && empty($this->title) && ! $this->headArrows) {
             return '';
         }
 
         ob_start();
         echo Html::beginTag('div', ['class' => 'stripe-head']);
 
+        if (! empty($this->icon)) {
+            echo Html::tag('div', $this->icon, ['class' => 'icon']);
+        }
+
         if (! empty($this->title)) {
             echo Html::tag('div', $this->title, ['class' => 'title']);
         }
 
-        if ($this->titleArrows) {
+        if ($this->headArrows) {
             echo $this->renderArrows();
         }
 
