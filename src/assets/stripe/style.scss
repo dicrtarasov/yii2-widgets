@@ -1,5 +1,5 @@
 // @author Igor A Tarasov <develop@dicr.org>
-// @version 27.07.20 03:22:26
+// @version 27.07.20 03:46:59
 
 .widget-stripe {
     display: block;
@@ -93,11 +93,7 @@
 
                 &.prev {
                     left: auto;
-                    right: calc(100% + 2rem);
-
-                    @media (max-width: 767px) {
-                        right: calc(100% + 1rem);
-                    }
+                    right: calc(100% + 1rem);
 
                     @media (max-width: 575px) {
                         right: calc(100% + 1px);
@@ -105,12 +101,8 @@
                 }
 
                 &.next {
-                    left: calc(100% + 2rem);
+                    left: calc(100% + 1rem);
                     right: auto;
-
-                    @media (max-width: 767px) {
-                        left: calc(100% + 1rem);
-                    }
 
                     @media (max-width: 575px) {
                         left: calc(100% + 1px);
