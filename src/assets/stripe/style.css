@@ -85,43 +85,12 @@
     transform: translateY(-50%)
 }
 
-@media (max-width: 1199px) {
-    .widget-stripe .stripe-body .stripe-arrows .arrow:before {
-        width: 1rem;
-        height: 1.67rem
-    }
-}
-
 .widget-stripe .stripe-body .stripe-arrows .arrow.prev {
     left: -2rem
 }
 
-@media (max-width: 1199px) {
-    .widget-stripe .stripe-body .stripe-arrows .arrow.prev {
-        left: -1.6rem
-    }
-}
-
-@media (max-width: 575px) {
-    .widget-stripe .stripe-body .stripe-arrows .arrow.prev {
-        left: -0.6rem
-    }
-}
-
 .widget-stripe .stripe-body .stripe-arrows .arrow.next {
     right: -2rem
-}
-
-@media (max-width: 1199px) {
-    .widget-stripe .stripe-body .stripe-arrows .arrow.next {
-        right: -1.6rem
-    }
-}
-
-@media (max-width: 575px) {
-    .widget-stripe .stripe-body .stripe-arrows .arrow.next {
-        right: -0.6rem
-    }
 }
 
 /*# sourceMappingURL=style.css.map */
