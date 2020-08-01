@@ -1,7 +1,7 @@
 <?php
-/**
+/*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 23.07.20 21:31:29
+ * @version 02.08.20 02:56:15
  */
 
 declare(strict_types = 1);
@@ -16,7 +16,6 @@ use function array_merge;
  * Виджет авто-подсказок при вводе.
  *
  * @link https://www.devbridge.com/sourcery/components/jquery-autocomplete/
- * @noinspection PhpUnused
  */
 class AutocompleteWidget extends InputWidget
 {

@@ -1,7 +1,7 @@
 <?php
-/**
+/*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 23.07.20 21:31:29
+ * @version 02.08.20 02:58:14
  */
 
 declare(strict_types = 1);
@@ -20,7 +20,6 @@ use function trim;
  * Авто-подсказка по текстовому полю при заполнении значения скрытого поля, например id.
  *
  * @link https://www.devbridge.com/sourcery/components/jquery-autocomplete/
- * @noinspection PhpUnused
  */
 class ShadowAutocomplete extends InputWidget
 {

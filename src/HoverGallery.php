@@ -1,7 +1,7 @@
 <?php
-/**
+/*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 23.07.20 21:31:29
+ * @version 02.08.20 02:56:25
  */
 
 declare(strict_types = 1);
@@ -17,8 +17,6 @@ use function ob_start;
 
 /**
  * Виджет галереи изображений, переключающихся при наведении мышки.
- *
- * @noinspection PhpUnused
  */
 class HoverGallery extends Widget
 {

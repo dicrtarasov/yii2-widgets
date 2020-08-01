@@ -25,7 +25,7 @@ Configure
 
 Add to config file (config/web.php or common\config\main.php) 
 
-```
+```php
     'modules' => [
         'redactor' => 'yii\redactor\RedactorModule',
     ],
@@ -34,7 +34,7 @@ or if you want to change the upload directory.
 to path/to/uploadfolder
 default value `@webroot/uploads`
 
-```
+```php
     'modules' => [
         'redactor' => [
             'class' => 'yii\redactor\RedactorModule',
@@ -51,13 +51,13 @@ reference: [Protect Your Uploads Folder with .htaccess](http://tomolivercv.wordp
 
 Config view/form
 
-```
+```html
 <?= $form->field($model, 'body')->widget(\yii\redactor\widgets\Redactor::className()) ?>
 ```
 
 or not use ActiveField
 
-```
+```html
 <?= \yii\redactor\widgets\Redactor::widget([
     'model' => $model,
     'attribute' => 'body'
@@ -65,7 +65,7 @@ or not use ActiveField
 ```    
 or config advanced redactor reference [Docs](http://imperavi.com/redactor/docs/)
 
-```
+```html
 <?= $form->field($model, 'body')->widget(\yii\redactor\widgets\Redactor::className(), [
     'clientOptions' => [
         'imageManagerJson' => ['/redactor/upload/image-json'],

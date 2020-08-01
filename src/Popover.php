@@ -1,11 +1,10 @@
 <?php
-/**
+/*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 23.07.20 21:31:29
+ * @version 02.08.20 02:54:28
  */
 
 declare(strict_types = 1);
-
 namespace dicr\widgets;
 
 use function ob_get_clean;
@@ -18,7 +17,8 @@ use function trim;
  * Позицию и ориентацию строки, а также размеры popover требуется подстроить дополнительно через css блока,
  * в котором он используется.
  *
- * @noinspection PhpUnused
+ * @deprecated используйте BootStrap popover
+ * @link https://getbootstrap.com/docs/4.5/components/popovers/
  */
 class Popover extends Widget
 {

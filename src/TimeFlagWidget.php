@@ -1,7 +1,7 @@
 <?php
-/**
+/*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 23.07.20 21:31:29
+ * @version 02.08.20 02:58:18
  */
 
 declare(strict_types = 1);
@@ -12,8 +12,6 @@ use yii\base\InvalidConfigException;
 
 /**
  * Виджет поля ввода datetime с типом checkbox.
- *
- * @noinspection PhpUnused
  */
 class TimeFlagWidget extends InputWidget
 {

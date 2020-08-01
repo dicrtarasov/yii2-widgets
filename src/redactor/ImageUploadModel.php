@@ -1,7 +1,7 @@
 <?php
-/**
+/*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 23.07.20 21:31:29
+ * @version 02.08.20 02:56:30
  */
 
 /**
@@ -15,8 +15,6 @@ namespace dicr\widgets\redactor;
 
 /**
  * Class ImageUploadModel
- *
- * @noinspection PhpUnused
  */
 class ImageUploadModel extends FileUploadModel
 {

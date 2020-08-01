@@ -1,7 +1,7 @@
 <?php
-/**
+/*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 23.07.20 21:31:29
+ * @version 02.08.20 02:58:00
  */
 
 declare(strict_types = 1);
@@ -14,8 +14,6 @@ use function ob_get_clean;
 
 /**
  * Отображает рейтинг звездочками.
- *
- * @noinspection PhpUnused
  */
 class RatingWidget extends Widget
 {

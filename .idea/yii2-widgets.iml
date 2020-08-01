@@ -21,5 +21,9 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="jquery" level="application" />
+    <orderEntry type="library" name="@types/bootstrap" level="application" />
+    <orderEntry type="library" name="@types/jquery" level="application" />
+    <orderEntry type="library" name="@types/jqueryui" level="application" />
+    <orderEntry type="library" name="@types/slick-carousel" level="application" />
   </component>
 </module>

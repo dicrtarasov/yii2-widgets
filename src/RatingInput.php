@@ -1,7 +1,7 @@
 <?php
-/**
+/*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 23.07.20 21:31:29
+ * @version 02.08.20 02:57:54
  */
 
 declare(strict_types = 1);
@@ -14,8 +14,6 @@ use function range;
 
 /**
  * Отображает ввод рейтинга звездочками.
- *
- * @noinspection PhpUnused
  */
 class RatingInput extends InputWidget
 {

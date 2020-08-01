@@ -75,7 +75,3 @@ Or config advanced redactor reference [Docs](http://imperavi.com/redactor/docs/)
 ])?>
 ```
 
-Bummer! I was tested on my project but not have many time to write the document on file and usage.
-If you have problem, then please create [issue](https://github.com/yiidoc/yii2-redactor/issues)
-
-Thanks!
