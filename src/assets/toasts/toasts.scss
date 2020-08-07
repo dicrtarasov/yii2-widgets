@@ -1,0 +1,21 @@
+// @author Igor A Tarasov <develop@dicr.org>
+// @version 07.08.20 13:18:33
+
+.dicr-widgets-toasts {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: stretch;
+    justify-content: flex-start;
+    position: fixed;
+    top: 0.1rem;
+    right: 0.1rem;
+    z-index: 999999;
+
+    .toast {
+        flex: 0 0 auto;
+        max-width: 22rem;
+        min-width: 10rem;
+    }
+}
+
+

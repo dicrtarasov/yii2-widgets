@@ -1,6 +1,6 @@
 /*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 23.07.20 21:31:29
+ * @version 07.08.20 13:18:26
  */
 
 (function (window, $) {
@@ -16,7 +16,7 @@
         // noinspection SpellCheckingInspection
         this.options = $.extend({}, {
             animation: true,
-            autohide: 10000
+            autohide: 5000
         }, options);
 
         this.container = $(container);
@@ -57,7 +57,7 @@
         $toast.toast({
             animation: Boolean(opts.animation),
             autohide: Boolean(opts.autohide),
-            delay: parseInt(opts.autohide) || 0,
+            delay: Number(opts.autohide),
         });
 
         // noinspection JSUnresolvedFunction
@@ -78,7 +78,7 @@
         return this.addToast(
             `<div class="toast-header">
                 <strong class="mr-auto ${textClass || ''}">${header}</strong>
-                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
