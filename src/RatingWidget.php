@@ -1,7 +1,7 @@
 <?php
 /*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 02.08.20 02:58:00
+ * @version 13.08.20 06:34:56
  */
 
 declare(strict_types = 1);
@@ -9,6 +9,7 @@ namespace dicr\widgets;
 
 use Yii;
 use yii\base\InvalidConfigException;
+
 use function is_numeric;
 use function ob_get_clean;
 
@@ -23,7 +24,7 @@ class RatingWidget extends Widget
     /** @var float значение 1..5 */
     public $value;
 
-    /** @var int|null кол-во отзывов */
+    /** @var ?int кол-во отзывов */
     public $count;
 
     /** @var bool сделать микроразметку */

@@ -1,7 +1,7 @@
 <?php
-/**
+/*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 23.07.20 21:31:29
+ * @version 13.08.20 06:21:23
  */
 
 declare(strict_types = 1);
@@ -21,7 +21,7 @@ class MultiselectAsset extends AssetBundle
 
     /** @var string[] */
     public $css = [
-        'multiselect.css'
+        'multiselect.scss'
     ];
 
     /** @var string[] */

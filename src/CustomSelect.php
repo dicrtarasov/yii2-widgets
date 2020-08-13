@@ -1,13 +1,14 @@
 <?php
 /*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 02.08.20 02:56:21
+ * @version 13.08.20 06:34:56
  */
 
 declare(strict_types = 1);
 namespace dicr\widgets;
 
 use yii\base\InvalidConfigException;
+
 use function is_array;
 use function ob_get_clean;
 use function ob_start;
@@ -25,7 +26,6 @@ class CustomSelect extends InputWidget
 
     /**
      * @inheritDoc
-     * @throws InvalidConfigException
      * @throws InvalidConfigException
      */
     public function init()

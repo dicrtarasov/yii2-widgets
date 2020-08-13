@@ -1,7 +1,7 @@
 <?php
 /*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 02.08.20 02:58:18
+ * @version 13.08.20 06:34:27
  */
 
 declare(strict_types = 1);
@@ -20,7 +20,6 @@ class TimeFlagWidget extends InputWidget
 
     /**
      * @inheritDoc
-     * @throws InvalidConfigException
      * @throws InvalidConfigException
      */
     public function run()

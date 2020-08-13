@@ -1,7 +1,7 @@
 <?php
 /*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 02.08.20 02:58:09
+ * @version 13.08.20 06:34:56
  */
 
 declare(strict_types = 1);
@@ -11,6 +11,7 @@ use dicr\asset\RedactorAsset;
 use Yii;
 use yii\helpers\Url;
 use yii\web\JsExpression;
+
 use function in_array;
 
 /**
@@ -107,7 +108,6 @@ class RedactorWidget extends InputWidget
     {
         // регистрируем ресурсы
         $asset = RedactorAsset::register($this->view);
-        $asset->addLangResources($this->clientOptions['lang']);
         $asset->addPluginsResources($this->clientOptions['plugins'] ?? []);
 
         // регистрируем плагин

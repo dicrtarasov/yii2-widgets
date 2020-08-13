@@ -1,7 +1,7 @@
 <?php
-/**
+/*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 23.07.20 21:31:29
+ * @version 13.08.20 06:23:09
  */
 
 declare(strict_types = 1);
@@ -20,7 +20,7 @@ class ToastsAsset extends AssetBundle
 
     /** @var string[] */
     public $css = [
-        'toasts.css'
+        'toasts.scss'
     ];
 
     /** @var string[] */

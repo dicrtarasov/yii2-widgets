@@ -1,11 +1,10 @@
 <?php
 /*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 02.08.20 02:58:04
+ * @version 13.08.20 06:31:00
  */
 
 declare(strict_types = 1);
-
 namespace dicr\widgets;
 
 use Yii;
@@ -13,6 +12,7 @@ use yii\base\Exception;
 use yii\base\InvalidConfigException;
 use yii\base\Module;
 use yii\helpers\FileHelper;
+
 use const DIRECTORY_SEPARATOR;
 
 /**
@@ -46,9 +46,6 @@ class RedactorModule extends Module
     /**
      * {@inheritDoc}
      * @throws InvalidConfigException
-     * @throws InvalidConfigException
-     * @throws InvalidConfigException
-     * @see \yii\base\Module::init()
      */
     public function init()
     {
@@ -80,7 +77,7 @@ class RedactorModule extends Module
      * @throws InvalidConfigException
      * @throws Exception
      */
-    public function getSaveDir()
+    public function getSaveDir(): string
     {
         $dir = $this->uploadDir;
 
@@ -103,7 +100,7 @@ class RedactorModule extends Module
      * @param string $filename
      * @return string
      */
-    public function getFilePath(string $filename)
+    public function getFilePath(string $filename): string
     {
         return $this->saveDir . DIRECTORY_SEPARATOR . $filename;
     }
@@ -114,7 +111,7 @@ class RedactorModule extends Module
      * @param string $filename
      * @return string
      */
-    public function getUrl(string $filename)
+    public function getUrl(string $filename): string
     {
         $url = $this->uploadUrl;
 

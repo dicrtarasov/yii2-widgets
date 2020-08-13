@@ -1,7 +1,7 @@
 <?php
-/**
+/*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 27.07.20 00:57:25
+ * @version 13.08.20 06:34:56
  */
 
 declare(strict_types = 1);
@@ -9,6 +9,7 @@ namespace dicr\widgets;
 
 use Exception;
 use yii\helpers\Json;
+
 use function array_merge;
 use function ob_get_clean;
 use function ob_start;
@@ -102,7 +103,7 @@ class Stripe extends Widget
      *
      * @return string
      */
-    protected function renderHead()
+    protected function renderHead(): string
     {
         if (empty($this->icon) && empty($this->title) && ! $this->headArrows) {
             return '';
@@ -132,7 +133,7 @@ class Stripe extends Widget
      *
      * @return string
      */
-    protected function renderBody()
+    protected function renderBody(): string
     {
         ob_start();
         echo Html::beginTag('div', ['class' => 'stripe-body']);
@@ -157,7 +158,7 @@ class Stripe extends Widget
      *
      * @return string
      */
-    protected function renderArrows()
+    protected function renderArrows(): string
     {
         ob_start();
         echo Html::beginTag('div', ['class' => 'stripe-arrows']);

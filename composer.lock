@@ -4,14 +4,14 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "dd1762971014df41d0d7eacc5e90af16",
+    "content-hash": "3de805ad63fe67e3f8375624e09cb5b8",
     "packages": [
         {
             "name": "bower-asset/inputmask",
             "version": "3.3.11",
             "source": {
                 "type": "git",
-                "url": "https://github.com/RobinHerbots/Inputmask.git",
+                "url": "git@github.com:RobinHerbots/Inputmask.git",
                 "reference": "5e670ad62f50c738388d4dcec78d2888505ad77b"
             },
             "dist": {
@@ -32,7 +32,7 @@
             "version": "3.5.1",
             "source": {
                 "type": "git",
-                "url": "git@github.com:jquery/jquery-dist.git",
+                "url": "https://github.com/jquery/jquery-dist.git",
                 "reference": "4c0e4becb8263bb5b3e6dadc448d8e7305ef8215"
             },
             "dist": {
@@ -143,23 +143,29 @@
         },
         {
             "name": "dicr/yii2-asset",
-            "version": "1.6.0",
+            "version": "1.7.6",
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/dicr/yii2-asset.git",
-                "reference": "849301df738052ff78c9793d3eb938fb455791b9"
+                "reference": "39d0f72d23852f5b2a04d7b4f439c09820661bc3"
             },
             "require": {
-                "php": "~7.2",
+                "php": "~7.4",
+                "scssphp/scssphp": "~1.1",
                 "yiisoft/yii2": "~2.0"
             },
             "require-dev": {
-                "roave/security-advisories": "dev-master"
+                "phpunit/phpunit": "~9.3"
             },
             "type": "yii2-extension",
             "autoload": {
                 "psr-4": {
                     "dicr\\asset\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "dicr\\tests\\": "tests/"
                 }
             },
             "license": [
@@ -183,15 +189,15 @@
             "support": {
                 "source": "https://gitlab.com/dicr/yii2-asset.git"
             },
-            "time": "2020-07-26T06:27:39+00:00"
+            "time": "2020-08-13T01:13:48+00:00"
         },
         {
             "name": "dicr/yii2-helper",
-            "version": "3.4.1",
+            "version": "3.4.2",
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/dicr/yii2-helper.git",
-                "reference": "277e66b31663b1091781bd517bd09f72a0bb9a8c"
+                "reference": "8eb2ad8730001bb81209a2dd5d76649ef165c76b"
             },
             "require": {
                 "ext-intl": "*",
@@ -241,7 +247,7 @@
             "support": {
                 "source": "https://gitlab.com/dicr/yii2-helper.git"
             },
-            "time": "2020-08-07T11:01:06+00:00"
+            "time": "2020-08-07T11:28:49+00:00"
         },
         {
             "name": "ezyang/htmlpurifier",
@@ -295,10 +301,10 @@
         },
         {
             "name": "npm-asset/bootstrap",
-            "version": "4.5.1",
+            "version": "4.5.2",
             "dist": {
                 "type": "tar",
-                "url": "https://registry.npmjs.org/bootstrap/-/bootstrap-4.5.1.tgz"
+                "url": "https://registry.npmjs.org/bootstrap/-/bootstrap-4.5.2.tgz"
             },
             "type": "npm-asset",
             "license": [
@@ -306,17 +312,78 @@
             ]
         },
         {
-            "name": "yiisoft/yii2",
-            "version": "2.0.36",
+            "name": "scssphp/scssphp",
+            "version": "1.1.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/yiisoft/yii2-framework.git",
-                "reference": "a557111ea6c27794b98c98b76ff3f127eb55f309"
+                "url": "https://github.com/scssphp/scssphp.git",
+                "reference": "824e4cec10b2bfa88eec5dac23991cb9106622c1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/a557111ea6c27794b98c98b76ff3f127eb55f309",
-                "reference": "a557111ea6c27794b98c98b76ff3f127eb55f309",
+                "url": "https://api.github.com/repos/scssphp/scssphp/zipball/824e4cec10b2bfa88eec5dac23991cb9106622c1",
+                "reference": "824e4cec10b2bfa88eec5dac23991cb9106622c1",
+                "shasum": ""
+            },
+            "require": {
+                "ext-ctype": "*",
+                "ext-json": "*",
+                "php": ">=5.6.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^5.7 || ^6.5 || ^7.5 || ^8.3",
+                "squizlabs/php_codesniffer": "~3.5",
+                "twbs/bootstrap": "~4.3",
+                "zurb/foundation": "~6.5"
+            },
+            "bin": [
+                "bin/pscss"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "ScssPhp\\ScssPhp\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Anthon Pang",
+                    "email": "apang@softwaredevelopment.ca",
+                    "homepage": "https://github.com/robocoder"
+                },
+                {
+                    "name": "Cédric Morin",
+                    "email": "cedric@yterium.com",
+                    "homepage": "https://github.com/Cerdic"
+                }
+            ],
+            "description": "scssphp is a compiler for SCSS written in PHP.",
+            "homepage": "http://scssphp.github.io/scssphp/",
+            "keywords": [
+                "css",
+                "less",
+                "sass",
+                "scss",
+                "stylesheet"
+            ],
+            "time": "2020-06-04T17:30:40+00:00"
+        },
+        {
+            "name": "yiisoft/yii2",
+            "version": "2.0.37",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yiisoft/yii2-framework.git",
+                "reference": "e8094d1aa9e807fbea970bc1360ab836ffb1b738"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/e8094d1aa9e807fbea970bc1360ab836ffb1b738",
+                "reference": "e8094d1aa9e807fbea970bc1360ab836ffb1b738",
                 "shasum": ""
             },
             "require": {
@@ -417,7 +484,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-07-07T21:45:32+00:00"
+            "time": "2020-08-07T20:11:56+00:00"
         },
         {
             "name": "yiisoft/yii2-bootstrap4",
@@ -541,6 +608,20 @@
                 "extension installer",
                 "yii2"
             ],
+            "funding": [
+                {
+                    "url": "https://github.com/yiisoft",
+                    "type": "github"
+                },
+                {
+                    "url": "https://opencollective.com/yiisoft",
+                    "type": "open_collective"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/yiisoft/yii2-composer",
+                    "type": "tidelift"
+                }
+            ],
             "time": "2020-06-24T00:04:01+00:00"
         }
     ],
@@ -551,12 +632,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "2ef1995958f6434d5d408d7baa6612c7d239cc54"
+                "reference": "a9e4cf90fc47b0ffbb90ee79f24be1b7c5ce82dc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/2ef1995958f6434d5d408d7baa6612c7d239cc54",
-                "reference": "2ef1995958f6434d5d408d7baa6612c7d239cc54",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/a9e4cf90fc47b0ffbb90ee79f24be1b7c5ce82dc",
+                "reference": "a9e4cf90fc47b0ffbb90ee79f24be1b7c5ce82dc",
                 "shasum": ""
             },
             "conflict": {
@@ -631,8 +712,8 @@
                 "gregwar/rst": "<1.0.3",
                 "guzzlehttp/guzzle": ">=4-rc.2,<4.2.4|>=5,<5.3.1|>=6,<6.2.1",
                 "illuminate/auth": ">=4,<4.0.99|>=4.1,<=4.1.31|>=4.2,<=4.2.22|>=5,<=5.0.35|>=5.1,<=5.1.46|>=5.2,<=5.2.45|>=5.3,<=5.3.31|>=5.4,<=5.4.36|>=5.5,<5.5.10",
-                "illuminate/cookie": ">=4,<=4.0.11|>=4.1,<=4.1.31|>=4.2,<=4.2.22|>=5,<=5.0.35|>=5.1,<=5.1.46|>=5.2,<=5.2.45|>=5.3,<=5.3.31|>=5.4,<=5.4.36|>=5.5,<5.5.42|>=5.6,<5.6.30",
-                "illuminate/database": ">=4,<4.0.99|>=4.1,<4.1.29",
+                "illuminate/cookie": ">=4,<=4.0.11|>=4.1,<=4.1.31|>=4.2,<=4.2.22|>=5,<=5.0.35|>=5.1,<=5.1.46|>=5.2,<=5.2.45|>=5.3,<=5.3.31|>=5.4,<=5.4.36|>=5.5,<=5.5.44|>=5.6,<5.6.30|>=6,<6.18.31|>=7,<7.22.4",
+                "illuminate/database": ">=4,<4.0.99|>=4.1,<4.1.29|>=5.5,<=5.5.44|>=6,<6.18.34|>=7,<7.23.2",
                 "illuminate/encryption": ">=4,<=4.0.11|>=4.1,<=4.1.31|>=4.2,<=4.2.22|>=5,<=5.0.35|>=5.1,<=5.1.46|>=5.2,<=5.2.45|>=5.3,<=5.3.31|>=5.4,<=5.4.36|>=5.5,<5.5.40|>=5.6,<5.6.15",
                 "illuminate/view": ">=7,<7.1.2",
                 "ivankristianto/phpwhois": "<=4.3",
@@ -643,7 +724,7 @@
                 "kitodo/presentation": "<3.1.2",
                 "kreait/firebase-php": ">=3.2,<3.8.1",
                 "la-haute-societe/tcpdf": "<6.2.22",
-                "laravel/framework": ">=4,<4.0.99|>=4.1,<=4.1.31|>=4.2,<=4.2.22|>=5,<=5.0.35|>=5.1,<=5.1.46|>=5.2,<=5.2.45|>=5.3,<=5.3.31|>=5.4,<=5.4.36|>=5.5,<5.5.42|>=5.6,<5.6.30|>=7,<7.1.2",
+                "laravel/framework": ">=4,<4.0.99|>=4.1,<=4.1.31|>=4.2,<=4.2.22|>=5,<=5.0.35|>=5.1,<=5.1.46|>=5.2,<=5.2.45|>=5.3,<=5.3.31|>=5.4,<=5.4.36|>=5.5,<=5.5.49|>=5.6,<5.6.30|>=6,<6.18.34|>=7,<7.23.2",
                 "laravel/socialite": ">=1,<1.0.99|>=2,<2.0.10",
                 "league/commonmark": "<0.18.3",
                 "librenms/librenms": "<1.53",
@@ -838,7 +919,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-08-05T22:02:01+00:00"
+            "time": "2020-08-08T10:05:44+00:00"
         }
     ],
     "aliases": [],
@@ -849,7 +930,7 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "~7.2"
+        "php": "~7.4"
     },
     "platform-dev": [],
     "plugin-api-version": "1.1.0"

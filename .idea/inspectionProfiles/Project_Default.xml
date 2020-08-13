@@ -67,6 +67,7 @@
       </Languages>
     </inspection_tool>
     <inspection_tool class="DynamicallyGeneratedCodeJS" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="ES6TopLevelAwaitExpression" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="EfferentObjectCouplingInspection" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
     <inspection_tool class="EmptyClassInspection" enabled="true" level="INFORMATION" enabled_by_default="true" />
     <inspection_tool class="EmptyTryBlockJS" enabled="true" level="WARNING" enabled_by_default="true" />
