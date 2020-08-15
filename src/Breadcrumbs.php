@@ -1,7 +1,7 @@
 <?php
 /*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 07.08.20 16:24:46
+ * @version 16.08.20 02:52:04
  */
 
 declare(strict_types = 1);
@@ -9,6 +9,7 @@ namespace dicr\widgets;
 
 use yii\base\InvalidConfigException;
 use yii\helpers\Url;
+
 use function array_values;
 use function ob_get_clean;
 use function ob_start;
@@ -18,15 +19,38 @@ use function ob_start;
  */
 class Breadcrumbs extends \yii\bootstrap4\Breadcrumbs
 {
+    /** @inheritDoc */
+    public $homeLink = [
+        'label' => '<i class="fas fa-home"></i>',
+        'encode' => false,
+        'url' => '/'
+    ];
+
     /** @var bool генерировать микроразметку */
     public $schema = true;
 
     /**
      * @inheritDoc
+     */
+    public function init()
+    {
+        parent::init();
+
+        Html::addCssClass($this->options, 'dicr-widgets-breadcrumbs');
+    }
+
+    /**
+     * @inheritDoc
      * @throws InvalidConfigException
      */
-    public function run() : string
+    public function run()
     {
+        if (empty($this->links)) {
+            return '';
+        }
+
+        BreadcrumbsAsset::register($this->view);
+
         ob_start();
         echo parent::run();
 
@@ -42,8 +66,12 @@ class Breadcrumbs extends \yii\bootstrap4\Breadcrumbs
      *
      * @return string
      */
-    public function renderSchema() : string
+    public function renderSchema(): string
     {
+        if (empty($this->links)) {
+            return '';
+        }
+
         $items = [];
 
         foreach (array_values($this->links) as $pos => $link) {

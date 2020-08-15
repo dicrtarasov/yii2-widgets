@@ -1,12 +1,14 @@
 <?php
 /*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 13.08.20 06:23:09
+ * @version 16.08.20 02:52:04
  */
 
 declare(strict_types = 1);
 namespace dicr\widgets;
 
+use yii\bootstrap4\BootstrapAsset;
+use yii\bootstrap4\BootstrapPluginAsset;
 use yii\web\AssetBundle;
 use yii\web\JqueryAsset;
 
@@ -30,6 +32,8 @@ class ToastsAsset extends AssetBundle
 
     /** @var string[] */
     public $depends = [
-        JqueryAsset::class,
+        BootstrapAsset::class,
+        BootstrapPluginAsset::class,
+        JqueryAsset::class
     ];
 }
