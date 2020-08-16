@@ -1,12 +1,25 @@
 // @author Igor A Tarasov <develop@dicr.org>
-// @version 16.08.20 02:47:11
+// @version 16.08.20 06:49:51
 
 .dicr-widgets-breadcrumbs {
-    margin: 1rem 0;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    background-color: transparent;
+    padding: 0;
+    margin: 0 0 0.625rem 0;
 
-    .breadcrumb {
+    .breadcrumb-item {
+        display: block;
         padding: 0;
-        background: none;
-        margin: 0;
+
+        + .breadcrumb-item::before {
+            content: "‣";
+            display: inline-block;
+            font-size: 1.4rem;
+            line-height: 1;
+            padding: 0 0.3rem;
+            vertical-align: middle;
+        }
     }
 }
