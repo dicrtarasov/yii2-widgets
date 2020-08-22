@@ -1,13 +1,14 @@
 <?php
 /*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 13.08.20 06:34:56
+ * @version 22.08.20 15:23:47
  */
 
 declare(strict_types = 1);
 namespace dicr\widgets;
 
 use Exception;
+use Yii;
 use yii\helpers\Json;
 
 use function array_merge;
@@ -165,12 +166,12 @@ class Stripe extends Widget
 
         echo Html::a('', 'javascript:', [
             'class' => ['arrow', 'prev', $this->id . '-prev'],
-            'title' => 'Назад'
+            'title' => Yii::t('dicr/widgets', 'Назад')
         ]);
 
         echo Html::a('', 'javascript:', [
             'class' => ['arrow', 'next', $this->id . '-next'],
-            'title' => 'Вперед'
+            'title' => Yii::t('dicr/widgets', 'Вперед')
         ]);
 
         echo Html::endTag('div');
