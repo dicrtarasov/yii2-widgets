@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="JavaScriptLibraryMappings">
-    <file url="PROJECT" libraries="{@types/bootstrap, @types/jqueryui, @types/slick-carousel}" />
+    <file url="PROJECT" libraries="{@types/bootstrap, @types/fancybox, @types/inputmask, @types/jquery, @types/jqueryui, @types/slick-carousel}" />
   </component>
 </project>

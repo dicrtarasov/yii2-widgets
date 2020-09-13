@@ -24,5 +24,8 @@
     <orderEntry type="library" name="@types/bootstrap" level="application" />
     <orderEntry type="library" name="@types/jqueryui" level="application" />
     <orderEntry type="library" name="@types/slick-carousel" level="application" />
+    <orderEntry type="library" name="@types/fancybox" level="application" />
+    <orderEntry type="library" name="@types/inputmask" level="application" />
+    <orderEntry type="library" name="@types/jquery" level="application" />
   </component>
 </module>
