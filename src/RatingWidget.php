@@ -1,14 +1,16 @@
 <?php
 /*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 02.08.20 02:58:00
+ * @version 22.08.20 15:29:07
  */
 
 declare(strict_types = 1);
 namespace dicr\widgets;
 
+use dicr\helper\Inflector;
 use Yii;
 use yii\base\InvalidConfigException;
+
 use function is_numeric;
 use function ob_get_clean;
 
@@ -23,7 +25,7 @@ class RatingWidget extends Widget
     /** @var float значение 1..5 */
     public $value;
 
-    /** @var int|null кол-во отзывов */
+    /** @var ?int кол-во отзывов */
     public $count;
 
     /** @var bool сделать микроразметку */
@@ -62,11 +64,12 @@ class RatingWidget extends Widget
                 if ($this->value > 0) {
                     $this->options['title'] = sprintf('%.1f', $this->value);
                     if (isset($this->count) && ($this->count > 0)) {
-                        $this->options['title'] .= ' - ' . $this->count . ' ' . Yii::t('app', 'отзывов');
+                        $this->options['title'] .= ' - ' . $this->count . ' ' .
+                            Inflector::numReviews($this->count);
                     }
                 } else {
-                    $this->options['title'] = Yii::t('app', 'Рейтинг') . ' - ' .
-                        Yii::t('app', 'нет отзывов');
+                    $this->options['title'] = Yii::t('dicr/widgets', 'нет') . ' ' .
+                        Yii::t('dicr/widgets', 'отзывов');
                 }
             }
 
@@ -102,7 +105,7 @@ class RatingWidget extends Widget
 
         echo Html::beginTag('span', ['class' => 'rating-stars']);
 
-        for ($i = 1; $i <= 5; $i ++) {
+        for ($i = 1; $i <= 5; $i++) {
             if ($this->value >= $i) {
                 $class = 'fas fa-star';
             } elseif ($this->value >= $i - 0.5) {
@@ -123,13 +126,14 @@ class RatingWidget extends Widget
                 '(' .
                 (($this->count > 0) ?
                     Yii::$app->formatter->asInteger($this->count) :
-                    Yii::t('app', 'нет')
-                ) . ' ' . Yii::t('app', 'отзывов') . ')', [
+                    Yii::t('dicr/widgets', 'нет')
+                ) . ' ' . Yii::t('dicr/widgets', 'отзывов') . ')', [
                     'class' => 'rating-count'
                 ]);
         }
 
         echo Html::endTag($this->tag);
+
         return ob_get_clean();
     }
 }

@@ -1,7 +1,7 @@
 <?php
 /*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 02.08.20 02:56:25
+ * @version 13.08.20 06:34:56
  */
 
 declare(strict_types = 1);
@@ -9,6 +9,7 @@ namespace dicr\widgets;
 
 use yii\base\InvalidConfigException;
 use yii\helpers\ArrayHelper;
+
 use function get_class;
 use function is_array;
 use function is_string;
@@ -37,8 +38,6 @@ class HoverGallery extends Widget
 
     /**
      * @inheritDoc
-     * @throws InvalidConfigException
-     * @throws InvalidConfigException
      * @throws InvalidConfigException
      */
     public function init()
@@ -105,7 +104,7 @@ class HoverGallery extends Widget
      *
      * @return string
      */
-    protected function renderSlides()
+    protected function renderSlides(): string
     {
         if (empty($this->images)) {
             return '';
@@ -128,7 +127,7 @@ class HoverGallery extends Widget
      * @param array $options 0 - url картинки, остальное - опции картинки
      * @return string
      */
-    protected function renderSlide(array $options)
+    protected function renderSlide(array $options): string
     {
         $src = ArrayHelper::remove($options, 0);
         if (empty($src)) {

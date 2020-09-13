@@ -1,7 +1,7 @@
 <?php
 /*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 02.08.20 02:58:14
+ * @version 13.08.20 06:34:56
  */
 
 declare(strict_types = 1);
@@ -12,6 +12,7 @@ use yii\base\InvalidConfigException;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
 use yii\web\JsExpression;
+
 use function ob_get_clean;
 use function ob_start;
 use function trim;
@@ -31,7 +32,6 @@ class ShadowAutocomplete extends InputWidget
 
     /**
      * @inheritDoc
-     * @throws InvalidConfigException
      * @throws InvalidConfigException
      */
     public function init()

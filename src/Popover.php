@@ -1,7 +1,7 @@
 <?php
 /*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 02.08.20 02:54:28
+ * @version 13.08.20 06:28:41
  */
 
 declare(strict_types = 1);
@@ -36,10 +36,10 @@ class Popover extends Widget
 
     public $position = self::POS_TOP;
 
-    /** @var string|null оборачиваемый контент */
+    /** @var ?string оборачиваемый контент */
     public $content;
 
-    /** @var string|null содержимое всплывашки */
+    /** @var ?string содержимое всплывашки */
     public $popup;
 
     /**

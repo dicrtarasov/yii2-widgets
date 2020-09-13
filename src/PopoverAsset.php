@@ -1,7 +1,7 @@
 <?php
 /*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 02.08.20 02:53:31
+ * @version 13.08.20 06:21:47
  */
 
 declare(strict_types = 1);
@@ -19,6 +19,6 @@ class PopoverAsset extends AssetBundle
 
     /** @inheritDoc */
     public $css = [
-        'style.css'
+        'style.scss'
     ];
 }

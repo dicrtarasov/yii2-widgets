@@ -1,7 +1,7 @@
 <?php
-/**
+/*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 23.07.20 21:31:29
+ * @version 16.08.20 02:52:04
  */
 
 declare(strict_types = 1);
@@ -22,10 +22,13 @@ class StripeAsset extends AssetBundle
     public $sourcePath = __DIR__ . '/assets/stripe';
 
     /** @var string[] */
-    public $css = ['style.css'];
+    public $css = [
+        'style.scss'
+    ];
 
     /** @var string[] */
     public $depends = [
-        JqueryAsset::class, SlickAsset::class
+        JqueryAsset::class,
+        SlickAsset::class
     ];
 }

@@ -1,7 +1,7 @@
 <?php
-/**
+/*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 23.07.20 21:31:29
+ * @version 13.08.20 06:29:17
  */
 
 declare(strict_types = 1);
@@ -21,10 +21,14 @@ class QuantitySelectorAsset extends AssetBundle
     public $sourcePath = __DIR__ . '/assets/quantity-selector';
 
     /** @var string[] */
-    public $css = ['style.css'];
+    public $css = [
+        'style.scss'
+    ];
 
     /** @var string[] */
-    public $js = ['script.js'];
+    public $js = [
+        'script.js'
+    ];
 
     /** @var string[] */
     public $depends = [
