@@ -1,7 +1,7 @@
 <?php
 /*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 13.08.20 06:34:56
+ * @version 14.09.20 21:09:56
  */
 
 declare(strict_types = 1);
@@ -33,7 +33,7 @@ class RedactorWidget extends InputWidget
             'fontcolor',
             'fontfamily',
             'fontsize',
-            'aligment',
+            'alignment',
             'table',
             'imagemanager',
             'filemanager',
@@ -50,6 +50,7 @@ class RedactorWidget extends InputWidget
             'bold',
             'italic',
             'underline',
+            'alignment',
             'ul',
             'ol',
             'link',
