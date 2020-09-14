@@ -1,17 +1,10 @@
 <?php
-/**
+/*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 23.07.20 21:31:29
+ * @version 14.09.20 20:54:33
  */
 
 declare(strict_types = 1);
-/**
- * @copyright 2019-2019 Dicr http://dicr.org
- * @author Igor A Tarasov <develop@dicr.org>
- * @license proprietary
- * @version 20.10.19 21:25:32
- */
-
 namespace dicr\widgets\redactor;
 
 /**
