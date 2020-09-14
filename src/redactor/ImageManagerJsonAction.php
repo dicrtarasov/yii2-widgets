@@ -1,7 +1,7 @@
 <?php
-/**
+/*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 23.07.20 21:31:29
+ * @version 14.09.20 20:42:08
  */
 
 declare(strict_types = 1);
@@ -21,17 +21,17 @@ use yii\base\Exception;
 use yii\base\InvalidConfigException;
 use yii\helpers\FileHelper;
 use yii\web\HttpException;
+
 use function count;
 use function is_array;
 
 /**
  * Class ImageManagerJsonAction
- *
- * @package dicr\widgets\redactor
  */
 class ImageManagerJsonAction extends Action
 {
     /**
+     * @inheritDoc
      * @throws HttpException
      */
     public function init()

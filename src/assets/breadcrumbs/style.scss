@@ -1,5 +1,5 @@
 // @author Igor A Tarasov <develop@dicr.org>
-// @version 12.09.20 01:26:57
+// @version 14.09.20 20:41:32
 
 .dicr-widgets-breadcrumbs {
     display: block;
@@ -9,8 +9,15 @@
 
     .breadcrumb-item {
         display: inline;
+        font-size: 0.93rem;
+        line-height: 1.5;
+        vertical-align: middle;
         padding: 0;
         margin: 0;
+
+        @media (max-width: 575px) {
+            line-height: 2.5;
+        }
 
         + .breadcrumb-item::before {
             content: "‣";
@@ -26,19 +33,8 @@
             }
         }
 
-        a, span {
-            display: inline;
-            font-size: 0.93rem;
-            line-height: 1.5;
-            vertical-align: middle;
-
-            @media (max-width: 575px) {
-                line-height: 2.5;
-            }
-        }
-
         &:last-of-type {
-            a, span {
+            a {
                 color: inherit;
             }
         }

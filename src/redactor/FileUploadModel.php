@@ -1,7 +1,7 @@
 <?php
-/**
+/*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 23.07.20 21:31:29
+ * @version 14.09.20 20:42:08
  */
 
 declare(strict_types = 1);
@@ -14,6 +14,7 @@ use Yii;
 use yii\base\Model;
 use yii\helpers\Inflector;
 use yii\web\UploadedFile;
+
 use function count;
 
 /**
@@ -30,7 +31,7 @@ class FileUploadModel extends Model
     /**
      * Инициализация.
      */
-    public function init()
+    public function init() : void
     {
         parent::init();
 
@@ -50,9 +51,8 @@ class FileUploadModel extends Model
 
     /**
      * {@inheritDoc}
-     * @see \yii\base\Model::rules()
      */
-    public function rules()
+    public function rules() : array
     {
         return [
             ['files', 'each', 'rule' => ['file', 'extensions' => $this->allowedExtensions]]
@@ -60,10 +60,9 @@ class FileUploadModel extends Model
     }
 
     /**
-     * Загружает файлы
-     *
      * {@inheritDoc}
-     * @see \yii\base\Model::beforeValidate()
+     *
+     * Загружает файлы
      */
     public function beforeValidate()
     {
