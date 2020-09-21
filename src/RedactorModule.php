@@ -1,7 +1,7 @@
 <?php
 /*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 13.08.20 06:31:00
+ * @version 21.09.20 21:51:38
  */
 
 declare(strict_types = 1);
@@ -23,7 +23,7 @@ use const DIRECTORY_SEPARATOR;
 class RedactorModule extends Module
 {
     /** @inheritDoc */
-    public $controllerNamespace = 'dicr\widgets\redactor';
+    public $controllerNamespace = __NAMESPACE__ . '\\redactor';
 
     /** @inheritDoc */
     public $defaultRoute = 'upload';
