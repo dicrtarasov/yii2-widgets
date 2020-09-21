@@ -1,7 +1,7 @@
 <?php
 /*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 22.09.20 01:51:34
+ * @version 22.09.20 02:15:27
  */
 
 declare(strict_types = 1);
@@ -87,27 +87,35 @@ class RedactorWidget extends InputWidget
     {
         if (! isset($this->options['id'])) {
             $this->options['id'] = $this->hasModel() ?
-                Html::getInputId($this->model, $this->attribute) : $this->getId();
+                Html::getInputId($this->model, $this->attribute) :
+                $this->getId();
         }
 
         Html::addCssClass($this->options, 'form-control');
 
         $this->clientOptions['lang'] = $this->clientOptions['lang'] ?? Yii::$app->language;
 
-        $this->clientOptions['imageUpload'] = Url::to($this->clientOptions['imageUpload'] ?? '/redactor/upload/image');
+        $this->clientOptions['imageUpload'] = Url::to(
+            $this->clientOptions['imageUpload'] ?? '/upload/image'
+        );
 
         $this->clientOptions['imageUploadErrorCallback'] =
-            $this->clientOptions['imageUploadErrorCallback'] ?? new JsExpression('function(json){alert(json.error);}');
+            $this->clientOptions['imageUploadErrorCallback'] ??
+            new JsExpression('function(json){alert(json.error);}');
 
         if (in_array('imagemanager', $this->clientOptions['plugins'] ?? [], true)) {
             $this->clientOptions['imageManagerJson'] =
-                $this->clientOptions['imageManagerJson'] ?? '/redactor/upload/image-json';
+                $this->clientOptions['imageManagerJson'] ??
+                '/redactor/upload/image-json';
         }
 
-        $this->clientOptions['fileUpload'] = Url::to($this->clientOptions['fileUpload'] ?? '/redactor/upload/file');
+        $this->clientOptions['fileUpload'] = Url::to(
+            $this->clientOptions['fileUpload'] ?? '/upload/file'
+        );
 
         $this->clientOptions['fileUploadErrorCallback'] =
-            $this->clientOptions['fileUploadErrorCallback'] ?? new JsExpression('function(json){alert(json.error);}');
+            $this->clientOptions['fileUploadErrorCallback'] ??
+            new JsExpression('function(json){alert(json.error);}');
 
         if (in_array('filemanager', $this->clientOptions['plugins'] ?? [], true)) {
             $this->clientOptions['fileManagerJson'] = '/redactor/upload/file-json';
