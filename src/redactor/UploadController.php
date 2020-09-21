@@ -1,23 +1,21 @@
 <?php
 /*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 02.08.20 02:58:32
- */
-
-/*
- * @author Nghia Nguyen <yiidevelop@hotmail.com>
- * @since 2.0
+ * @version 22.09.20 01:33:37
  */
 
 declare(strict_types = 1);
 namespace dicr\widgets\redactor;
 
+use dicr\widgets\RedactorModule;
 use yii\filters\ContentNegotiator;
 use yii\web\Controller;
 use yii\web\Response;
 
 /**
  * Контроллер загрузки файлов.
+ *
+ * @property-read RedactorModule $module
  */
 class UploadController extends Controller
 {
@@ -25,9 +23,9 @@ class UploadController extends Controller
     public $enableCsrfValidation = false;
 
     /**
-     * @return array
+     * @inheritDoc
      */
-    public function behaviors()
+    public function behaviors() : array
     {
         return [
             [
@@ -40,9 +38,9 @@ class UploadController extends Controller
     }
 
     /**
-     * @return array
+     * @inheritDoc
      */
-    public function actions()
+    public function actions() : array
     {
         return [
             'file' => FileUploadAction::class,

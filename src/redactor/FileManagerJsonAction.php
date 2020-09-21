@@ -1,81 +1,65 @@
 <?php
-/**
+/*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 23.07.20 21:31:29
+ * @version 22.09.20 01:47:33
  */
 
 declare(strict_types = 1);
 namespace dicr\widgets\redactor;
 
-use dicr\widgets\RedactorModule;
 use Yii;
-use yii\base\Action;
 use yii\helpers\FileHelper;
 use yii\web\HttpException;
+
+use function array_map;
 use function count;
-use function is_array;
+use function filesize;
+use function pathinfo;
+
+use const PATHINFO_BASENAME;
+use const PATHINFO_FILENAME;
 
 /**
  * Class FileManagerJsonAction
  */
-class FileManagerJsonAction extends Action
+class FileManagerJsonAction extends RedactorAction
 {
     /**
+     * @return array
      * @throws HttpException
      */
-    public function init()
+    public function run() : array
     {
         if (! Yii::$app->request->isAjax) {
             throw new HttpException(403, 'This action allow only ajaxRequest');
         }
-    }
 
-    /**
-     * Модуль редактора.
-     *
-     * @return RedactorModule
-     */
-    protected function module()
-    {
-        /** @noinspection PhpIncompatibleReturnTypeInspection */
-        return $this->controller->module;
-    }
-
-    /**
-     * @return array|null
-     */
-    public function run()
-    {
         $config = ['recursive' => true];
-        if ($this->module()->imageAllowExtensions !== null) {
-            $onlyExtensions = array_map(static function($ext) {
+
+        if ($this->module->imageAllowExtensions !== null) {
+            $onlyExtensions = array_map(static function ($ext) {
                 return '*.' . $ext;
-            }, $this->module()->imageAllowExtensions);
+            }, $this->module->imageAllowExtensions);
 
             $config['only'] = $onlyExtensions;
         }
 
-        $filesPath = FileHelper::findFiles($this->module()->saveDir, $config);
+        $result = [];
 
-        if (is_array($filesPath) && count($filesPath)) {
-            $result = [];
+        $filesPath = FileHelper::findFiles($this->module->saveDir, $config);
+        foreach ($filesPath as $filePath) {
+            $url = $this->module->fileUrl(pathinfo($filePath, PATHINFO_BASENAME));
+            $fileName = pathinfo($filePath, PATHINFO_FILENAME);
 
-            foreach ($filesPath as $filePath) {
-                $url = $this->module()->getUrl(pathinfo($filePath, PATHINFO_BASENAME));
-                $fileName = pathinfo($filePath, PATHINFO_FILENAME);
-
-                $result[] = [
-                    'title' => $fileName,
-                    'name' => $fileName,
-                    'url' => $url,
-                    'size' => Yii::$app->formatter->asShortSize(filesize($filePath)),
-                    'id' => count($result) + 1
-                ];
-            }
-
-            return $result;
+            $result[] = [
+                'title' => $fileName,
+                'name' => $fileName,
+                'url' => $url,
+                'size' => Yii::$app->formatter->asShortSize(filesize($filePath)),
+                'id' => count($result) + 1
+            ];
         }
 
-        return null;
+        return $result;
     }
 }

@@ -1,23 +1,21 @@
 <?php
-/**
+/*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 23.07.20 21:31:29
+ * @version 22.09.20 01:40:10
  */
 
 declare(strict_types = 1);
 namespace dicr\widgets\redactor;
 
-use yii\base\Action;
-
 /**
  * Upload action
  */
-class FileUploadAction extends Action
+class FileUploadAction extends RedactorAction
 {
     /**
-     * Run
+     * @return array
      */
-    public function run()
+    public function run() : array
     {
         $ret = [];
 

@@ -1,7 +1,7 @@
 <?php
 /*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 14.09.20 20:42:08
+ * @version 22.09.20 01:48:22
  */
 
 declare(strict_types = 1);
@@ -19,6 +19,8 @@ use function count;
 
 /**
  * Class FileUploadModel
+ *
+ * @property-read RedactorModule $module
  */
 class FileUploadModel extends Model
 {
@@ -35,7 +37,7 @@ class FileUploadModel extends Model
     {
         parent::init();
 
-        $this->allowedExtensions = $this->module()->fileAllowExtensions;
+        $this->allowedExtensions = $this->module->fileAllowExtensions;
     }
 
     /**
@@ -43,7 +45,7 @@ class FileUploadModel extends Model
      *
      * @return RedactorModule
      */
-    protected function module()
+    protected function getModule() : RedactorModule
     {
         /** @noinspection PhpIncompatibleReturnTypeInspection */
         return Yii::$app->controller->module;
@@ -64,13 +66,14 @@ class FileUploadModel extends Model
      *
      * Загружает файлы
      */
-    public function beforeValidate()
+    public function beforeValidate() : bool
     {
         if (! parent::beforeValidate()) {
             return false;
         }
 
         $this->files = UploadedFile::getInstancesByName('file');
+
         return true;
     }
 
@@ -79,7 +82,7 @@ class FileUploadModel extends Model
      *
      * @return array response
      */
-    public function upload()
+    public function upload() : array
     {
         $ret = [];
 
@@ -93,7 +96,7 @@ class FileUploadModel extends Model
                 $name = self::getFileName($file);
 
                 // полный путь файла
-                $path = $this->module()->getFilePath($name);
+                $path = $this->getModule()->filePath($name);
 
                 // сохраняем
                 if (! $file->saveAs($path)) {
@@ -106,7 +109,7 @@ class FileUploadModel extends Model
                 }
 
                 $ret[$key] = [
-                    'url' => $this->module()->getUrl($name),
+                    'url' => $this->getModule()->fileUrl($name),
                     'name' => $name,
                     'id' => md5(date('YmdHis'))
                 ];
@@ -127,11 +130,12 @@ class FileUploadModel extends Model
      * @param UploadedFile $file
      * @return string
      */
-    protected static function getFileName(UploadedFile $file)
+    protected static function getFileName(UploadedFile $file) : string
     {
         $fileName = substr(uniqid(md5((string)mt_rand()), true), 0, 10);
         $fileName .= '-' . Inflector::slug($file->baseName);
         $fileName .= '.' . $file->extension;
+
         return $fileName;
     }
 }

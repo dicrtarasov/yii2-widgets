@@ -1,7 +1,7 @@
 <?php
 /*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 21.09.20 21:51:38
+ * @version 22.09.20 01:52:04
  */
 
 declare(strict_types = 1);
@@ -35,7 +35,7 @@ class RedactorModule extends Module
     public $uploadUrl = '@web/uploads';
 
     /** @var array расширения картинок, разрешенных для загрузки */
-    public $imageAllowExtensions = ['jpg', 'png', 'gif', 'bmp', 'svg'];
+    public $imageAllowExtensions = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'svg'];
 
     /** @var array расширения файлов, разрешенных для загрузки */
     public $fileAllowExtensions;
@@ -74,7 +74,6 @@ class RedactorModule extends Module
      * Возвращает папку для загрузки файлов.
      *
      * @return string
-     * @throws InvalidConfigException
      * @throws Exception
      */
     public function getSaveDir(): string
@@ -100,7 +99,7 @@ class RedactorModule extends Module
      * @param string $filename
      * @return string
      */
-    public function getFilePath(string $filename): string
+    public function filePath(string $filename) : string
     {
         return $this->saveDir . DIRECTORY_SEPARATOR . $filename;
     }
@@ -111,7 +110,7 @@ class RedactorModule extends Module
      * @param string $filename
      * @return string
      */
-    public function getUrl(string $filename): string
+    public function fileUrl(string $filename) : string
     {
         $url = $this->uploadUrl;
 
@@ -119,8 +118,6 @@ class RedactorModule extends Module
             $url .= '/' . (int)Yii::$app->user->id;
         }
 
-        $url .= '/' . $filename;
-
-        return $url;
+        return $url . '/' . $filename;
     }
 }

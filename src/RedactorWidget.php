@@ -1,7 +1,7 @@
 <?php
 /*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 21.09.20 22:06:09
+ * @version 22.09.20 01:51:34
  */
 
 declare(strict_types = 1);
@@ -83,11 +83,11 @@ class RedactorWidget extends InputWidget
     /**
      * @inheritDoc
      */
-    public function init()
+    public function init() : void
     {
         if (! isset($this->options['id'])) {
-            $this->options['id'] =
-                $this->hasModel() ? Html::getInputId($this->model, $this->attribute) : $this->getId();
+            $this->options['id'] = $this->hasModel() ?
+                Html::getInputId($this->model, $this->attribute) : $this->getId();
         }
 
         Html::addCssClass($this->options, 'form-control');
@@ -119,7 +119,7 @@ class RedactorWidget extends InputWidget
     /**
      * @inheritDoc
      */
-    public function run()
+    public function run() : string
     {
         // регистрируем ресурсы
         $asset = RedactorAsset::register($this->view);
@@ -128,7 +128,8 @@ class RedactorWidget extends InputWidget
         // регистрируем плагин
         $this->registerPlugin('redactor');
 
-        return $this->hasModel() ? Html::activeTextarea($this->model, $this->attribute, $this->options) :
+        return $this->hasModel() ?
+            Html::activeTextarea($this->model, $this->attribute, $this->options) :
             Html::textarea($this->name, $this->value, $this->options);
     }
 }

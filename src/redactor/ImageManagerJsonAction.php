@@ -1,86 +1,56 @@
 <?php
 /*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 14.09.20 20:42:08
+ * @version 22.09.20 01:48:22
  */
 
 declare(strict_types = 1);
-/**
- * @copyright 2019-2019 Dicr http://dicr.org
- * @author Igor A Tarasov <develop@dicr.org>
- * @license proprietary
- * @version 20.10.19 21:29:32
- */
-
 namespace dicr\widgets\redactor;
 
-use dicr\widgets\RedactorModule;
 use Yii;
-use yii\base\Action;
 use yii\base\Exception;
-use yii\base\InvalidConfigException;
 use yii\helpers\FileHelper;
-use yii\web\HttpException;
+use yii\web\BadRequestHttpException;
 
 use function count;
-use function is_array;
 
 /**
  * Class ImageManagerJsonAction
  */
-class ImageManagerJsonAction extends Action
+class ImageManagerJsonAction extends RedactorAction
 {
     /**
-     * @inheritDoc
-     * @throws HttpException
+     * @return array
+     * @throws Exception
      */
-    public function init()
+    public function run() : array
     {
         if (! Yii::$app->request->isAjax) {
-            throw new HttpException(403, 'This action allow only ajaxRequest');
+            throw new BadRequestHttpException('This action allow only ajaxRequest');
         }
-    }
 
-    /**
-     * Модуль редактора.
-     *
-     * @return RedactorModule
-     */
-    protected function module()
-    {
-        /** @noinspection PhpIncompatibleReturnTypeInspection */
-        return $this->controller->module;
-    }
-
-    /**
-     * @return array|null
-     * @throws Exception
-     * @throws InvalidConfigException
-     */
-    public function run()
-    {
-        $onlyExtensions = array_map(static function($ext) {
+        $onlyExtensions = array_map(static function ($ext) {
             return '*.' . $ext;
-        }, $this->module()->imageAllowExtensions);
+        }, $this->module->imageAllowExtensions ?: []);
 
-        $filesPath = FileHelper::findFiles($this->module()->getSaveDir(), [
+        $result = [];
+
+        $filesPath = FileHelper::findFiles($this->module->saveDir, [
             'recursive' => true,
             'only' => $onlyExtensions
         ]);
-        if (is_array($filesPath) && count($filesPath)) {
-            $result = [];
-            foreach ($filesPath as $filePath) {
-                $url = $this->module()->getUrl(pathinfo($filePath, PATHINFO_BASENAME));
-                $result[] = [
-                    'thumb' => $url,
-                    'url' => $url,
-                    'title' => pathinfo($filePath, PATHINFO_FILENAME),
-                    'id' => count($result) + 1
-                ];
-            }
-            return $result;
+
+        foreach ($filesPath as $filePath) {
+            $url = $this->module->fileUrl(pathinfo($filePath, PATHINFO_BASENAME));
+
+            $result[] = [
+                'thumb' => $url,
+                'url' => $url,
+                'title' => pathinfo($filePath, PATHINFO_FILENAME),
+                'id' => count($result) + 1
+            ];
         }
 
-        return null;
+        return $result;
     }
 }
