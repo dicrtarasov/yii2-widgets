@@ -1,7 +1,7 @@
 <?php
 /*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 22.09.20 02:15:27
+ * @version 23.09.20 17:43:31
  */
 
 declare(strict_types = 1);
@@ -96,7 +96,7 @@ class RedactorWidget extends InputWidget
         $this->clientOptions['lang'] = $this->clientOptions['lang'] ?? Yii::$app->language;
 
         $this->clientOptions['imageUpload'] = Url::to(
-            $this->clientOptions['imageUpload'] ?? '/upload/image'
+            $this->clientOptions['imageUpload'] ?? '/redactor/upload/image'
         );
 
         $this->clientOptions['imageUploadErrorCallback'] =
@@ -110,7 +110,7 @@ class RedactorWidget extends InputWidget
         }
 
         $this->clientOptions['fileUpload'] = Url::to(
-            $this->clientOptions['fileUpload'] ?? '/upload/file'
+            $this->clientOptions['fileUpload'] ?? '/redactor/upload/file'
         );
 
         $this->clientOptions['fileUploadErrorCallback'] =
