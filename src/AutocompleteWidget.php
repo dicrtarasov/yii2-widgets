@@ -1,7 +1,7 @@
 <?php
 /*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 02.08.20 02:56:15
+ * @version 30.10.20 21:35:12
  */
 
 declare(strict_types = 1);
@@ -10,6 +10,7 @@ namespace dicr\widgets;
 use dicr\asset\AutocompleteAsset;
 use yii\helpers\ArrayHelper;
 use yii\web\JsExpression;
+
 use function array_merge;
 
 /**
@@ -22,7 +23,7 @@ class AutocompleteWidget extends InputWidget
     /**
      * @inheritDoc
      */
-    public function init()
+    public function init() : void
     {
         parent::init();
 
@@ -43,7 +44,7 @@ class AutocompleteWidget extends InputWidget
     /**
      * @inheritDoc
      */
-    public function run()
+    public function run() : string
     {
         AutocompleteAsset::register($this->view);
 

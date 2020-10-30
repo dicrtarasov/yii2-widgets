@@ -1,7 +1,7 @@
 <?php
 /*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 22.09.20 01:48:22
+ * @version 30.10.20 21:34:15
  */
 
 declare(strict_types = 1);
@@ -29,7 +29,7 @@ class ImageManagerJsonAction extends RedactorAction
             throw new BadRequestHttpException('This action allow only ajaxRequest');
         }
 
-        $onlyExtensions = array_map(static function ($ext) {
+        $onlyExtensions = array_map(static function ($ext) : string {
             return '*.' . $ext;
         }, $this->module->imageAllowExtensions ?: []);
 

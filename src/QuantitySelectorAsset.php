@@ -1,7 +1,7 @@
 <?php
 /*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 13.08.20 06:29:17
+ * @version 30.10.20 21:27:44
  */
 
 declare(strict_types = 1);
@@ -17,20 +17,20 @@ use yii\web\JqueryAsset;
  */
 class QuantitySelectorAsset extends AssetBundle
 {
-    /** @var string */
+    /** @inheritDoc */
     public $sourcePath = __DIR__ . '/assets/quantity-selector';
 
-    /** @var string[] */
+    /** @inheritDoc */
     public $css = [
         'style.scss'
     ];
 
-    /** @var string[] */
+    /** @inheritDoc */
     public $js = [
         'script.js'
     ];
 
-    /** @var string[] */
+    /** @inheritDoc */
     public $depends = [
         JqueryAsset::class
     ];

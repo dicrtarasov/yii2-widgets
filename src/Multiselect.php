@@ -1,7 +1,7 @@
 <?php
 /*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 02.08.20 02:57:41
+ * @version 30.10.20 21:27:17
  */
 
 declare(strict_types = 1);
@@ -25,7 +25,7 @@ class Multiselect extends InputWidget
     public $items = [];
 
     /**
-     * @var array опции
+     * @inheritDoc
      * @see Html::dropDownList
      */
     public $options = [
@@ -37,7 +37,7 @@ class Multiselect extends InputWidget
      * @inheritDoc
      * @throws Exception
      */
-    public function init()
+    public function init() : void
     {
         parent::init();
 
@@ -56,7 +56,7 @@ class Multiselect extends InputWidget
      * @inheritDoc
      * @throws InvalidConfigException
      */
-    public function run()
+    public function run() : string
     {
         if (empty($this->items)) {
             return '';

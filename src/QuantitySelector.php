@@ -1,7 +1,7 @@
 <?php
 /*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 02.08.20 02:57:47
+ * @version 30.10.20 21:27:29
  */
 
 declare(strict_types = 1);
@@ -25,13 +25,13 @@ class QuantitySelector extends InputWidget
     /** @var int шаг */
     public $step = 1;
 
-    /** @var int */
+    /** @inheritDoc */
     public $value = 1;
 
     /**
      * @inheritDoc
      */
-    public function init()
+    public function init() : void
     {
         parent::init();
 

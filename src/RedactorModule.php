@@ -1,7 +1,7 @@
 <?php
 /*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 22.09.20 01:52:04
+ * @version 30.10.20 21:33:12
  */
 
 declare(strict_types = 1);
@@ -47,7 +47,7 @@ class RedactorModule extends Module
      * {@inheritDoc}
      * @throws InvalidConfigException
      */
-    public function init()
+    public function init() : void
     {
         parent::init();
 

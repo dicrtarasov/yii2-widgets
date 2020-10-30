@@ -1,7 +1,7 @@
 <?php
 /*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 16.08.20 02:52:04
+ * @version 30.10.20 21:30:34
  */
 
 declare(strict_types = 1);
@@ -32,7 +32,7 @@ class Breadcrumbs extends \yii\bootstrap4\Breadcrumbs
     /**
      * @inheritDoc
      */
-    public function init()
+    public function init() : void
     {
         parent::init();
 
@@ -43,7 +43,7 @@ class Breadcrumbs extends \yii\bootstrap4\Breadcrumbs
      * @inheritDoc
      * @throws InvalidConfigException
      */
-    public function run()
+    public function run() : string
     {
         if (empty($this->links)) {
             return '';

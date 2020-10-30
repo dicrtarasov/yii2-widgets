@@ -1,7 +1,7 @@
 <?php
 /*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 13.08.20 06:34:27
+ * @version 30.10.20 21:33:43
  */
 
 declare(strict_types = 1);
@@ -22,7 +22,7 @@ class TimeFlagWidget extends InputWidget
      * @inheritDoc
      * @throws InvalidConfigException
      */
-    public function run()
+    public function run() : string
     {
         $this->options['labelOptions'] = [
             'class' => 'control-label',

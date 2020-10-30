@@ -1,7 +1,7 @@
 <?php
 /*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 13.08.20 06:34:56
+ * @version 30.10.20 21:30:46
  */
 
 declare(strict_types = 1);
@@ -28,7 +28,7 @@ class CustomSelect extends InputWidget
      * @inheritDoc
      * @throws InvalidConfigException
      */
-    public function init()
+    public function init() : void
     {
         parent::init();
 
@@ -50,7 +50,7 @@ class CustomSelect extends InputWidget
     /**
      * @inheritDoc
      */
-    public function run()
+    public function run() : string
     {
         CustomSelectAsset::register($this->view);
 

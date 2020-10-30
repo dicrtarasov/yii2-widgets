@@ -1,7 +1,7 @@
 <?php
 /*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 22.08.20 15:23:47
+ * @version 30.10.20 21:33:29
  */
 
 declare(strict_types = 1);
@@ -39,7 +39,7 @@ class Stripe extends Widget
      * @inheritDoc
      * @throws Exception
      */
-    public function init()
+    public function init() : void
     {
         parent::init();
 
@@ -79,7 +79,7 @@ class Stripe extends Widget
     /**
      * @inheritDoc
      */
-    public function run()
+    public function run() : string
     {
         if (empty($this->slides)) {
             return '';
@@ -96,6 +96,7 @@ class Stripe extends Widget
         echo $this->renderHead();
         echo $this->renderBody();
         echo Html::endTag('section');
+
         return ob_get_clean();
     }
 
@@ -104,7 +105,7 @@ class Stripe extends Widget
      *
      * @return string
      */
-    protected function renderHead(): string
+    protected function renderHead() : string
     {
         if (empty($this->icon) && empty($this->title) && ! $this->headArrows) {
             return '';
@@ -126,6 +127,7 @@ class Stripe extends Widget
         }
 
         echo Html::endTag('div');
+
         return ob_get_clean();
     }
 
@@ -134,7 +136,7 @@ class Stripe extends Widget
      *
      * @return string
      */
-    protected function renderBody(): string
+    protected function renderBody() : string
     {
         ob_start();
         echo Html::beginTag('div', ['class' => 'stripe-body']);
@@ -151,6 +153,7 @@ class Stripe extends Widget
         }
 
         echo Html::endTag('div');
+
         return ob_get_clean();
     }
 
@@ -159,7 +162,7 @@ class Stripe extends Widget
      *
      * @return string
      */
-    protected function renderArrows(): string
+    protected function renderArrows() : string
     {
         ob_start();
         echo Html::beginTag('div', ['class' => 'stripe-arrows']);
@@ -175,6 +178,7 @@ class Stripe extends Widget
         ]);
 
         echo Html::endTag('div');
+
         return ob_get_clean();
     }
 }

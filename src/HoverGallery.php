@@ -1,7 +1,7 @@
 <?php
 /*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 13.08.20 06:34:56
+ * @version 30.10.20 21:31:02
  */
 
 declare(strict_types = 1);
@@ -40,7 +40,7 @@ class HoverGallery extends Widget
      * @inheritDoc
      * @throws InvalidConfigException
      */
-    public function init()
+    public function init() : void
     {
         parent::init();
 
@@ -84,7 +84,7 @@ class HoverGallery extends Widget
     /**
      * @inheritDoc
      */
-    public function run()
+    public function run() : string
     {
         if (empty($this->images)) {
             return '';

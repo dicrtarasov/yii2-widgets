@@ -1,7 +1,7 @@
 <?php
 /*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 22.09.20 01:47:33
+ * @version 30.10.20 21:34:15
  */
 
 declare(strict_types = 1);
@@ -37,7 +37,7 @@ class FileManagerJsonAction extends RedactorAction
         $config = ['recursive' => true];
 
         if ($this->module->imageAllowExtensions !== null) {
-            $onlyExtensions = array_map(static function ($ext) {
+            $onlyExtensions = array_map(static function ($ext) : string {
                 return '*.' . $ext;
             }, $this->module->imageAllowExtensions);
 

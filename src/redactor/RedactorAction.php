@@ -1,7 +1,7 @@
 <?php
 /*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 22.09.20 01:34:39
+ * @version 30.10.20 21:32:52
  */
 
 declare(strict_types = 1);
@@ -23,7 +23,7 @@ abstract class RedactorAction extends Action
      *
      * @return RedactorModule
      */
-    public function getModule()
+    public function getModule() : RedactorModule
     {
         return $this->controller->module;
     }

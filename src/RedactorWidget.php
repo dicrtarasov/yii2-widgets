@@ -1,7 +1,7 @@
 <?php
 /*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 23.09.20 17:43:31
+ * @version 30.10.20 21:35:13
  */
 
 declare(strict_types = 1);
@@ -24,7 +24,9 @@ use function in_array;
 class RedactorWidget extends InputWidget
 {
     /**
-     * @var array The options underlying for setting up Redactor plugin.
+     * {@inheritDoc}
+     * The options underlying for setting up Redactor plugin.
+     *
      * @see http://imperavi.com/redactor/docs/settings
      */
     public $clientOptions = [

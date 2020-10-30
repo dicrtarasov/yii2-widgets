@@ -1,7 +1,7 @@
 <?php
 /*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 16.08.20 02:52:04
+ * @version 30.10.20 21:29:06
  */
 
 declare(strict_types = 1);
@@ -17,20 +17,20 @@ use yii\web\JqueryAsset;
  */
 class ToastsAsset extends AssetBundle
 {
-    /** @var string */
+    /** @inheritDoc */
     public $sourcePath = __DIR__ . '/assets/toasts';
 
-    /** @var string[] */
+    /** @inheritDoc */
     public $css = [
         'toasts.scss'
     ];
 
-    /** @var string[] */
+    /** @inheritDoc */
     public $js = [
         'toasts.js'
     ];
 
-    /** @var string[] */
+    /** @inheritDoc */
     public $depends = [
         BootstrapAsset::class,
         BootstrapPluginAsset::class,

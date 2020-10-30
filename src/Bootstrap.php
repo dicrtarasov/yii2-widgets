@@ -1,7 +1,7 @@
 <?php
 /*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 22.08.20 15:30:40
+ * @version 30.10.20 21:29:32
  */
 
 declare(strict_types = 1);
@@ -18,7 +18,7 @@ class Bootstrap implements BootstrapInterface
     /**
      * @inheritDoc
      */
-    public function bootstrap($app)
+    public function bootstrap($app) : void
     {
         $app->i18n->translations['dicr/widgets'] = [
             'class' => PhpMessageSource::class,

@@ -1,7 +1,7 @@
 <?php
 /*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 13.08.20 06:34:56
+ * @version 30.10.20 21:33:16
  */
 
 declare(strict_types = 1);
@@ -34,7 +34,7 @@ class ShadowAutocomplete extends InputWidget
      * @inheritDoc
      * @throws InvalidConfigException
      */
-    public function init()
+    public function init() : void
     {
         parent::init();
 
@@ -72,7 +72,7 @@ class ShadowAutocomplete extends InputWidget
      * @inheritDoc
      * @throws InvalidConfigException
      */
-    public function run()
+    public function run() : string
     {
         /** @var string тип поля подсказки */
         $type = ArrayHelper::remove($this->options, 'type', 'search');

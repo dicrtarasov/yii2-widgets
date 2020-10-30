@@ -1,7 +1,7 @@
 <?php
 /*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 22.08.20 15:29:07
+ * @version 30.10.20 21:32:44
  */
 
 declare(strict_types = 1);
@@ -38,7 +38,7 @@ class RatingWidget extends Widget
      * @inheritDoc
      * @throws InvalidConfigException
      */
-    public function init()
+    public function init() : void
     {
         parent::init();
 
@@ -86,7 +86,7 @@ class RatingWidget extends Widget
     /**
      * @inheritDoc
      */
-    public function run()
+    public function run() : string
     {
         if (! isset($this->value)) {
             return '';

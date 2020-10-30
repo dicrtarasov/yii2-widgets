@@ -1,7 +1,7 @@
 <?php
 /*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 02.08.20 02:58:26
+ * @version 30.10.20 21:33:56
  */
 
 declare(strict_types = 1);
@@ -35,7 +35,7 @@ class ToastsWidget extends Widget
     /**
      * @inheritDoc
      */
-    public function init()
+    public function init() : void
     {
         parent::init();
 
@@ -57,7 +57,7 @@ class ToastsWidget extends Widget
     /**
      * @inheritDoc
      */
-    public function run()
+    public function run() : string
     {
         ToastsAsset::register($this->view);
 

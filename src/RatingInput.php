@@ -1,7 +1,7 @@
 <?php
 /*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 02.08.20 02:57:54
+ * @version 30.10.20 21:35:13
  */
 
 declare(strict_types = 1);
@@ -23,7 +23,7 @@ class RatingInput extends InputWidget
     /**
      * @inheritDoc
      */
-    public function init()
+    public function init() : void
     {
         parent::init();
 
@@ -34,7 +34,7 @@ class RatingInput extends InputWidget
      * @inheritDoc
      * @noinspection PhpUnusedParameterInspection
      */
-    public function run()
+    public function run() : string
     {
         RatingInputAsset::register($this->view);
 
@@ -49,7 +49,7 @@ class RatingInput extends InputWidget
 
         $options = [
             'tag' => false,
-            'item' => static function($index, $label, $name, $checked, $value) use ($inputValue) {
+            'item' => static function ($index, $label, $name, $checked, $value) use ($inputValue) : string {
                 $input = Html::radio($name, $checked, ['value' => $value]);
                 $value = (int)$value;
 

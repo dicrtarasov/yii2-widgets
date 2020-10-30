@@ -1,7 +1,7 @@
 <?php
 /*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 13.08.20 06:21:23
+ * @version 30.10.20 21:27:17
  */
 
 declare(strict_types = 1);
@@ -16,15 +16,15 @@ use yii\web\AssetBundle;
  */
 class MultiselectAsset extends AssetBundle
 {
-    /** @var string */
+    /** @inheritDoc */
     public $sourcePath = __DIR__ . '/assets/multiselect';
 
-    /** @var string[] */
+    /** @inheritDoc */
     public $css = [
         'multiselect.scss'
     ];
 
-    /** @var string[] */
+    /** @inheritDoc */
     public $depends = [
         \dicr\asset\MultiselectAsset::class
     ];

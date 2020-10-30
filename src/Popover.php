@@ -1,7 +1,7 @@
 <?php
 /*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 13.08.20 06:28:41
+ * @version 30.10.20 21:31:40
  */
 
 declare(strict_types = 1);
@@ -34,6 +34,7 @@ class Popover extends Widget
     /** @var string позиция справа */
     public const POS_RIGHT = 'right';
 
+    /** @var string позиция */
     public $position = self::POS_TOP;
 
     /** @var ?string оборачиваемый контент */
@@ -45,7 +46,7 @@ class Popover extends Widget
     /**
      * @inheritDoc
      */
-    public function init()
+    public function init() : void
     {
         parent::init();
 
@@ -57,7 +58,7 @@ class Popover extends Widget
     /**
      * @inheritDoc
      */
-    public function run()
+    public function run() : string
     {
         $content = $this->content . trim(ob_get_clean());
         if (empty($content)) {

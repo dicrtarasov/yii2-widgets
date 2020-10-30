@@ -1,7 +1,7 @@
 <?php
 /*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 13.08.20 06:21:00
+ * @version 30.10.20 21:35:13
  */
 
 declare(strict_types = 1);
@@ -14,10 +14,10 @@ use yii\web\AssetBundle;
  */
 class HoverGalleryAsset extends AssetBundle
 {
-    /** @var string */
+    /** @inheritDoc */
     public $sourcePath = __DIR__ . '/assets/hover-gallery';
 
-    /** @var string[] */
+    /** @inheritDoc */
     public $css = [
         'style.scss'
     ];

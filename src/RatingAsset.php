@@ -1,7 +1,7 @@
 <?php
 /*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 13.08.20 06:22:18
+ * @version 30.10.20 21:27:54
  */
 
 declare(strict_types = 1);
@@ -17,13 +17,13 @@ use yii\web\AssetBundle;
  */
 class RatingAsset extends AssetBundle
 {
-    /** @var string */
+    /** @inheritDoc */
     public $sourcePath = __DIR__ . '/assets/rating';
 
-    /** @var string[] */
+    /** @inheritDoc */
     public $css = ['style.scss'];
 
-    /** @var string[] */
+    /** @inheritDoc */
     public $depends = [
         FontAwesomeAsset::class
     ];

@@ -1,7 +1,7 @@
 <?php
 /*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 13.08.20 06:22:33
+ * @version 30.10.20 21:28:05
  */
 
 declare(strict_types = 1);
@@ -18,20 +18,20 @@ use yii\web\JqueryAsset;
  */
 class RatingInputAsset extends AssetBundle
 {
-    /** @var string */
+    /** @inheritDoc */
     public $sourcePath = __DIR__ . '/assets/rating-input';
 
-    /** @var string[] */
+    /** @inheritDoc */
     public $css = [
         'style.scss'
     ];
 
-    /** @var string[] */
+    /** @inheritDoc */
     public $js = [
         'script.js'
     ];
 
-    /** @var string[] */
+    /** @inheritDoc */
     public $depends = [
         JqueryAsset::class,
         FontAwesomeAsset::class
