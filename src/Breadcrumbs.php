@@ -1,7 +1,7 @@
 <?php
 /*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 30.10.20 21:30:34
+ * @version 23.11.20 02:09:48
  */
 
 declare(strict_types = 1);
@@ -27,7 +27,7 @@ class Breadcrumbs extends \yii\bootstrap4\Breadcrumbs
     ];
 
     /** @var bool генерировать микроразметку */
-    public $schema = true;
+    public $schema = false;
 
     /**
      * @inheritDoc
