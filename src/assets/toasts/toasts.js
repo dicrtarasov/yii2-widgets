@@ -1,6 +1,6 @@
 /*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 07.08.20 13:18:26
+ * @version 15.12.20 20:48:43
  */
 
 (function (window, $) {
@@ -77,8 +77,8 @@
     Toasts.prototype.createToast = function (textClass, header, message, opts) {
         return this.addToast(
             `<div class="toast-header">
-                <strong class="mr-auto ${textClass || ''}">${header}</strong>
-                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast">
+                <strong class="mr-auto me-auto ${textClass || ''}">${header}</strong>
+                <button type="button" class="ml-2 ms-2 mb-1 close" data-dismiss="toast" data-bs-dismiss="toast">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
