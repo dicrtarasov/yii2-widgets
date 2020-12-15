@@ -1,6 +1,6 @@
 /*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 15.12.20 20:48:43
+ * @version 15.12.20 22:54:14
  */
 
 (function (window, $) {
@@ -22,7 +22,7 @@
         this.container = $(container);
 
         if (this.container.length < 1) {
-            this.container = $('.dicr-widgets.toasts', window.document.body);
+            this.container = $('.dicr-widgets-toasts', window.document.body);
             if (this.container.length < 1) {
                 // noinspection XHTMLIncompatabilitiesJS
                 this.container = $('<section></section>').appendTo(document.body);
@@ -77,10 +77,8 @@
     Toasts.prototype.createToast = function (textClass, header, message, opts) {
         return this.addToast(
             `<div class="toast-header">
-                <strong class="mr-auto me-auto ${textClass || ''}">${header}</strong>
-                <button type="button" class="ml-2 ms-2 mb-1 close" data-dismiss="toast" data-bs-dismiss="toast">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                <strong class="${textClass || ''}">${header}</strong>
+                <button type="button" class="close" data-dismiss="toast" data-bs-dismiss="toast"></button>
             </div>
             <div class="toast-body ${textClass || ''}">${message}</div>`,
             opts
