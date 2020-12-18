@@ -1,5 +1,5 @@
 // @author Igor A Tarasov <develop@dicr.org>
-// @version 07.08.20 13:18:33
+// @version 15.12.20 22:53:44
 
 .dicr-widgets-toasts {
     display: flex;
@@ -13,8 +13,19 @@
 
     .toast {
         flex: 0 0 auto;
+        display: block;
         max-width: 22rem;
         min-width: 10rem;
+
+        .toast-header {
+            .close {
+                margin-left: auto;
+            }
+        }
+
+        .toast-body {
+            padding: 0.5rem .75rem;
+        }
     }
 }
 
