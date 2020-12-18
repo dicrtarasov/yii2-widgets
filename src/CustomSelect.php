@@ -1,7 +1,7 @@
 <?php
 /*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 30.10.20 21:30:46
+ * @version 18.12.20 12:48:00
  */
 
 declare(strict_types = 1);
@@ -21,7 +21,7 @@ class CustomSelect extends InputWidget
     /** @var string[] ассоциативный массив значений val => label */
     public $values;
 
-    /** @var string текст не выбранного значения */
+    /** @var ?string текст не выбранного значения */
     public $placeholder;
 
     /**
@@ -42,7 +42,9 @@ class CustomSelect extends InputWidget
             throw new InvalidConfigException('values');
         }
 
-        $this->placeholder = (string)$this->placeholder;
+        if ($this->placeholder !== null) {
+            $this->placeholder = (string)$this->placeholder;
+        }
 
         Html::addCssClass($this->options, 'dicr-widget-custom-select');
     }
@@ -83,7 +85,7 @@ class CustomSelect extends InputWidget
         // всплывающий список
         echo Html::beginTag('div', ['class' => 'popup']);
 
-        if ($this->placeholder !== '') {
+        if ($this->placeholder !== null) {
             echo Html::label(
                 Html::radio($inputName, $value === '', ['value' => '']) .
                 Html::encode($this->placeholder), null, ['class' => 'placeholder']
@@ -102,6 +104,7 @@ class CustomSelect extends InputWidget
         echo Html::endTag('div');   // popup
 
         echo Html::endTag('section');   // widget
+
         return ob_get_clean();
     }
 }
