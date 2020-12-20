@@ -11,7 +11,7 @@
             "version": "3.3.11",
             "source": {
                 "type": "git",
-                "url": "git@github.com:RobinHerbots/Inputmask.git",
+                "url": "https://github.com/RobinHerbots/Inputmask.git",
                 "reference": "5e670ad62f50c738388d4dcec78d2888505ad77b"
             },
             "dist": {
@@ -197,11 +197,11 @@
         },
         {
             "name": "dicr/yii2-helper",
-            "version": "4.0.4",
+            "version": "4.0.5",
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/dicr/yii2-helper.git",
-                "reference": "2c6a75259add1494fb73095c47c5d5fb687acdc4"
+                "reference": "76da10469bcb2bba32449e68852d1e4817e56e77"
             },
             "require": {
                 "ext-intl": "*",
@@ -249,7 +249,7 @@
             "support": {
                 "source": "https://gitlab.com/dicr/yii2-helper.git"
             },
-            "time": "2020-12-14T18:57:55+00:00"
+            "time": "2020-12-19T13:06:04+00:00"
         },
         {
             "name": "ezyang/htmlpurifier",
