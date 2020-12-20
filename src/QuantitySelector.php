@@ -1,14 +1,12 @@
 <?php
 /*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 30.10.20 21:27:29
+ * @version 20.12.20 18:18:23
  */
 
 declare(strict_types = 1);
 namespace dicr\widgets;
 
-use function array_filter;
-use function is_numeric;
 use function ob_get_clean;
 
 /**
@@ -16,17 +14,29 @@ use function ob_get_clean;
  */
 class QuantitySelector extends InputWidget
 {
-    /** @var int минимальное значение */
+    /** @var string кнопки по сторонам от поля ввода */
+    public const BUTTONS_MODE_ASIDE = 'aside';
+
+    /** @var string кнопки в отдельной панели */
+    public const BUTTONS_MODE_PANEL = 'panel';
+
+    /** @var string схема кнопок */
+    public $buttonsMode = self::BUTTONS_MODE_ASIDE;
+
+    /** @var string контент кнопки минус */
+    public $buttonMinusContent = '-';
+
+    /** @var string контент кнопки плюс */
+    public $buttonPlusContent = '+';
+
+    /** @var ?int минимальное значение */
     public $min = 1;
 
-    /** @var int|null максимальное значение */
+    /** @var ?int|null максимальное значение */
     public $max = 99999;
 
-    /** @var int шаг */
+    /** @var ?int шаг */
     public $step = 1;
-
-    /** @inheritDoc */
-    public $value = 1;
 
     /**
      * @inheritDoc
@@ -47,21 +57,33 @@ class QuantitySelector extends InputWidget
 
         ob_start();
         echo Html::beginTag('section', $this->options);
-        echo Html::button('−', ['class' => 'button minus']);
 
-        $inputOptions = array_filter([
+        if ($this->buttonsMode === self::BUTTONS_MODE_ASIDE) {
+            echo Html::button($this->buttonMinusContent, ['class' => 'button minus']);
+        }
+
+        $inputOptions = [
             'class' => 'input',
-            'min' => is_numeric($this->min) ? $this->min : null,
-            'max' => is_numeric($this->max) ? $this->max : null,
-            'step' => is_numeric($this->step) ? $this->step : null
-        ]);
+            'min' => $this->min,
+            'max' => $this->max,
+            'step' => $this->step
+        ];
 
         echo $this->hasModel() ?
             Html::activeInput('number', $this->model, $this->attribute, $inputOptions) :
             Html::input('number', $this->name, $this->value, $inputOptions);
 
-        echo Html::button('+', ['class' => 'button plus']);
+        if ($this->buttonsMode === self::BUTTONS_MODE_ASIDE) {
+            echo Html::button($this->buttonPlusContent, ['class' => 'button plus']);
+        } elseif ($this->buttonsMode === self::BUTTONS_MODE_PANEL) {
+            echo Html::beginTag('div', ['class' => 'controls']);
+            echo Html::button($this->buttonMinusContent, ['class' => 'button minus']);
+            echo Html::button($this->buttonPlusContent, ['class' => 'button plus']);
+            echo Html::endTag('div');
+        }
+
         echo Html::endTag('section');
+
         return ob_get_clean();
     }
 }

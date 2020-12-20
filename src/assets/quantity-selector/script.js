@@ -1,96 +1,100 @@
 /*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 23.07.20 21:31:29
+ * @version 20.12.20 18:22:22
  */
 
-(function (window, $) {
-    "use strict";
+"use strict";
 
+(function (window, $) {
     /**
+     * Виджет выбора количества.
+     *
      * @constructor
      */
     function QuantitySelectorWidget()
     {
-        /**
-         * Возвращает параметры поля ввода.
-         *
-         * @param {HTMLInputElement|jQuery<HTMLInputElement>} input
-         * @returns {{val: number, min: number, max: number, step: number}}
-         */
-        function getInputParams(input)
-        {
-            const $input = $(input);
-
-            const params = {
-                min: $input[0].min === "" ? 0 : Number($input[0].min),
-                max: $input[0].max === "" ? NaN : Number($input[0].max),
-                step: $input[0].step === "" ? 1 : Math.abs(Number($input[0].step)),
-                val: $input.val().trim() === "" ? 0 : Number($input.val())
-            };
-
-            if (isNaN(params.min)) {
-                params.min = 0;
-            }
-
-            if (isNaN(params.step)) {
-                params.step = 1;
-            }
-
-            if (isNaN(params.val)) {
-                params.val = params.min;
-            }
-
-            return params;
-        }
+        // noinspection ES6ConvertVarToLetConst
+        var self = this;
+        // noinspection ES6ConvertVarToLetConst
+        var selector = '.widget-quantity-selector';
 
         /**
-         * Установить новое значение поля ввода.
+         * Обработка клика по кнопкам.
          *
-         * @param {HTMLInputElement|jQuery<HTMLInputElement>} input
-         * @param {number} value
+         * @param {Event} e
          */
-        function setInputValue(input, value)
-        {
-            const $input = $(input);
-            const params = getInputParams(input);
-
-            let newValue = value;
-
-            if (newValue < params.min) {
-                newValue = params.min;
-            } else if (!isNaN(params.max) && newValue > params.max) {
-                newValue = params.max;
-            }
-
-            if (newValue !== params.val) {
-                $input.val(newValue).trigger('change');
-            }
-        }
-
-        // обработка нажатий кнопок
-        $(window.document).on('click', '.widget-quantity-selector .button', function (e) {
+        self.handleButton = function (e) {
             e.preventDefault();
 
-            const $widget = $(this).closest('.widget-quantity-selector');
-            const $input = $('.input', $widget);
-            const params = getInputParams($input);
+            // noinspection ES6ConvertVarToLetConst
+            var $button = $(this);
+            // noinspection ES6ConvertVarToLetConst
+            var $input = $button.closest(selector).find('.input');
+            // noinspection ES6ConvertVarToLetConst
+            var value = parseInt(String($input.val())) || 1;
+            // noinspection ES6ConvertVarToLetConst
+            var step = parseInt($input.prop('step')) || 1;
+            // noinspection ES6ConvertVarToLetConst
+            var side = $button.hasClass('minus') ? -1 : 1;
 
-            setInputValue(
-                $input,
-                $(this).hasClass('minus') ? params.val - params.step : params.val + params.step
-            );
-        });
+            $input.val(value + step * side);
+            $input.trigger('change');
+        };
 
-        // корректировка значений поля ввода
-        $(window.document).on('change', '.widget-quantity-selector .input', function () {
-            const $widget = $(this).closest('.widget-quantity-selector');
-            const $input = $('.input', $widget);
-            const params = getInputParams($input);
+        /**
+         * Проверка значения поля ввода.
+         *
+         * @param {Event} e
+         */
+        self.handleInput = function (e) {
+            e.preventDefault();
+            e.stopPropagation();
 
-            setInputValue($input, params.val);
-        });
+            // noinspection ES6ConvertVarToLetConst
+            var $input = $(this);
+            // noinspection ES6ConvertVarToLetConst
+            var val = parseInt(String($input.val()));
+            // noinspection ES6ConvertVarToLetConst
+            var newVal = val || 1;
+
+            // noinspection ES6ConvertVarToLetConst
+            var min = parseInt($input.prop("min")) || 1;
+            if (newVal < min) {
+                newVal = min;
+            }
+
+            // noinspection ES6ConvertVarToLetConst
+            var max = parseInt($input.prop("max"));
+            if (!isNaN(max) && newVal > max) {
+                newVal = max;
+            }
+
+            if (newVal !== val) {
+                $input.val(newVal);
+            }
+
+            $input.closest(selector).trigger('update', newVal);
+        };
+
+        /**
+         * Инициализация виджета.
+         */
+        self.init = function () {
+            // noinspection JSCheckFunctionSignatures
+            $(window.document)
+                .off(selector)
+
+                // обработка нажатий кнопок
+                .on('click' + selector, selector + ' .button', self.handleButton)
+
+                // корректировка значений поля ввода
+                .on('change' + selector, selector + ' .input', self.handleInput);
+        };
     }
 
     window.app = window.app || {};
-    window.app.widgetQuantitySelector = window.app.widgetQuantitySelector || new QuantitySelectorWidget();
+    window.app.widgetQuantitySelector = new QuantitySelectorWidget();
+
+    $(window.app.widgetQuantitySelector.init);
+    $(window.document).ajaxComplete(window.app.widgetQuantitySelector.init);
 })(window, jQuery);
