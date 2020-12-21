@@ -1,7 +1,7 @@
 <?php
 /*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 23.11.20 02:09:48
+ * @version 22.12.20 03:38:53
  */
 
 declare(strict_types = 1);
@@ -10,6 +10,7 @@ namespace dicr\widgets;
 use yii\base\InvalidConfigException;
 use yii\helpers\Url;
 
+use function array_key_last;
 use function array_values;
 use function ob_get_clean;
 use function ob_start;
@@ -51,9 +52,20 @@ class Breadcrumbs extends \yii\bootstrap4\Breadcrumbs
 
         BreadcrumbsAsset::register($this->view);
 
+        // делаем копию ссылок
+        $links = $this->links;
+
+        // из последней ссылки удаляем url
+        unset($this->links[array_key_last($this->links)]['url']);
+
+        // рендерим ссылки
         ob_start();
         echo parent::run();
 
+        // восстанавливаем ссылки
+        $this->links = $links;
+
+        // рендерим схему
         if ($this->schema) {
             echo $this->renderSchema();
         }
