@@ -1,7 +1,7 @@
 <?php
 /*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 22.12.20 04:12:57
+ * @version 22.12.20 04:18:17
  */
 
 declare(strict_types = 1);
@@ -92,7 +92,7 @@ class Breadcrumbs extends \yii\bootstrap4\Breadcrumbs
 
         $items = [];
 
-        foreach (array_values($this->links) as $pos => $link) {
+        foreach (array_values($links) as $pos => $link) {
             if (! empty($link['url']) && ! empty($link['label'])) {
                 $items[] = [
                     '@type' => 'ListItem',
