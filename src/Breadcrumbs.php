@@ -1,7 +1,7 @@
 <?php
 /*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 22.12.20 04:18:17
+ * @version 22.12.20 04:30:51
  */
 
 declare(strict_types = 1);
@@ -13,6 +13,8 @@ use yii\helpers\Url;
 use function array_key_last;
 use function array_unshift;
 use function array_values;
+use function is_array;
+use function is_scalar;
 use function ob_get_clean;
 use function ob_start;
 
@@ -38,6 +40,17 @@ class Breadcrumbs extends \yii\bootstrap4\Breadcrumbs
     {
         parent::init();
 
+        // коррекция ссылок
+        foreach ($this->links as $i => &$link) {
+            if (empty($link)) {
+                unset($this->links[$i]);
+            } elseif (is_scalar($link)) {
+                $link = ['label' => $link];
+            }
+        }
+
+        unset($link);
+
         Html::addCssClass($this->options, 'dicr-widgets-breadcrumbs');
     }
 
@@ -57,7 +70,10 @@ class Breadcrumbs extends \yii\bootstrap4\Breadcrumbs
         $links = $this->links;
 
         // из последней ссылки удаляем url
-        unset($this->links[array_key_last($this->links)]['url']);
+        $lastIndex = array_key_last($this->links);
+        if (is_array($this->links[$lastIndex])) {
+            unset($this->links[$lastIndex]['url']);
+        }
 
         // рендерим ссылки
         ob_start();
