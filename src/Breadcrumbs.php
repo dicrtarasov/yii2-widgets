@@ -1,7 +1,7 @@
 <?php
 /*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 22.12.20 03:38:53
+ * @version 22.12.20 04:12:57
  */
 
 declare(strict_types = 1);
@@ -11,6 +11,7 @@ use yii\base\InvalidConfigException;
 use yii\helpers\Url;
 
 use function array_key_last;
+use function array_unshift;
 use function array_values;
 use function ob_get_clean;
 use function ob_start;
@@ -78,10 +79,15 @@ class Breadcrumbs extends \yii\bootstrap4\Breadcrumbs
      *
      * @return string
      */
-    public function renderSchema(): string
+    public function renderSchema() : string
     {
         if (empty($this->links)) {
             return '';
+        }
+
+        $links = $this->links;
+        if (! empty($this->homeLink)) {
+            array_unshift($links, $this->homeLink);
         }
 
         $items = [];
