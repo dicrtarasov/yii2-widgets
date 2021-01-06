@@ -1,6 +1,6 @@
 /*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 05.01.21 12:59:03
+ * @version 06.01.21 09:11:31
  */
 
 "use strict";
@@ -173,8 +173,12 @@
             // noinspection ES6ConvertVarToLetConst
             var maxWidth = 0;
             $('label', self.dom.list).each(function () {
-                if (this.offsetWidth > maxWidth) {
-                    maxWidth = this.offsetWidth;
+                // noinspection ES6ConvertVarToLetConst
+                var style = window.getComputedStyle(this);
+                // noinspection ES6ConvertVarToLetConst
+                var width = this.offsetWidth - parseInt(style.paddingLeft) - parseInt(style.paddingRight);
+                if (width > maxWidth) {
+                    maxWidth = width;
                 }
             });
 
