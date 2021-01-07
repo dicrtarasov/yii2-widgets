@@ -1,6 +1,6 @@
 /*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 06.01.21 09:11:31
+ * @version 07.01.21 09:21:11
  */
 
 "use strict";
@@ -90,7 +90,7 @@
             // обновляем кнопку и значение элемента
             self.updateValue($(this));
             // эмулируем синтетическое событие change
-            self.dom.triggerHandler('change', $(this).val());
+            self.dom.trigger('change', $(this).val());
         };
 
         /**
@@ -173,12 +173,8 @@
             // noinspection ES6ConvertVarToLetConst
             var maxWidth = 0;
             $('label', self.dom.list).each(function () {
-                // noinspection ES6ConvertVarToLetConst
-                var style = window.getComputedStyle(this);
-                // noinspection ES6ConvertVarToLetConst
-                var width = this.offsetWidth - parseInt(style.paddingLeft) - parseInt(style.paddingRight);
-                if (width > maxWidth) {
-                    maxWidth = width;
+                if (this.offsetWidth > maxWidth) {
+                    maxWidth = this.offsetWidth;
                 }
             });
 
