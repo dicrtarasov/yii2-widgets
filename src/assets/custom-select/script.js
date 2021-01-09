@@ -1,6 +1,6 @@
 /*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 09.01.21 21:01:53
+ * @version 09.01.21 22:34:09
  */
 
 "use strict";
@@ -50,6 +50,13 @@
 
             // временно включаем datalist
             self.dom.addClass('open');
+            self.dom.list.css('align-items', 'flex-start');
+
+            $('label', self.dom.list).css({
+                display: 'inline-block',
+                whiteSpace: 'nowrap',
+                padding: 0
+            });
 
             // ожидаем отрисовки
             window.requestAnimationFrame(function () {
@@ -63,6 +70,12 @@
 
                 // прячем обратно
                 self.dom.removeClass('open');
+                self.dom.list.css('align-items', '');
+                $('label', self.dom.list).css({
+                    display: '',
+                    whiteSpace: '',
+                    padding: ''
+                });
 
                 // метка кнопки
                 // noinspection ES6ConvertVarToLetConst
@@ -71,7 +84,9 @@
                 // учитываем паддинги метки кнопки
                 // noinspection ES6ConvertVarToLetConst
                 var style = window.getComputedStyle($btnLabel[0]);
-                self.labelWidth += parseFloat(style.paddingLeft) + parseFloat(style.paddingRight);
+                self.labelWidth = Math.ceil(
+                    self.labelWidth + parseFloat(style.paddingLeft) + parseFloat(style.paddingRight)
+                );
 
                 // устанавливаем ширину метки кнопки
                 $btnLabel.css('min-width', self.labelWidth);
@@ -226,7 +241,9 @@
         $(window.document).off(selector);
 
         $(selector, window.document).each(function () {
-            $(this).data('widget', new CustomSelectWidget(this));
+            if (!$(this).data('widget')) {
+                $(this).data('widget', new CustomSelectWidget(this));
+            }
         });
     }
 
