@@ -1,6 +1,6 @@
 /*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 09.01.21 20:27:27
+ * @version 09.01.21 21:01:53
  */
 
 "use strict";
@@ -54,6 +54,7 @@
             // ожидаем отрисовки
             window.requestAnimationFrame(function () {
                 $('label', self.dom.list).each(function () {
+                    // noinspection ES6ConvertVarToLetConst
                     var width = $(this).width();
                     if (width > self.labelWidth) {
                         self.labelWidth = width;
@@ -64,9 +65,11 @@
                 self.dom.removeClass('open');
 
                 // метка кнопки
+                // noinspection ES6ConvertVarToLetConst
                 var $btnLabel = $('label', self.dom.btn);
 
                 // учитываем паддинги метки кнопки
+                // noinspection ES6ConvertVarToLetConst
                 var style = window.getComputedStyle($btnLabel[0]);
                 self.labelWidth += parseFloat(style.paddingLeft) + parseFloat(style.paddingRight);
 
@@ -196,7 +199,7 @@
                 e.stopImmediatePropagation();
                 // обновляем кнопку и значение элемента
                 self.updateValue($(this));
-                // закрываем списко
+                // закрываем список
                 self.dom.removeClass('open');
                 // эмулируем синтетическое событие change
                 self.dom.trigger('change', $(this).val());
