@@ -1,6 +1,6 @@
 /*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 09.01.21 23:37:05
+ * @version 10.01.21 00:15:49
  */
 
 "use strict";
@@ -49,9 +49,9 @@
         self.updateWidth = function () {
             // noinspection ES6ConvertVarToLetConst
             var $def = $.Deferred();
-
-            // рассчитываем максимальную ширину меток
-            self.labelWidth = 0;
+            if (!self.dom.is(':visible')) {
+                return $def.resolve(false);
+            }
 
             // временно включаем datalist
             self.dom.addClass('open');
@@ -65,6 +65,9 @@
 
             // ожидаем отрисовки
             window.requestAnimationFrame(function () {
+                // рассчитываем максимальную ширину меток
+                self.labelWidth = 0;
+
                 $('label', self.dom.list).each(function () {
                     // noinspection ES6ConvertVarToLetConst
                     var width = $(this).width();
@@ -83,21 +86,25 @@
                 self.dom.removeClass('open');
                 self.dom.list.css('align-items', '');
 
-                // метка кнопки
-                // noinspection ES6ConvertVarToLetConst
-                var $btnLabel = $('label', self.dom.btn);
+                if (self.labelWidth < 1) {
+                    self.labelWidth = undefined;
+                } else {
+                    // метка кнопки
+                    // noinspection ES6ConvertVarToLetConst
+                    var $btnLabel = $('label', self.dom.btn);
 
-                // учитываем паддинги метки кнопки
-                // noinspection ES6ConvertVarToLetConst
-                var style = window.getComputedStyle($btnLabel[0]);
-                self.labelWidth = Math.ceil(
-                    self.labelWidth + parseFloat(style.paddingLeft) + parseFloat(style.paddingRight)
-                );
+                    // учитываем паддинги метки кнопки
+                    // noinspection ES6ConvertVarToLetConst
+                    var style = window.getComputedStyle($btnLabel[0]);
+                    self.labelWidth = Math.ceil(
+                        self.labelWidth + parseFloat(style.paddingLeft) + parseFloat(style.paddingRight)
+                    );
 
-                // устанавливаем ширину метки кнопки
-                $btnLabel.css('width', self.labelWidth);
+                    // устанавливаем ширину метки кнопки
+                    $btnLabel.css('width', self.labelWidth);
+                }
 
-                $def.resolve(self.labelWidth);
+                $def.resolve(!!self.labelWidth);
             });
 
             return $def;
@@ -116,11 +123,12 @@
                 // noinspection ES6ConvertVarToLetConst
                 var $label = $input.next('label');
                 if ($label.length > 0) {
-                    self.dom.btn.empty().append(
-                        $label.clone()
-                            .removeAttr('for')
-                            .width(self.labelWidth)
-                    );
+                    $label = $label.clone().removeAttr('for');
+                    if (self.labelWidth) {
+                        $label.width(self.labelWidth);
+                    }
+
+                    self.dom.btn.empty().append($label);
                 }
             } else {
                 self.dom.prop('value', '');
@@ -203,7 +211,11 @@
         self.dom.btn
             .on('click' + selector, function (e) {
                 e.preventDefault();
-                self.dom.toggleClass('open');
+
+                // если элемент был скрыт ранее и не рассчитался размер
+                $.when(self.labelWidth || self.updateWidth()).done(function () {
+                    self.dom.toggleClass('open');
+                });
             });
 
         // клики по документу
