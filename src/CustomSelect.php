@@ -1,7 +1,7 @@
 <?php
 /*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 05.01.21 12:51:33
+ * @version 09.01.21 20:29:59
  */
 
 declare(strict_types = 1);
@@ -22,7 +22,7 @@ class CustomSelect extends InputWidget
     /** @var string[]|array[] ассоциативный массив значений value => item */
     public $items;
 
-    /** @var ?array элемент пустого значения */
+    /** @var ?array|string элемент пустого значения */
     public $placeholder;
 
     /**
@@ -36,6 +36,9 @@ class CustomSelect extends InputWidget
         // placeholder
         if ($this->placeholder !== null) {
             $this->placeholder = $this->parseItem($this->placeholder);
+            $this->placeholder['class'] = array_merge(
+                (array)($this->placeholder['class'] ?: []), ['placeholder']
+            );
         }
 
         // items
@@ -104,13 +107,6 @@ class CustomSelect extends InputWidget
      */
     protected function renderButton(): string
     {
-        ob_start();
-
-        echo Html::beginTag('button', [
-            'type' => 'button',
-            'class' => 'widget-custom-select-button'
-        ]);
-
         // текущее значение модели
         $currentValue = $this->hasModel() ?
             (string)Html::getAttributeValue($this->model, $this->attribute) :
@@ -124,14 +120,11 @@ class CustomSelect extends InputWidget
             $item = [
                 'label' => '',
                 'encode' => false,
-                'class' => null
+                'class' => ['unknown']
             ];
         }
 
-        echo $this->renderItem($currentValue, $item);
-        echo Html::endTag('button');
-
-        return ob_get_clean();
+        return Html::button($this->renderItem($currentValue, $item));
     }
 
     /**
