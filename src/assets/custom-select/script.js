@@ -1,6 +1,6 @@
 /*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 09.01.21 18:05:36
+ * @version 09.01.21 18:36:31
  */
 
 "use strict";
@@ -29,10 +29,14 @@
         // noinspection ES6ConvertVarToLetConst
         var self = this;
 
+        /** @var {JQuery<HTMLElement>} */
         self.dom = $(target);
-        self.dom.button = $('button', self.dom);
+
+        /** @var {JQuery<HTMLButtonElement>} */
+        self.dom.btn = $('button', self.dom);
+
+        /** @var {JQuery<HTMLDataListElement>} */
         self.dom.list = $('datalist', self.dom);
-        self.labelWidth = null;
 
         /**
          * обновляет кнопку текущим значением выбранного элемента
@@ -42,13 +46,13 @@
         self.updateValue = function ($input) {
             if ($input.length > 0) {
                 // обновляем значение виджета
-                self.dom[0].value = $input[0].value;
+                self.dom.prop('value', $input.prop('value'));
 
                 // noinspection ES6ConvertVarToLetConst
                 var $label = $input.next('label');
                 if ($label.length > 0) {
-                    self.dom.button.empty().append(
-                        $label.clone().removeAttr('for').width(self.labelWidth)
+                    self.dom.btn.empty().append(
+                        $label.clone().removeAttr('for')
                     );
                 }
             }
@@ -61,24 +65,18 @@
             // временно включаем datalist
             self.dom.addClass('open');
 
+            // очищаем текущие ограничения ширины
+            $([self.dom.btn, self.dom.list]).css('max-width', '');
+
             // ожидаем отрисовки
             window.requestAnimationFrame(function () {
-                // определяем максимальную ширину
-                self.labelWidth = 0;
-
-                $('label', self.dom.list).each(function () {
-                    // noinspection ES6ConvertVarToLetConst
-                    var width = $(this).width;
-                    if (width > self.labelWidth) {
-                        self.labelWidth = width;
-                    }
-                });
+                // noinspection ES6ConvertVarToLetConst
+                var maxWidth = Math.max(self.dom.btn.width(), self.dom.list.width());
 
                 // прячем
                 self.dom.removeClass('open');
 
-                // устанавливаем ширину кнопки по максимальной
-                $('label', self.dom.button).css('width', self.labelWidth);
+                $([self.dom.btn, self.dom.list]).css('min-width', maxWidth);
             });
         };
 
@@ -145,14 +143,14 @@
                 self.dom.list.append($label);
             });
 
-            // пересчитываем ширину метки
-            self.updateWidth();
-
             // устанавливаем значение первого элемента
             // noinspection ES6ConvertVarToLetConst
             var $input = $('input:first', self.dom.list);
             $input.prop('checked', true);
             self.updateValue($input);
+
+            // пересчитываем ширину метки
+            self.updateWidth();
         };
 
         // начальное значение элемента
@@ -163,34 +161,36 @@
 
         // клики по кнопке
         // noinspection JSStringConcatenationToES6Template
-        self.dom.button.off(selector).on('click' + selector, function (e) {
-            e.preventDefault();
-
-            // переключаем открытое состояние
-            self.dom.toggleClass('open');
-        });
+        self.dom.btn
+            .off(selector)
+            .on('click' + selector, function (e) {
+                e.preventDefault();
+                self.dom.toggleClass('open');
+            });
 
         // клики по документу
         // noinspection JSStringConcatenationToES6Template
         $(window.document).on('click' + selector, function (e) {
             // пропускаем клики по кнопке виджета
             // noinspection ES6ConvertVarToLetConst
-            var $button = $(e.target).closest('button');
-            if ($button.length < 1 || $button[0] !== self.dom.button[0]) {
+            var $btn = $(e.target).closest('button');
+            if ($btn.length < 1 || $btn[0] !== self.dom.btn[0]) {
                 self.dom.removeClass('open');
             }
         });
 
         // изменение выбранного значения
         // noinspection JSStringConcatenationToES6Template
-        self.dom.list.off(selector).on('change' + selector, 'input', function (e) {
-            e.preventDefault();
-            e.stopImmediatePropagation();
-            // обновляем кнопку и значение элемента
-            self.updateValue($(this));
-            // эмулируем синтетическое событие change
-            self.dom.trigger('change', $(this).val());
-        });
+        self.dom.list
+            .off(selector)
+            .on('change' + selector, 'input', function (e) {
+                e.preventDefault();
+                e.stopImmediatePropagation();
+                // обновляем кнопку и значение элемента
+                self.updateValue($(this));
+                // эмулируем синтетическое событие change
+                self.dom.trigger('change', $(this).val());
+            });
 
         // получение/установка значения
         self.dom[0].val = self.val;
