@@ -1,6 +1,6 @@
 /*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 07.01.21 09:21:11
+ * @version 09.01.21 18:05:36
  */
 
 "use strict";
@@ -32,6 +32,7 @@
         self.dom = $(target);
         self.dom.button = $('button', self.dom);
         self.dom.list = $('datalist', self.dom);
+        self.labelWidth = null;
 
         /**
          * обновляет кнопку текущим значением выбранного элемента
@@ -47,50 +48,38 @@
                 var $label = $input.next('label');
                 if ($label.length > 0) {
                     self.dom.button.empty().append(
-                        $label.clone().removeAttr('for')
+                        $label.clone().removeAttr('for').width(self.labelWidth)
                     );
                 }
             }
         };
 
         /**
-         * Обработка клика по кнопке.
-         *
-         * @param {Event} e
+         * Рассчитывает и обновляет ширину кнопки виджета по самой широкой из списка элементов
          */
-        self.handleButtonClick = function (e) {
-            e.preventDefault();
+        self.updateWidth = function () {
+            // временно включаем datalist
+            self.dom.addClass('open');
 
-            // переключаем открытое состояние
-            self.dom.toggleClass('open');
-        };
+            // ожидаем отрисовки
+            window.requestAnimationFrame(function () {
+                // определяем максимальную ширину
+                self.labelWidth = 0;
 
-        /**
-         * Обработка клика по документу
-         *
-         * @param {Event} e
-         */
-        self.handleDocumentClick = function (e) {
-            // пропускаем клики по кнопке виджета
-            // noinspection ES6ConvertVarToLetConst
-            var $button = $(e.target).closest('button');
-            if ($button.length < 1 || $button[0] !== self.dom.button[0]) {
+                $('label', self.dom.list).each(function () {
+                    // noinspection ES6ConvertVarToLetConst
+                    var width = $(this).width;
+                    if (width > self.labelWidth) {
+                        self.labelWidth = width;
+                    }
+                });
+
+                // прячем
                 self.dom.removeClass('open');
-            }
-        };
 
-        /**
-         * Обработка переключения radio.
-         *
-         * @param {Event} e
-         */
-        self.handleChange = function (e) {
-            e.preventDefault();
-            e.stopImmediatePropagation();
-            // обновляем кнопку и значение элемента
-            self.updateValue($(this));
-            // эмулируем синтетическое событие change
-            self.dom.trigger('change', $(this).val());
+                // устанавливаем ширину кнопки по максимальной
+                $('label', self.dom.button).css('width', self.labelWidth);
+            });
         };
 
         /**
@@ -156,49 +145,52 @@
                 self.dom.list.append($label);
             });
 
+            // пересчитываем ширину метки
+            self.updateWidth();
+
             // устанавливаем значение первого элемента
             // noinspection ES6ConvertVarToLetConst
             var $input = $('input:first', self.dom.list);
-            // noinspection JSUnusedGlobalSymbols
-            $input[0].checked = true;
+            $input.prop('checked', true);
             self.updateValue($input);
         };
-
-        // временно включаем datalist
-        self.dom.addClass('open');
-
-        // ожидаем отрисовки
-        window.requestAnimationFrame(function () {
-            // определяем максимальную ширину
-            // noinspection ES6ConvertVarToLetConst
-            var maxWidth = 0;
-            $('label', self.dom.list).each(function () {
-                if (this.offsetWidth > maxWidth) {
-                    maxWidth = this.offsetWidth;
-                }
-            });
-
-            // прячем
-            self.dom.removeClass('open');
-
-            // устанавливаем ширину кнопки по максимальной
-            self.dom.button.css('width', maxWidth);
-        });
 
         // начальное значение элемента
         self.updateValue($('input:checked', self.dom.list));
 
+        // обновляем ширину кнопки
+        self.updateWidth();
+
         // клики по кнопке
         // noinspection JSStringConcatenationToES6Template
-        self.dom.button.off(selector).on('click' + selector, self.handleButtonClick);
+        self.dom.button.off(selector).on('click' + selector, function (e) {
+            e.preventDefault();
+
+            // переключаем открытое состояние
+            self.dom.toggleClass('open');
+        });
 
         // клики по документу
         // noinspection JSStringConcatenationToES6Template
-        $(window.document).on('click' + selector, self.handleDocumentClick);
+        $(window.document).on('click' + selector, function (e) {
+            // пропускаем клики по кнопке виджета
+            // noinspection ES6ConvertVarToLetConst
+            var $button = $(e.target).closest('button');
+            if ($button.length < 1 || $button[0] !== self.dom.button[0]) {
+                self.dom.removeClass('open');
+            }
+        });
 
         // изменение выбранного значения
         // noinspection JSStringConcatenationToES6Template
-        self.dom.list.off(selector).on('change' + selector, 'input', self.handleChange);
+        self.dom.list.off(selector).on('change' + selector, 'input', function (e) {
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            // обновляем кнопку и значение элемента
+            self.updateValue($(this));
+            // эмулируем синтетическое событие change
+            self.dom.trigger('change', $(this).val());
+        });
 
         // получение/установка значения
         self.dom[0].val = self.val;
