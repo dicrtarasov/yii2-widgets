@@ -1,6 +1,6 @@
 /*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 09.01.21 23:25:06
+ * @version 09.01.21 23:37:05
  */
 
 "use strict";
@@ -200,7 +200,7 @@
 
         // клики по кнопке
         // noinspection JSStringConcatenationToES6Template
-        self.dom.btn.off(selector)
+        self.dom.btn
             .on('click' + selector, function (e) {
                 e.preventDefault();
                 self.dom.toggleClass('open');
@@ -219,7 +219,7 @@
 
         // изменение выбранного значения
         // noinspection JSStringConcatenationToES6Template
-        self.dom.list.off(selector)
+        self.dom.list
             .on('change' + selector, 'input', function (e) {
                 e.preventDefault();
                 e.stopImmediatePropagation();
@@ -249,8 +249,6 @@
      */
     function init()
     {
-        $(window.document).off(selector);
-
         $(selector, window.document).each(function () {
             if (!$(this).data('widget')) {
                 $(this).data('widget', new CustomSelectWidget(this));
