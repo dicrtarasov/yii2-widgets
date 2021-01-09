@@ -1,6 +1,6 @@
 /*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 09.01.21 22:34:09
+ * @version 09.01.21 23:25:06
  */
 
 "use strict";
@@ -43,8 +43,13 @@
 
         /**
          * Рассчитывает и обновляет ширину кнопки виджета по самой широкой из списка элементов
+         *
+         * @return JQueryDeferred ожидание установки меток
          */
         self.updateWidth = function () {
+            // noinspection ES6ConvertVarToLetConst
+            var $def = $.Deferred();
+
             // рассчитываем максимальную ширину меток
             self.labelWidth = 0;
 
@@ -66,16 +71,17 @@
                     if (width > self.labelWidth) {
                         self.labelWidth = width;
                     }
+
+                    $(this).css({
+                        display: '',
+                        whiteSpace: '',
+                        padding: ''
+                    });
                 });
 
                 // прячем обратно
                 self.dom.removeClass('open');
                 self.dom.list.css('align-items', '');
-                $('label', self.dom.list).css({
-                    display: '',
-                    whiteSpace: '',
-                    padding: ''
-                });
 
                 // метка кнопки
                 // noinspection ES6ConvertVarToLetConst
@@ -89,8 +95,12 @@
                 );
 
                 // устанавливаем ширину метки кнопки
-                $btnLabel.css('min-width', self.labelWidth);
+                $btnLabel.css('width', self.labelWidth);
+
+                $def.resolve(self.labelWidth);
             });
+
+            return $def;
         };
 
         /**
@@ -105,12 +115,11 @@
 
                 // noinspection ES6ConvertVarToLetConst
                 var $label = $input.next('label');
-
                 if ($label.length > 0) {
                     self.dom.btn.empty().append(
                         $label.clone()
                             .removeAttr('for')
-                            .css('min-width', self.labelWidth)
+                            .width(self.labelWidth)
                     );
                 }
             } else {
@@ -127,7 +136,7 @@
          */
         self.val = function (value) {
             if (typeof value === 'undefined') {
-                return self.dom[0].value;
+                return self.dom.prop('value');
             }
 
             // noinspection ES6ConvertVarToLetConst, JSStringConcatenationToES6Template
@@ -153,6 +162,8 @@
          *     encode: boolean|undefined,
          *     class: string|undefined
          * }[]|string[]} items значения value => string| item{label, encode}
+         *
+         * @return JQueryDeferred ожидание окончания добавления
          */
         self.items = function (name, items) {
             // удаляем все элементы кроме placeholder
@@ -172,7 +183,7 @@
                 // noinspection ES6ConvertVarToLetConst,JSStringConcatenationToES6Template
                 var id = self.dom.attr('id') + '-' + index;
 
-                // noinspection ES6ShorthandObjectProperty
+                // noinspection ES6ShorthandObjectProperty,JSUnusedGlobalSymbols
                 self.dom.list.append(
                     $('<input/>', {type: 'radio', id: id, name: name, value: value})
                 );
@@ -184,7 +195,7 @@
             });
 
             // пересчитываем ширину метки
-            self.updateWidth();
+            return self.updateWidth();
         };
 
         // клики по кнопке
@@ -230,7 +241,7 @@
         self.updateValue($('input:checked', self.dom.list));
 
         // обновляем ширину кнопки
-        $(self.updateWidth);
+        self.updateWidth();
     }
 
     /**
