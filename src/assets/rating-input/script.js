@@ -1,6 +1,6 @@
 /*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 23.07.20 21:31:29
+ * @version 09.01.21 18:07:54
  */
 
 (function (window, $) {
@@ -13,6 +13,7 @@
     {
         const selector = '.dicr-widget-rating-input';
 
+        // noinspection JSStringConcatenationToES6Template
         $(window.document)
             // отключение предыдущих обработчиков
             .off(selector)

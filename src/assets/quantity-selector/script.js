@@ -1,6 +1,6 @@
 /*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 20.12.20 18:22:22
+ * @version 09.01.21 18:07:54
  */
 
 "use strict";
@@ -80,7 +80,7 @@
          * Инициализация виджета.
          */
         self.init = function () {
-            // noinspection JSCheckFunctionSignatures
+            // noinspection JSCheckFunctionSignatures,JSStringConcatenationToES6Template
             $(window.document)
                 .off(selector)
 
