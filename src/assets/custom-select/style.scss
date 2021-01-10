@@ -1,5 +1,5 @@
 // @author Igor A Tarasov <develop@dicr.org>
-// @version 09.01.21 20:32:25
+// @version 10.01.21 21:28:04
 
 .widget-custom-select {
     display: inline-block;
@@ -34,7 +34,7 @@
         position: absolute;
         top: calc(100% + 0.25rem);
         left: -0.5rem;
-        z-index: 1;
+        z-index: 999;
 
         background: #fff;
         padding: 0.5rem;
