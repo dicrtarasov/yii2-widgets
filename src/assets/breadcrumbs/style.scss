@@ -1,7 +1,7 @@
 // @author Igor A Tarasov <develop@dicr.org>
-// @version 16.01.21 09:15:40
+// @version 16.01.21 09:18:54
 
-.dicr-widgets-breadcrumbs {
+.widget-breadcrumbs {
     display: flex;
     flex-flow: row wrap;
     align-items: center;
@@ -30,7 +30,7 @@
             content: "‣";
             display: block;
             font-size: 1.5rem;
-            line-height: 0.9375rem;
+            line-height: 1;
             padding: 0 0.3rem;
             white-space: nowrap;
         }

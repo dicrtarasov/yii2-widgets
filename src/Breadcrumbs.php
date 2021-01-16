@@ -1,7 +1,7 @@
 <?php
 /*
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 22.12.20 04:30:51
+ * @version 16.01.21 09:18:46
  */
 
 declare(strict_types = 1);
@@ -51,7 +51,7 @@ class Breadcrumbs extends \yii\bootstrap4\Breadcrumbs
 
         unset($link);
 
-        Html::addCssClass($this->options, 'dicr-widgets-breadcrumbs');
+        Html::addCssClass($this->options, 'widget-breadcrumbs');
     }
 
     /**
