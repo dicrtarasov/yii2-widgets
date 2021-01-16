@@ -1,15 +1,18 @@
 // @author Igor A Tarasov <develop@dicr.org>
-// @version 16.01.21 09:12:50
+// @version 16.01.21 09:15:40
 
 .dicr-widgets-breadcrumbs {
-    display: block;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: flex-start;
     background-color: transparent;
     padding: 0;
     margin: 0 0 0.6rem;
 
     .breadcrumb-item {
         flex: 0 0 auto;
-        display: inline-flex;
+        display: flex;
         flex-flow: row nowrap;
         align-items: center;
         font-size: 0.93rem;
@@ -30,10 +33,6 @@
             line-height: 0.9375rem;
             padding: 0 0.3rem;
             white-space: nowrap;
-
-            @media (max-width: 575px) {
-                font-size: 1.6rem;
-            }
         }
 
         &:last-of-type {
