@@ -1,7 +1,9 @@
 <?php
 /*
+ * @copyright 2019-2021 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 30.10.20 21:34:15
+ * @license MIT
+ * @version 19.01.21 19:42:43
  */
 
 declare(strict_types = 1);
@@ -23,15 +25,16 @@ class ImageManagerJsonAction extends RedactorAction
      * @return array
      * @throws Exception
      */
-    public function run() : array
+    public function run(): array
     {
         if (! Yii::$app->request->isAjax) {
             throw new BadRequestHttpException('This action allow only ajaxRequest');
         }
 
-        $onlyExtensions = array_map(static function ($ext) : string {
-            return '*.' . $ext;
-        }, $this->module->imageAllowExtensions ?: []);
+        $onlyExtensions = array_map(
+            static fn($ext): string => '*.' . $ext,
+            $this->module->imageAllowExtensions ?: []
+        );
 
         $result = [];
 

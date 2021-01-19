@@ -1,7 +1,9 @@
 <?php
 /*
+ * @copyright 2019-2021 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 30.10.20 21:35:13
+ * @license MIT
+ * @version 19.01.21 19:44:13
  */
 
 declare(strict_types = 1);
@@ -95,29 +97,27 @@ class RedactorWidget extends InputWidget
 
         Html::addCssClass($this->options, 'form-control');
 
-        $this->clientOptions['lang'] = $this->clientOptions['lang'] ?? Yii::$app->language;
+        $this->clientOptions['lang'] ??= Yii::$app->language;
 
         $this->clientOptions['imageUpload'] = Url::to(
             $this->clientOptions['imageUpload'] ?? '/redactor/upload/image'
         );
 
-        $this->clientOptions['imageUploadErrorCallback'] =
-            $this->clientOptions['imageUploadErrorCallback'] ??
-            new JsExpression('function(json){alert(json.error);}');
+        $this->clientOptions['imageUploadErrorCallback'] ??= new JsExpression(
+            'function(json){alert(json.error);}'
+        );
 
         if (in_array('imagemanager', $this->clientOptions['plugins'] ?? [], true)) {
-            $this->clientOptions['imageManagerJson'] =
-                $this->clientOptions['imageManagerJson'] ??
-                '/redactor/upload/image-json';
+            $this->clientOptions['imageManagerJson'] ??= '/redactor/upload/image-json';
         }
 
         $this->clientOptions['fileUpload'] = Url::to(
             $this->clientOptions['fileUpload'] ?? '/redactor/upload/file'
         );
 
-        $this->clientOptions['fileUploadErrorCallback'] =
-            $this->clientOptions['fileUploadErrorCallback'] ??
-            new JsExpression('function(json){alert(json.error);}');
+        $this->clientOptions['fileUploadErrorCallback'] ??= new JsExpression(
+            'function(json){alert(json.error);}'
+        );
 
         if (in_array('filemanager', $this->clientOptions['plugins'] ?? [], true)) {
             $this->clientOptions['fileManagerJson'] = '/redactor/upload/file-json';

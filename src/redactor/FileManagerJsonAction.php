@@ -1,7 +1,9 @@
 <?php
 /*
+ * @copyright 2019-2021 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 30.10.20 21:34:15
+ * @license MIT
+ * @version 19.01.21 19:42:12
  */
 
 declare(strict_types = 1);
@@ -28,7 +30,7 @@ class FileManagerJsonAction extends RedactorAction
      * @return array
      * @throws HttpException
      */
-    public function run() : array
+    public function run(): array
     {
         if (! Yii::$app->request->isAjax) {
             throw new HttpException(403, 'This action allow only ajaxRequest');
@@ -37,9 +39,10 @@ class FileManagerJsonAction extends RedactorAction
         $config = ['recursive' => true];
 
         if ($this->module->imageAllowExtensions !== null) {
-            $onlyExtensions = array_map(static function ($ext) : string {
-                return '*.' . $ext;
-            }, $this->module->imageAllowExtensions);
+            $onlyExtensions = array_map(
+                static fn($ext): string => '*.' . $ext,
+                $this->module->imageAllowExtensions
+            );
 
             $config['only'] = $onlyExtensions;
         }
