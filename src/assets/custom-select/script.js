@@ -1,6 +1,8 @@
 /*
+ * @copyright 2019-2021 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 10.01.21 00:15:49
+ * @license MIT
+ * @version 02.02.21 12:42:54
  */
 
 "use strict";
@@ -10,7 +12,6 @@
     /** @var {string} селектор класса виджета */
     var selector = '.widget-custom-select';
 
-    // noinspection JSUnusedGlobalSymbols
     /**
      * Искусственный элемент select.
      *
@@ -58,8 +59,6 @@
             self.dom.list.css('align-items', 'flex-start');
 
             $('label', self.dom.list).css({
-                display: 'inline-block',
-                whiteSpace: 'nowrap',
                 padding: 0
             });
 
@@ -269,7 +268,8 @@
     }
 
     // при загрузке страницы
-    $(init);
+    // noinspection JSCheckFunctionSignatures
+    $(window).on('load', init);
 
     // при загрузке Ajax
     $(window.document).ajaxComplete(init);
