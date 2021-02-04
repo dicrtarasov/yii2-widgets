@@ -1,5 +1,7 @@
+// @copyright 2019-2021 Dicr http://dicr.org
 // @author Igor A Tarasov <develop@dicr.org>
-// @version 11.01.21 16:24:58
+// @license MIT
+// @version 05.02.21 00:55:53
 
 .widget-custom-select {
     display: flex;
@@ -16,6 +18,7 @@
     }
 
     button {
+        flex: 1 1 auto;
         display: flex;
         flex-flow: row nowrap;
         align-items: center;
