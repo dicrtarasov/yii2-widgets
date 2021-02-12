@@ -2,7 +2,7 @@
  * @copyright 2019-2021 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
  * @license MIT
- * @version 12.02.21 21:11:06
+ * @version 12.02.21 21:18:45
  */
 
 "use strict";
@@ -179,19 +179,18 @@
                 $(this).remove();
             });
 
-            Object.keys(items)
-                // конвертируем в объекты
-                .forEach(function (key) {
-                    if (typeof items[key] !== 'object') {
-                        items[key] = {label: items[key], encode: true}
-                    }
-                })
+            // конвертируем в объекты
+            Object.keys(items).forEach(function (i) {
+                if (typeof items[i] !== 'object') {
+                    items[i] = {label: items[i], encode: true}
+                }
+            });
 
+            Object.keys(items)
                 // сортируем по названию
                 .sort(function (k1, k2) {
                     return items[k1].label.localeCompare(items[k2].label);
                 })
-
                 // добавляем новые элементы
                 .forEach(function (value, index) {
                     // noinspection ES6ConvertVarToLetConst
