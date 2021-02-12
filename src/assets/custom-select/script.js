@@ -2,7 +2,7 @@
  * @copyright 2019-2021 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
  * @license MIT
- * @version 02.02.21 12:42:54
+ * @version 12.02.21 21:03:26
  */
 
 "use strict";
@@ -180,26 +180,30 @@
             });
 
             // добавляем новые элементы
-            Object.keys(items).forEach(function (value, index) {
-                // noinspection ES6ConvertVarToLetConst
-                var item = items[value];
-                if (typeof item !== 'object') {
-                    item = {label: item, encode: true};
-                }
+            Object.keys(items)
+                .sort(function (i1, i2) {
+                    return items[i1].localeCompare(items[i2])
+                })
+                .forEach(function (value, index) {
+                    // noinspection ES6ConvertVarToLetConst
+                    var item = items[value];
+                    if (typeof item !== 'object') {
+                        item = {label: item, encode: true};
+                    }
 
-                // noinspection ES6ConvertVarToLetConst,JSStringConcatenationToES6Template
-                var id = self.dom.attr('id') + '-' + index;
+                    // noinspection ES6ConvertVarToLetConst,JSStringConcatenationToES6Template
+                    var id = self.dom.attr('id') + '-' + index;
 
-                // noinspection ES6ShorthandObjectProperty,JSUnusedGlobalSymbols
-                self.dom.list.append(
-                    $('<input/>', {type: 'radio', id: id, name: name, value: value})
-                );
+                    // noinspection ES6ShorthandObjectProperty,JSUnusedGlobalSymbols
+                    self.dom.list.append(
+                        $('<input/>', {type: 'radio', id: id, name: name, value: value})
+                    );
 
-                // noinspection ES6ConvertVarToLetConst
-                var $label = $('<label/>', {for: id, class: item.class || undefined});
-                $label[item.encode ? 'text' : 'html'](item.label);
-                self.dom.list.append($label);
-            });
+                    // noinspection ES6ConvertVarToLetConst
+                    var $label = $('<label/>', {for: id, class: item.class || undefined});
+                    $label[item.encode ? 'text' : 'html'](item.label);
+                    self.dom.list.append($label);
+                });
 
             // пересчитываем ширину метки
             return self.updateWidth();
