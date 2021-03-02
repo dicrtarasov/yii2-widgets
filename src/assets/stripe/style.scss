@@ -1,7 +1,7 @@
 // @copyright 2019-2021 Dicr http://dicr.org
 // @author Igor A Tarasov <develop@dicr.org>
 // @license MIT
-// @version 02.03.21 11:29:49
+// @version 02.03.21 11:37:11
 
 .widget-stripe {
     display: block;
@@ -9,7 +9,7 @@
     // общие стили стрелок для шапки и тела виджета
     .stripe-arrows {
         .arrow {
-            opacity: 0.75;
+            opacity: 0.5;
 
             &:before {
                 display: block;
