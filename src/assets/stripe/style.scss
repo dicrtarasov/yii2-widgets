@@ -1,7 +1,7 @@
 // @copyright 2019-2021 Dicr http://dicr.org
 // @author Igor A Tarasov <develop@dicr.org>
 // @license MIT
-// @version 02.03.21 11:37:11
+// @version 02.03.21 12:26:02
 
 .widget-stripe {
     display: block;
@@ -108,8 +108,13 @@
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            left: -2rem;
-            right: -2rem;
+            left: -2.5rem;
+            right: -2.5rem;
+
+            @media (max-width: 1399px) {
+                left: 1rem;
+                right: 1rem;
+            }
 
             @media (max-width: 575px) {
                 left: 0.5rem;
