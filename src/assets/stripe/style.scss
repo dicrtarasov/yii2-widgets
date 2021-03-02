@@ -1,5 +1,7 @@
+// @copyright 2019-2021 Dicr http://dicr.org
 // @author Igor A Tarasov <develop@dicr.org>
-// @version 13.09.20 06:08:11
+// @license MIT
+// @version 02.03.21 11:29:49
 
 .widget-stripe {
     display: block;
@@ -8,10 +10,6 @@
     .stripe-arrows {
         .arrow {
             opacity: 0.75;
-
-            &:hover {
-                opacity: 1;
-            }
 
             &:before {
                 display: block;
@@ -22,6 +20,14 @@
                 &:before {
                     transform: scaleX(-1);
                 }
+            }
+        }
+    }
+
+    &:hover {
+        .stripe-arrows {
+            .arrow {
+                opacity: 1;
             }
         }
     }
@@ -71,6 +77,10 @@
             .slick-list {
                 margin: 0 -1rem;
 
+                @media (max-width: 575px) {
+                    margin: 0 -0.75rem;
+                }
+
                 .slick-track {
                     display: flex;
                     flex-flow: row nowrap;
@@ -81,34 +91,29 @@
                         float: none;
                         margin: 0 1rem;
                         height: auto;
+
+                        @media (max-width: 575px) {
+                            margin: 0 0.75rem;
+                        }
                     }
                 }
             }
         }
 
         .stripe-arrows {
-            .arrow {
-                position: absolute;
-                top: 50%;
-                transform: translateY(-50%);
+            display: flex;
+            flex-flow: row nowrap;
+            align-items: center;
+            justify-content: space-between;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            left: -2rem;
+            right: -2rem;
 
-                &.prev {
-                    left: auto;
-                    right: calc(100% + 1rem);
-
-                    @media (max-width: 575px) {
-                        right: calc(100% + 1px);
-                    }
-                }
-
-                &.next {
-                    left: calc(100% + 1rem);
-                    right: auto;
-
-                    @media (max-width: 575px) {
-                        left: calc(100% + 1px);
-                    }
-                }
+            @media (max-width: 575px) {
+                left: 0.5rem;
+                right: 0.5rem;
             }
         }
     }
