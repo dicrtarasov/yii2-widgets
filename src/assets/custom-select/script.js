@@ -2,7 +2,7 @@
  * @copyright 2019-2021 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
  * @license MIT
- * @version 12.02.21 21:18:45
+ * @version 03.03.21 12:14:54
  */
 
 "use strict";
@@ -17,10 +17,15 @@
      *
      * Функции:
      *
-     * $widget[0].val(), $widget.val() - получить значение
-     * $widget[0].val(val) - установить значение
-     * $widget[0].items(...) - установить новые элементы
-     * $widget.on('change', function(e, value) {}) - событие изменения
+     * ```php
+     * // CustomSelectWidget
+     * const widget = $widget.data('widget')
+     *
+     * widget.val() - получить значение
+     * widget.val(val) - установить значение
+     * widget.items(...) - установить новые элементы
+     *
+     * $widget.on('change', 'input', function(e, value) {}) - событие изменения
      *
      * @param {HTMLElement} target
      * @constructor
@@ -33,11 +38,13 @@
         /** @var {JQuery<HTMLElement>} */
         self.dom = $(target);
 
+        self.dom.$input = self.dom.children('input');
+
         /** @var {JQuery<HTMLButtonElement>} */
-        self.dom.btn = $('button', self.dom);
+        self.dom.$btn = self.dom.children('button');
 
         /** @var {JQuery<HTMLDataListElement>} */
-        self.dom.list = $('datalist', self.dom);
+        self.dom.$list = self.dom.children('datalist');
 
         /** @var {number} */
         self.labelWidth = undefined;
@@ -45,7 +52,7 @@
         /**
          * Рассчитывает и обновляет ширину кнопки виджета по самой широкой из списка элементов
          *
-         * @return JQueryDeferred ожидание установки меток
+         * @return {JQueryDeferred} ожидание установки меток
          */
         self.updateWidth = function () {
             // noinspection ES6ConvertVarToLetConst
@@ -56,41 +63,41 @@
 
             // временно включаем datalist
             self.dom.addClass('open');
-            self.dom.list.css('align-items', 'flex-start');
-
-            $('label', self.dom.list).css({
-                padding: 0
-            });
+            self.dom.$list.css('align-items', 'flex-start');
+            self.dom.$list.children('label').css({padding: 0});
 
             // ожидаем отрисовки
             window.requestAnimationFrame(function () {
                 // рассчитываем максимальную ширину меток
                 self.labelWidth = 0;
 
-                $('label', self.dom.list).each(function () {
+                self.dom.$list.children('label').each(function () {
                     // noinspection ES6ConvertVarToLetConst
                     var width = $(this).width();
                     if (width > self.labelWidth) {
                         self.labelWidth = width;
                     }
 
+                    /* не помню зачем
                     $(this).css({
                         display: '',
                         whiteSpace: '',
                         padding: ''
                     });
+                     */
                 });
 
                 // прячем обратно
                 self.dom.removeClass('open');
-                self.dom.list.css('align-items', '');
+                self.dom.$list.css('align-items', '');
+                self.dom.$list.children('label').css({padding: ''});
 
                 if (self.labelWidth < 1) {
                     self.labelWidth = undefined;
                 } else {
                     // метка кнопки
                     // noinspection ES6ConvertVarToLetConst
-                    var $btnLabel = $('label', self.dom.btn);
+                    var $btnLabel = self.dom.$btn.children('label');
 
                     // учитываем паддинги метки кнопки
                     // noinspection ES6ConvertVarToLetConst
@@ -110,28 +117,36 @@
         };
 
         /**
-         * обновляет кнопку текущим значением выбранного элемента
-         *
-         * @param {JQuery} $input активный измененный radio input
+         * Обновляет метки виджета по состоянию текущего значения
          */
-        self.updateValue = function ($input) {
-            if ($input.length > 0) {
-                // обновляем значение виджета
-                self.dom.prop('value', $input.prop('value'));
+        self.updateLabels = function () {
+            // удаляем пометку selected
+            self.dom.$list.children('label.selected').removeClass('selected');
 
+            // получаем текущее значение
+            // noinspection ES6ConvertVarToLetConst
+            var value = self.dom.$input.val();
+
+            // находим метку с текущим значением
+            // noinspection ES6ConvertVarToLetConst
+            var $label = self.dom.$list.children('label[data-value="' + value + '"]');
+            if ($label.length > 0) {
+                // клонируем метку для кнопки
                 // noinspection ES6ConvertVarToLetConst
-                var $label = $input.next('label');
-                if ($label.length > 0) {
-                    $label = $label.clone().removeAttr('for');
-                    if (self.labelWidth) {
-                        $label.width(self.labelWidth);
-                    }
-
-                    self.dom.btn.empty().append($label);
+                var $buttonLabel = $label.clone();
+                if (self.labelWidth) {
+                    $buttonLabel.width(self.labelWidth);
                 }
+
+                self.dom.$btn.empty().append($buttonLabel);
+
+                // выделяем текущую метку
+                $label.addClass('selected');
             } else {
-                self.dom.prop('value', '');
-                $('label', self.dom.btn).empty();
+                self.dom.$btn.children('label')
+                    .removeAttr('data-value')
+                    .addClass('unknown')
+                    .html('&nbsp;');
             }
         };
 
@@ -143,15 +158,11 @@
          */
         self.val = function (value) {
             if (typeof value === 'undefined') {
-                return self.dom.prop('value');
+                return self.dom.$input.val();
             }
 
-            // noinspection ES6ConvertVarToLetConst, JSStringConcatenationToES6Template
-            var $input = $('input[value="' + value + '"]', self.dom.list);
-
-            // noinspection JSUnusedGlobalSymbols
-            $input.prop('checked', true);
-            self.updateValue($input);
+            self.dom.$input.val(value);
+            self.updateLabels();
 
             return self.dom;
         };
@@ -161,54 +172,68 @@
         /**
          * Установить новые значения
          *
-         * $widget[0].items(...)
-         *
-         * @param {string} name название поля ввода
          * @param {{
          *     label: string
          *     encode: boolean|undefined,
          *     class: string|undefined
          * }[]|string[]} items значения value => string| item{label, encode}
          *
-         * @return JQueryDeferred ожидание окончания добавления
+         * @return {JQueryDeferred} ожидание окончания добавления
          */
-        self.items = function (name, items) {
+        self.items = function (items) {
             // удаляем все элементы кроме placeholder
-            $('input:not([value=""])', self.dom.list).each(function () {
-                $(this).next('label').remove();
-                $(this).remove();
-            });
+            self.dom.$list.children('label:not([data-value=""])').remove();
 
-            // конвертируем в объекты
-            Object.keys(items).forEach(function (i) {
-                if (typeof items[i] !== 'object') {
-                    items[i] = {label: items[i], encode: true}
-                }
-            });
+            // noinspection ES6ConvertVarToLetConst
+            var values = Object.keys(items)
+            if (values.length > 0) {
+                // конвертируем в объекты
+                values.forEach(function (i) {
+                    if (typeof items[i] !== 'object') {
+                        items[i] = {
+                            label: items[i],
+                            encode: true,
+                            class: undefined
+                        }
+                    }
+                });
 
-            Object.keys(items)
                 // сортируем по названию
-                .sort(function (k1, k2) {
+                values.sort(function (k1, k2) {
                     return items[k1].label.localeCompare(items[k2].label);
-                })
-                // добавляем новые элементы
-                .forEach(function (value, index) {
+                });
+
+                // готовим новые метки
+                // noinspection ES6ConvertVarToLetConst
+                var labels = [];
+                // noinspection ES6ConvertVarToLetConst
+                var currentValue = String(self.dom.$input.val());
+
+                // конвертируем в метки
+                values.forEach(function (value) {
+                    value = String(value);
+
                     // noinspection ES6ConvertVarToLetConst
                     var item = items[value];
 
-                    // noinspection ES6ConvertVarToLetConst,JSStringConcatenationToES6Template
-                    var id = self.dom.attr('id') + '-' + index;
-
-                    // noinspection ES6ShorthandObjectProperty,JSUnusedGlobalSymbols
-                    self.dom.list.append(
-                        $('<input/>', {type: 'radio', id: id, name: name, value: value})
-                    );
+                    if (value === currentValue) {
+                        item.class = item.class ? item.class + ' ' + 'selected' : 'selected';
+                    }
 
                     // noinspection ES6ConvertVarToLetConst
-                    var $label = $('<label/>', {for: id, class: item.class || undefined});
+                    var $label = $('<label/>', {class: item.class, 'data-value': value});
                     $label[item.encode ? 'text' : 'html'](item.label);
-                    self.dom.list.append($label);
+                    labels.push($label);
                 });
+
+                // добавляем в список
+                if (labels.length > 0) {
+                    self.dom.$list.append(labels);
+                }
+            }
+
+            // обновляем метки по новым значениям
+            self.updateLabels();
 
             // пересчитываем ширину метки
             return self.updateWidth();
@@ -216,15 +241,57 @@
 
         // клики по кнопке
         // noinspection JSStringConcatenationToES6Template
-        self.dom.btn
+        self.dom.$btn
             .on('click' + selector, function (e) {
                 e.preventDefault();
 
-                // если элемент был скрыт ранее и не рассчитался размер
-                $.when(self.labelWidth || self.updateWidth()).done(function () {
-                    self.dom.toggleClass('open');
-                });
+                // noinspection ES6ConvertVarToLetConst
+                var isOpen = self.dom.hasClass('open');
+                if (isOpen) {
+                    // закрываем
+                    self.dom.removeClass('open');
+                } else {
+                    // если элемент был скрыт ранее и не рассчитался размер
+                    $.when(self.labelWidth || self.updateWidth()).done(function () {
+                        // открываем
+                        self.dom.addClass('open');
+
+                        // возвращаем прокрутку списка в начало (только после отображения элемента)
+                        self.dom.$list.scrollTop(0);
+                    });
+                }
             });
+
+        // выбор элемента в списке
+        self.dom.$list
+            .on('click', 'label', function (e) {
+                e.preventDefault();
+
+                // закрываем выпадающий список
+                self.dom.removeClass('open');
+
+                // выбранное значение
+                // noinspection ES6ConvertVarToLetConst
+                var value = $(this).data('value');
+
+                // устанавливаем новое значение
+                self.val(value);
+
+                // оповещаем слушателей с дополнительным параметром value
+                self.dom.$input.trigger('change', value);
+            });
+
+        // модифицируем события change элемента input, добавляя значение
+        self.dom.$input.on('change', function (e, val) {
+            // если значение события не определено
+            if (val === undefined) {
+                // отменяем текущее событие
+                e.stopImmediatePropagation();
+
+                // генерируем новое, со значением
+                $(this).trigger('change', String($(this).val()));
+            }
+        });
 
         // клики по документу
         // noinspection JSStringConcatenationToES6Template
@@ -237,28 +304,8 @@
             }
         });
 
-        // изменение выбранного значения
-        // noinspection JSStringConcatenationToES6Template
-        self.dom.list
-            .on('change' + selector, 'input', function (e) {
-                e.preventDefault();
-                e.stopImmediatePropagation();
-                // обновляем кнопку и значение элемента
-                self.updateValue($(this));
-                // закрываем список
-                self.dom.removeClass('open');
-                // эмулируем синтетическое событие change
-                self.dom.trigger('change', $(this).val());
-            });
-
-        // получение/установка значения
-        self.dom[0].val = self.val;
-
-        // установка нового списка элементов
-        self.dom[0].items = self.items;
-
         // начальное значение элемента
-        self.updateValue($('input:checked', self.dom.list));
+        self.updateLabels();
 
         // обновляем ширину кнопки
         self.updateWidth();

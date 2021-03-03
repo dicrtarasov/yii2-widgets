@@ -1,7 +1,9 @@
 <?php
 /*
+ * @copyright 2019-2021 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 09.01.21 20:29:59
+ * @license MIT
+ * @version 03.03.21 12:13:05
  */
 
 declare(strict_types = 1);
@@ -36,9 +38,6 @@ class CustomSelect extends InputWidget
         // placeholder
         if ($this->placeholder !== null) {
             $this->placeholder = $this->parseItem($this->placeholder);
-            $this->placeholder['class'] = array_merge(
-                (array)($this->placeholder['class'] ?: []), ['placeholder']
-            );
         }
 
         // items
@@ -62,10 +61,14 @@ class CustomSelect extends InputWidget
      */
     public function run(): string
     {
+        //CustomSelectAsset::register($this->view);
         CustomSelectAsset::register($this->view);
 
         ob_start();
         echo Html::beginTag('section', $this->options);
+
+        // скрытый элемент input
+        echo $this->renderInput();
 
         // кнопка раскрытия
         echo $this->renderButton();
@@ -90,14 +93,46 @@ class CustomSelect extends InputWidget
             $item = [
                 'label' => (string)$item,
                 'encode' => true,
+                'class' => []
             ];
         }
 
         return [
             'label' => (string)($item['label'] ?? ''),
             'encode' => (bool)($item['encode'] ?? false),
-            'class' => empty($item['class']) ? null : $item['class']
+            'class' => empty($item['class']) ? [] : (array)$item['class']
         ];
+    }
+
+    /** @var string */
+    private $_currentValue;
+
+    /**
+     * Текущее значение ввода.
+     *
+     * @return string
+     */
+    protected function currentValue(): string
+    {
+        if ($this->_currentValue === null) {
+            $this->_currentValue = $this->hasModel() ?
+                (string)Html::getAttributeValue($this->model, $this->attribute) :
+                (string)$this->value;
+        }
+
+        return $this->_currentValue;
+    }
+
+    /**
+     * Рендерит скрытый элемент input
+     *
+     * @return string
+     */
+    protected function renderInput(): string
+    {
+        return $this->hasModel() ?
+            Html::activeHiddenInput($this->model, $this->attribute) :
+            Html::hiddenInput($this->name, $this->value);
     }
 
     /**
@@ -108,9 +143,7 @@ class CustomSelect extends InputWidget
     protected function renderButton(): string
     {
         // текущее значение модели
-        $currentValue = $this->hasModel() ?
-            (string)Html::getAttributeValue($this->model, $this->attribute) :
-            (string)$this->value;
+        $currentValue = $this->currentValue();
 
         // активный элемент
         $item = $this->items[$currentValue] ?? $this->placeholder;
@@ -118,7 +151,7 @@ class CustomSelect extends InputWidget
         // если не задан placeholder, то создаем пустой элемент
         if ($item === null) {
             $item = [
-                'label' => '',
+                'label' => '&nbsp;',
                 'encode' => false,
                 'class' => ['unknown']
             ];
@@ -138,12 +171,11 @@ class CustomSelect extends InputWidget
         echo Html::beginTag('datalist');
 
         if ($this->placeholder !== null) {
-            echo $this->renderItem('', $this->placeholder, 'ph');
+            echo $this->renderItem('', $this->placeholder);
         }
 
-        $index = 0;
         foreach ($this->items as $value => $item) {
-            echo $this->renderItem((string)$value, $item, $index++);
+            echo $this->renderItem((string)$value, $item);
         }
 
         echo Html::endTag('datalist');
@@ -154,40 +186,30 @@ class CustomSelect extends InputWidget
     /**
      * Рендерит элемент.
      *
-     * @param string|int|null $value
+     * @param string $value
      * @param array $item
-     * @param ?int $index суффикс ID элемента ввода
      * @return string
      */
-    protected function renderItem(string $value, array $item, $index = null): string
+    protected function renderItem(string $value, array $item): string
     {
         // определяем название поля ввода и значение
-        if ($this->hasModel()) {
-            $inputName = Html::getInputName($this->model, $this->attribute);
-            $currentValue = (string)Html::getAttributeValue($this->model, $this->attribute);
-        } else {
-            $inputName = $this->name;
-            $currentValue = (string)$this->value;
-        }
-
-        $id = $index === null ? null : $this->id . '-' . $index;
+        $currentValue = $this->currentValue();
 
         ob_start();
-
-        if ($id !== null) {
-            echo Html::radio($inputName, $currentValue === $value, [
-                'id' => $id,
-                'value' => $value
-            ]);
-        }
 
         $label = $item['encode'] ? Html::esc($item['label']) : $item['label'];
         if ($label === '') {
             $label = '&nbsp;';
         }
 
-        echo Html::label($label, $id, [
-            'class' => $item['class'],
+        if ($value === $currentValue) {
+            $item['class'] = empty($item['class']) ? [] : (array)$item['class'];
+            Html::addCssClass($item, 'selected');
+        }
+
+        echo Html::label($label, null, [
+            'data-value' => $value,
+            'class' => $item['class'] ?: null,
         ]);
 
         return ob_get_clean();

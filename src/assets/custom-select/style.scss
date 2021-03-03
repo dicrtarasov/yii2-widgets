@@ -1,7 +1,7 @@
 // @copyright 2019-2021 Dicr http://dicr.org
 // @author Igor A Tarasov <develop@dicr.org>
 // @license MIT
-// @version 05.02.21 00:55:53
+// @version 03.03.21 12:14:17
 
 .widget-custom-select {
     display: flex;
@@ -50,17 +50,13 @@
         padding: 0.5rem 0;
         margin: 0;
 
-        input {
-            display: none;
-        }
-
         label {
             padding: 0.25rem 0.5rem;
         }
     }
 
     &.open {
-        > datalist {
+        datalist {
             display: flex;
         }
     }
