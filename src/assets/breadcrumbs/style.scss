@@ -1,5 +1,7 @@
+// @copyright 2019-2021 Dicr http://dicr.org
 // @author Igor A Tarasov <develop@dicr.org>
-// @version 16.01.21 09:18:54
+// @license MIT
+// @version 03.03.21 12:50:16
 
 .widget-breadcrumbs {
     display: flex;
@@ -11,7 +13,7 @@
     margin: 0 0 0.6rem;
 
     .breadcrumb-item {
-        flex: 0 0 auto;
+        flex: 0 1 auto;
         display: flex;
         flex-flow: row nowrap;
         align-items: center;
