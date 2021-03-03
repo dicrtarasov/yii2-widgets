@@ -2,7 +2,7 @@
  * @copyright 2019-2021 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
  * @license MIT
- * @version 03.03.21 12:14:54
+ * @version 03.03.21 21:19:48
  */
 
 "use strict";
@@ -172,11 +172,11 @@
         /**
          * Установить новые значения
          *
-         * @param {{
+         * @param {Object<{
          *     label: string
          *     encode: boolean|undefined,
          *     class: string|undefined
-         * }[]|string[]} items значения value => string| item{label, encode}
+         * }>|Object<string>} items значения value => string| item{label, encode}
          *
          * @return {JQueryDeferred} ожидание окончания добавления
          */
@@ -237,6 +237,46 @@
 
             // пересчитываем ширину метки
             return self.updateWidth();
+        };
+
+        /**
+         * Устанавливает master-slave связь с родительским элементом
+         *
+         * @param {JQuery} $master родительский элемент
+         * @param {string} url адрес для получения списка items
+         * @param {Object|undefined} query параметры запроса url
+         * @param {string} param название параметра запроса значением master
+         */
+        self.setMaster = function ($master, url, query, param) {
+            $master.on('change', function (e, val) {
+                const masterValue = parseInt(String(val)) || 0;
+
+                // отключенное состояние
+                if (masterValue > 0) {
+                    self.dom.removeAttr('disabled');
+                } else {
+                    self.dom.attr('disabled', 'disabled');
+                }
+
+                // сбрасываем значение
+                self.val('');
+
+                // оповещаем изменение
+                self.dom.$input.trigger('change', '');
+
+                // удаляем элементы
+                self.items({});
+
+                // загружаем элементы
+                if (masterValue > 0) {
+                    // параметры загрузки
+                    query[param] = masterValue;
+
+                    $.get(url, query).done(function (values) {
+                        self.items(values);
+                    });
+                }
+            });
         };
 
         // клики по кнопке
