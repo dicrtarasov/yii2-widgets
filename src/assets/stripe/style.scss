@@ -1,7 +1,7 @@
 // @copyright 2019-2021 Dicr http://dicr.org
 // @author Igor A Tarasov <develop@dicr.org>
 // @license MIT
-// @version 08.03.21 18:25:04
+// @version 08.03.21 20:36:57
 
 .widget-stripe {
     display: block;
@@ -65,10 +65,6 @@
         .stripe-slides {
             display: none;
 
-            &.slick-initialized {
-                display: block;
-            }
-
             .slick-list {
                 margin: 0 -1rem;
 
@@ -89,6 +85,18 @@
 
                         @media (max-width: 575px) {
                             margin: 0 0.75rem;
+                        }
+                    }
+                }
+            }
+
+            &.slick-initialized {
+                display: block;
+
+                .slick-list {
+                    .slick-track {
+                        .slick-slide {
+                            display: flex;
                         }
                     }
                 }
