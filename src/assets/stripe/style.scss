@@ -1,7 +1,7 @@
 // @copyright 2019-2021 Dicr http://dicr.org
 // @author Igor A Tarasov <develop@dicr.org>
 // @license MIT
-// @version 12.03.21 02:01:15
+// @version 14.03.21 00:37:53
 
 .widget-stripe {
     display: block;
@@ -62,8 +62,12 @@
     .stripe-body {
         position: relative;
 
-        .stripe-slides.slick-slider {
+        .stripe-slides {
             display: none;
+
+            &.slick-initialized {
+                display: block;
+            }
 
             .slick-list {
                 margin: 0 -1rem;
