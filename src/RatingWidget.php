@@ -1,7 +1,9 @@
 <?php
 /*
+ * @copyright 2019-2021 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 30.10.20 21:32:44
+ * @license MIT
+ * @version 12.08.21 22:08:26
  */
 
 declare(strict_types = 1);
@@ -48,7 +50,7 @@ class RatingWidget extends Widget
                 throw new InvalidConfigException('value');
             }
 
-            $this->value = (float)round($this->value, 1);
+            $this->value = round($this->value, 1);
         }
 
         if (isset($this->count)) {

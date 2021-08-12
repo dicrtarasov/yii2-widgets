@@ -2,7 +2,7 @@
  * @copyright 2019-2021 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
  * @license MIT
- * @version 03.03.21 21:19:48
+ * @version 12.08.21 22:04:20
  */
 
 "use strict";
@@ -77,14 +77,6 @@
                     if (width > self.labelWidth) {
                         self.labelWidth = width;
                     }
-
-                    /* не помню зачем
-                    $(this).css({
-                        display: '',
-                        whiteSpace: '',
-                        padding: ''
-                    });
-                     */
                 });
 
                 // прячем обратно
@@ -172,12 +164,7 @@
         /**
          * Установить новые значения
          *
-         * @param {Object<{
-         *     label: string
-         *     encode: boolean|undefined,
-         *     class: string|undefined
-         * }>|Object<string>} items значения value => string| item{label, encode}
-         *
+         * @param {object} items значения value => string| item{label, encode}
          * @return {JQueryDeferred} ожидание окончания добавления
          */
         self.items = function (items) {
@@ -185,7 +172,7 @@
             self.dom.$list.children('label:not([data-value=""])').remove();
 
             // noinspection ES6ConvertVarToLetConst
-            var values = Object.keys(items)
+            var values = Object.keys(items);
             if (values.length > 0) {
                 // конвертируем в объекты
                 values.forEach(function (i) {

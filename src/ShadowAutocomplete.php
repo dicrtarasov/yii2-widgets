@@ -1,7 +1,9 @@
 <?php
 /*
+ * @copyright 2019-2021 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 30.10.20 21:33:16
+ * @license MIT
+ * @version 12.08.21 22:11:23
  */
 
 declare(strict_types = 1);
@@ -53,19 +55,19 @@ class ShadowAutocomplete extends InputWidget
         $this->clientOptions['triggerSelectOnValidInput'] = false;
 
         // при изменении подсказки удаляем значение скрытого поля
-        $this->clientOptions['onInvalidateSelection'] = new JsExpression("function() {
-            $('#{$this->options['id']}-shadow').val('');
-        }");
+        $this->clientOptions['onInvalidateSelection'] = new JsExpression('function() {
+            $("#' . $this->options['id'] . '-shadow").val("");
+        }');
 
         // при выборе подсказки заполняем значение скрытого поля
-        $this->clientOptions['onSelect'] = new JsExpression("function(suggestion) {
-            $('#{$this->options['id']}-shadow').val(suggestion.{$this->shadowValueField});
-        }");
+        $this->clientOptions['onSelect'] = new JsExpression('function(suggestion) {
+            $("#' . $this->options['id'] . '-shadow").val(suggestion.' . $this->shadowValueField . ');
+        }');
 
         // при изменении значения поля сбрасываем поле выбранного значения
-        $this->view->registerJs("$('#{$this->options['id']}').on('change', function() {
-            $('#{$this->options['id']}-shadow').val(''); 
-        })");
+        $this->view->registerJs('$("#' . $this->options['id'] . '").on("change", function() {
+            $("#' . $this->options['id'] . '-shadow").val(""); 
+        })');
     }
 
     /**

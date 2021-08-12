@@ -1,7 +1,9 @@
 <?php
 /*
+ * @copyright 2019-2021 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 30.10.20 21:35:13
+ * @license MIT
+ * @version 12.08.21 22:01:18
  */
 
 declare(strict_types = 1);
@@ -32,7 +34,6 @@ class RatingInput extends InputWidget
 
     /**
      * @inheritDoc
-     * @noinspection PhpUnusedParameterInspection
      */
     public function run() : string
     {

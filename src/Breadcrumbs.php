@@ -3,13 +3,12 @@
  * @copyright 2019-2021 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
  * @license MIT
- * @version 19.01.21 19:39:31
+ * @version 12.08.21 22:11:50
  */
 
 declare(strict_types = 1);
 namespace dicr\widgets;
 
-use yii\base\InvalidConfigException;
 use yii\helpers\Url;
 
 use function array_key_last;
@@ -23,7 +22,7 @@ use function ob_start;
 /**
  * Хлебные крошки.
  */
-class Breadcrumbs extends \yii\bootstrap4\Breadcrumbs
+class Breadcrumbs extends \yii\bootstrap5\Breadcrumbs
 {
     /** @inheritDoc */
     public $homeLink = [
@@ -38,7 +37,7 @@ class Breadcrumbs extends \yii\bootstrap4\Breadcrumbs
     /**
      * @inheritDoc
      */
-    public function init() : void
+    public function init(): void
     {
         parent::init();
 
@@ -58,9 +57,8 @@ class Breadcrumbs extends \yii\bootstrap4\Breadcrumbs
 
     /**
      * @inheritDoc
-     * @throws InvalidConfigException
      */
-    public function run() : string
+    public function run(): string
     {
         if (empty($this->links)) {
             return '';
@@ -97,7 +95,7 @@ class Breadcrumbs extends \yii\bootstrap4\Breadcrumbs
      *
      * @return string
      */
-    public function renderSchema() : string
+    public function renderSchema(): string
     {
         if (empty($this->links)) {
             return '';

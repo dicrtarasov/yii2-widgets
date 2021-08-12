@@ -3,7 +3,7 @@
  * @copyright 2019-2021 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
  * @license MIT
- * @version 03.03.21 12:13:05
+ * @version 12.08.21 22:08:09
  */
 
 declare(strict_types = 1);
@@ -115,9 +115,8 @@ class CustomSelect extends InputWidget
     protected function currentValue(): string
     {
         if ($this->_currentValue === null) {
-            $this->_currentValue = $this->hasModel() ?
-                (string)Html::getAttributeValue($this->model, $this->attribute) :
-                (string)$this->value;
+            $this->_currentValue = (string)($this->hasModel() ?
+                Html::getAttributeValue($this->model, $this->attribute) : $this->value);
         }
 
         return $this->_currentValue;
