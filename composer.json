@@ -9,7 +9,7 @@
         {
             "name": "Igor Tarasov",
             "email": "develop@dicr.org",
-            "homepage": "http://dicr.org",
+            "homepage": "https://dicr.org",
             "role": "developer"
         }
     ],
@@ -34,7 +34,7 @@
         "dicr/yii2-helper": "~4.4"
     },
     "require-dev": {
-        "roave/security-advisories": "dev-master"
+        "roave/security-advisories": "dev-latest"
     },
     "repositories": [
         {"type": "composer", "url": "https://asset-packagist.org"},
