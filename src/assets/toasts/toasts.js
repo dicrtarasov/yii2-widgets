@@ -1,6 +1,8 @@
 /*
+ * @copyright 2019-2021 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 15.12.20 22:54:14
+ * @license MIT
+ * @version 15.08.21 21:19:31
  */
 
 (function (window, $) {
@@ -78,7 +80,7 @@
         return this.addToast(
             `<div class="toast-header">
                 <strong class="${textClass || ''}">${header}</strong>
-                <button type="button" class="close" data-dismiss="toast" data-bs-dismiss="toast"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
             </div>
             <div class="toast-body ${textClass || ''}">${message}</div>`,
             opts

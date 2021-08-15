@@ -1,5 +1,7 @@
+// @copyright 2019-2021 Dicr http://dicr.org
 // @author Igor A Tarasov <develop@dicr.org>
-// @version 15.12.20 22:53:44
+// @license MIT
+// @version 15.08.21 21:20:04
 
 .dicr-widgets-toasts {
     display: flex;
@@ -17,16 +19,8 @@
         max-width: 22rem;
         min-width: 10rem;
 
-        .toast-header {
-            .close {
-                margin-left: auto;
-            }
-        }
-
         .toast-body {
             padding: 0.5rem .75rem;
         }
     }
 }
-
-
