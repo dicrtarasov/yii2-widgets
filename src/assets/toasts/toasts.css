@@ -1,0 +1,26 @@
+.dicr-widgets-toasts {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: stretch;
+    justify-content: flex-start;
+    position: fixed;
+    top: 0.1rem;
+    right: 0.1rem;
+    z-index: 999999
+}
+
+.dicr-widgets-toasts .toast {
+    flex: 0 0 auto;
+    max-width: 22rem;
+    min-width: 10rem
+}
+
+.dicr-widgets-toasts .toast .toast-header {
+    justify-content: space-between
+}
+
+.dicr-widgets-toasts .toast .toast-body {
+    padding: 0.5rem .75rem
+}
+
+/*# sourceMappingURL=toasts.css.map */

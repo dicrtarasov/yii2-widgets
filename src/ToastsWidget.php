@@ -1,12 +1,15 @@
 <?php
 /*
+ * @copyright 2019-2021 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 30.10.20 21:33:56
+ * @license MIT
+ * @version 03.10.21 20:01:15
  */
 
 declare(strict_types = 1);
 namespace dicr\widgets;
 
+use Yii;
 use yii\helpers\Json;
 
 /**
@@ -26,30 +29,39 @@ class ToastsWidget extends Widget
     /** @var string[] произвольный контент внутри <div class="toast"></div> */
     public $toasts = [];
 
-    /** @var int задержка скрытия, 0/false - запретить авто-скрытие */
-    public $autoHide = 10000;
-
     /** @var bool анимация */
     public $animation = true;
+
+    /** @var int задержка скрытия, 0/false - запретить авто-скрытие */
+    public $autohide = 10000;
+
+    /** @var string|false ключ сессии flash */
+    public $flashKey = 'toasts';
 
     /**
      * @inheritDoc
      */
-    public function init() : void
+    public function init(): void
     {
         parent::init();
 
-        foreach (['animation', 'autoHide'] as $field) {
-            if (isset($this->{$field})) {
-                $this->clientOptions['options'][$field] = $this->{$field};
+        // если задан ключ flash-сессии
+        if (! empty($this->flashKey)) {
+            // получаем конфиг из flash сессии
+            $flashConfig = Yii::$app->session->getFlash($this->flashKey, [], true);
+            if (! empty($flashConfig)) {
+                Yii::configure($this, $flashConfig);
             }
         }
 
-        foreach (['errors', 'warnings', 'success', 'toasts'] as $field) {
-            if (isset($this->{$field})) {
-                $this->clientOptions[$field] = (array)$this->{$field};
-            }
-        }
+        $this->clientOptions = [
+            'animation' => $this->animation,
+            'autohide' => $this->autohide,
+            'errors' => (array)($this->errors ?: []),
+            'warnings' => (array)($this->warnings ?: []),
+            'success' => (array)($this->success ?: []),
+            'toasts' => (array)($this->toasts ?: [])
+        ];
 
         Html::addCssClass($this->options, 'dicr-widgets-toasts');
     }
@@ -57,17 +69,14 @@ class ToastsWidget extends Widget
     /**
      * @inheritDoc
      */
-    public function run() : string
+    public function run(): string
     {
         ToastsAsset::register($this->view);
 
-        $this->view->registerJs("(function(args) {
-                $.each(args.errors, (i, message) => window.dicr.widgets.toasts.error(message, 'Ошибка', args.options));
-                $.each(args.warnings, (i, message) => window.dicr.widgets.toasts.warning(message, 'Предупреждение', args.options));
-                $.each(args.success, (i, message) => window.dicr.widgets.toasts.success(message, 'Готово', args.options));
-                $.each(args.toasts, (i, content) => window.dicr.widgets.toasts.addToast(content, args.options));
-            })(" . Json::encode($this->clientOptions) . ')');
+        $this->view->registerJs('window.dicr.widgets.toasts = new window.dicr.widgets.Toasts(".dicr-widgets-toasts",' .
+            Json::encode($this->clientOptions) . ')'
+        );
 
-        return '';
+        return Html::tag('section', '', $this->options);
     }
 }

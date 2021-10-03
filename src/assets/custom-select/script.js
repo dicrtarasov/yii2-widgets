@@ -2,7 +2,7 @@
  * @copyright 2019-2021 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
  * @license MIT
- * @version 12.08.21 22:04:20
+ * @version 03.10.21 20:03:24
  */
 
 "use strict";
@@ -34,19 +34,10 @@
     {
         // noinspection ES6ConvertVarToLetConst
         var self = this;
-
-        /** @var {JQuery<HTMLElement>} */
         self.dom = $(target);
-
         self.dom.$input = self.dom.children('input');
-
-        /** @var {JQuery<HTMLButtonElement>} */
         self.dom.$btn = self.dom.children('button');
-
-        /** @var {JQuery<HTMLDataListElement>} */
         self.dom.$list = self.dom.children('datalist');
-
-        /** @var {number} */
         self.labelWidth = undefined;
 
         /**
