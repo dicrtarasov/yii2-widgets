@@ -1,9 +1,9 @@
 <?php
 /*
- * @copyright 2019-2021 Dicr http://dicr.org
+ * @copyright 2019-2022 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
  * @license MIT
- * @version 12.08.21 22:08:09
+ * @version 04.01.22 18:26:36
  */
 
 declare(strict_types = 1);
@@ -11,7 +11,6 @@ namespace dicr\widgets;
 
 use yii\base\InvalidConfigException;
 
-use function is_array;
 use function is_scalar;
 use function ob_get_clean;
 use function ob_start;
@@ -22,10 +21,10 @@ use function ob_start;
 class CustomSelect extends InputWidget
 {
     /** @var string[]|array[] ассоциативный массив значений value => item */
-    public $items;
+    public array $items = [];
 
     /** @var ?array|string элемент пустого значения */
-    public $placeholder;
+    public string|array|null $placeholder = null;
 
     /**
      * @inheritDoc
@@ -38,13 +37,6 @@ class CustomSelect extends InputWidget
         // placeholder
         if ($this->placeholder !== null) {
             $this->placeholder = $this->parseItem($this->placeholder);
-        }
-
-        // items
-        if (empty($this->items)) {
-            $this->items = [];
-        } elseif (! is_array($this->items)) {
-            throw new InvalidConfigException('items');
         }
 
         foreach ($this->items as &$item) {
@@ -84,10 +76,10 @@ class CustomSelect extends InputWidget
     /**
      * Парсит элемент.
      *
-     * @param string|array|null $item
+     * @param array|string|null $item
      * @return array
      */
-    protected function parseItem($item): array
+    protected function parseItem(array|string|null $item): array
     {
         if ($item === null || is_scalar($item)) {
             $item = [
@@ -104,8 +96,7 @@ class CustomSelect extends InputWidget
         ];
     }
 
-    /** @var string */
-    private $_currentValue;
+    private string $_currentValue;
 
     /**
      * Текущее значение ввода.
@@ -114,7 +105,7 @@ class CustomSelect extends InputWidget
      */
     protected function currentValue(): string
     {
-        if ($this->_currentValue === null) {
+        if (! isset($this->_currentValue)) {
             $this->_currentValue = (string)($this->hasModel() ?
                 Html::getAttributeValue($this->model, $this->attribute) : $this->value);
         }

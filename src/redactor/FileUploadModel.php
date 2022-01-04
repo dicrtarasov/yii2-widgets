@@ -1,7 +1,9 @@
 <?php
 /*
+ * @copyright 2019-2022 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 22.09.20 01:48:22
+ * @license MIT
+ * @version 04.01.22 18:28:01
  */
 
 declare(strict_types = 1);
@@ -25,10 +27,10 @@ use function count;
 class FileUploadModel extends Model
 {
     /** @var UploadedFile[] */
-    public $files;
+    public array $files = [];
 
     /** @var string[] разрешенные расширения */
-    protected $allowedExtensions;
+    protected array $allowedExtensions = [];
 
     /**
      * Инициализация.

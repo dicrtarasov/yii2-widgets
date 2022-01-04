@@ -1,7 +1,9 @@
 <?php
 /*
+ * @copyright 2019-2022 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 30.10.20 21:27:17
+ * @license MIT
+ * @version 04.01.22 18:31:58
  */
 
 declare(strict_types = 1);
@@ -22,7 +24,7 @@ class Multiselect extends InputWidget
      * @var string[] элементы выбора
      * @see Html::dropDownList
      */
-    public $items = [];
+    public array $items = [];
 
     /**
      * @inheritDoc

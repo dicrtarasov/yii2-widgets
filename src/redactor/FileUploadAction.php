@@ -1,7 +1,9 @@
 <?php
 /*
+ * @copyright 2019-2022 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 22.09.20 01:40:10
+ * @license MIT
+ * @version 04.01.22 18:23:49
  */
 
 declare(strict_types = 1);
@@ -13,7 +15,7 @@ namespace dicr\widgets\redactor;
 class FileUploadAction extends RedactorAction
 {
     /**
-     * @return array
+     * @inheritDoc
      */
     public function run() : array
     {

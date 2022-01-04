@@ -1,9 +1,9 @@
 <?php
 /*
- * @copyright 2019-2021 Dicr http://dicr.org
+ * @copyright 2019-2022 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
  * @license MIT
- * @version 03.10.21 20:01:15
+ * @version 04.01.22 18:20:49
  */
 
 declare(strict_types = 1);
@@ -18,25 +18,25 @@ use yii\helpers\Json;
 class ToastsWidget extends Widget
 {
     /** @var string[] ошибки */
-    public $errors = [];
+    public array $errors = [];
 
     /** @var string[] предупреждения */
-    public $warnings = [];
+    public array $warnings = [];
 
     /** @var string[] сообщения об успехе */
-    public $success = [];
+    public array $success = [];
 
     /** @var string[] произвольный контент внутри <div class="toast"></div> */
-    public $toasts = [];
+    public array $toasts = [];
 
     /** @var bool анимация */
-    public $animation = true;
+    public bool $animation = true;
 
     /** @var int задержка скрытия, 0/false - запретить авто-скрытие */
-    public $autohide = 10000;
+    public int $autohide = 10000;
 
     /** @var string|false ключ сессии flash */
-    public $flashKey = 'toasts';
+    public string|false $flashKey = 'toasts';
 
     /**
      * @inheritDoc
@@ -57,10 +57,10 @@ class ToastsWidget extends Widget
         $this->clientOptions = [
             'animation' => $this->animation,
             'autohide' => $this->autohide,
-            'errors' => (array)($this->errors ?: []),
-            'warnings' => (array)($this->warnings ?: []),
-            'success' => (array)($this->success ?: []),
-            'toasts' => (array)($this->toasts ?: [])
+            'errors' => $this->errors,
+            'warnings' => $this->warnings,
+            'success' => $this->success,
+            'toasts' => $this->toasts
         ];
 
         Html::addCssClass($this->options, 'dicr-widgets-toasts');

@@ -1,9 +1,9 @@
 <?php
 /*
- * @copyright 2019-2021 Dicr http://dicr.org
+ * @copyright 2019-2022 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
  * @license MIT
- * @version 12.08.21 22:08:26
+ * @version 04.01.22 18:35:39
  */
 
 declare(strict_types = 1);
@@ -13,8 +13,8 @@ use dicr\helper\Inflector;
 use Yii;
 use yii\base\InvalidConfigException;
 
-use function is_numeric;
 use function ob_get_clean;
+use function round;
 
 /**
  * Отображает рейтинг звездочками.
@@ -22,46 +22,40 @@ use function ob_get_clean;
 class RatingWidget extends Widget
 {
     /** @var string тэг виджета */
-    public $tag = 'span';
+    public string $tag = 'span';
 
-    /** @var float значение 1..5 */
-    public $value;
+    /** @var ?float значение 1..5 */
+    public ?float $value = null;
 
     /** @var ?int кол-во отзывов */
-    public $count;
+    public ?int $count = null;
 
     /** @var bool сделать микроразметку */
-    public $schema;
+    public bool $schema = false;
 
     /** @var bool показывать текст */
-    public $showText = false;
+    public bool $showText = false;
 
     /**
      * @inheritDoc
      * @throws InvalidConfigException
      */
-    public function init() : void
+    public function init(): void
     {
         parent::init();
 
+        if ($this->count !== null && $this->count < 0) {
+            throw new InvalidConfigException('count');
+        }
+
         // если значение не установлено, то не отображаем виджет
-        if (isset($this->value)) {
-            if (! is_numeric($this->value) || ($this->value < 0) || ($this->value > 5)) {
+        if ($this->value !== null) {
+            if ($this->value < 0 || $this->value > 5) {
                 throw new InvalidConfigException('value');
             }
 
             $this->value = round($this->value, 1);
-        }
 
-        if (isset($this->count)) {
-            if (! is_numeric($this->count) || ($this->count < 0)) {
-                throw new InvalidConfigException('count');
-            }
-
-            $this->count = (int)$this->count;
-        }
-
-        if (isset($this->value)) {
             if (! isset($this->options['title'])) {
                 if ($this->value > 0) {
                     $this->options['title'] = sprintf('%.1f', $this->value);
@@ -88,7 +82,7 @@ class RatingWidget extends Widget
     /**
      * @inheritDoc
      */
-    public function run() : string
+    public function run(): string
     {
         if (! isset($this->value)) {
             return '';

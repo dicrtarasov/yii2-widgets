@@ -1,9 +1,9 @@
 <?php
 /*
- * @copyright 2019-2021 Dicr http://dicr.org
+ * @copyright 2019-2022 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
  * @license MIT
- * @version 12.08.21 22:01:18
+ * @version 04.01.22 18:31:58
  */
 
 declare(strict_types = 1);
@@ -20,7 +20,7 @@ use function range;
 class RatingInput extends InputWidget
 {
     /** @var string тэг виджета */
-    public $tag = 'span';
+    public string $tag = 'span';
 
     /**
      * @inheritDoc

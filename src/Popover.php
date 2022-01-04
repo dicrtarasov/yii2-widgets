@@ -1,7 +1,9 @@
 <?php
 /*
+ * @copyright 2019-2022 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 30.10.20 21:31:40
+ * @license MIT
+ * @version 04.01.22 18:31:58
  */
 
 declare(strict_types = 1);
@@ -35,13 +37,13 @@ class Popover extends Widget
     public const POS_RIGHT = 'right';
 
     /** @var string позиция */
-    public $position = self::POS_TOP;
+    public string $position = self::POS_TOP;
 
     /** @var ?string оборачиваемый контент */
-    public $content;
+    public ?string $content = null;
 
     /** @var ?string содержимое всплывашки */
-    public $popup;
+    public ?string $popup = null;
 
     /**
      * @inheritDoc

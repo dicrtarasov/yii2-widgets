@@ -1,7 +1,9 @@
 <?php
 /*
+ * @copyright 2019-2022 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 30.10.20 21:33:43
+ * @license MIT
+ * @version 04.01.22 18:41:31
  */
 
 declare(strict_types = 1);
@@ -15,14 +17,14 @@ use yii\base\InvalidConfigException;
  */
 class TimeFlagWidget extends InputWidget
 {
-    /** @var string datetime формат */
-    public $format;
+    /** @var ?string datetime формат */
+    public ?string $format = null;
 
     /**
      * @inheritDoc
      * @throws InvalidConfigException
      */
-    public function run() : string
+    public function run(): string
     {
         $this->options['labelOptions'] = [
             'class' => 'control-label',

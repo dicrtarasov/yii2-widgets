@@ -1,11 +1,13 @@
 /*
+ * @copyright 2019-2022 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 09.01.21 18:07:54
+ * @license MIT
+ * @version 04.01.22 18:18:01
  */
 
 "use strict";
 
-(function (window, $) {
+((window, $) => {
     /**
      * Виджет выбора количества.
      *
@@ -13,10 +15,8 @@
      */
     function QuantitySelectorWidget()
     {
-        // noinspection ES6ConvertVarToLetConst
-        var self = this;
-        // noinspection ES6ConvertVarToLetConst
-        var selector = '.widget-quantity-selector';
+        const self = this;
+        const selector = '.widget-quantity-selector';
 
         /**
          * Обработка клика по кнопкам.
@@ -26,16 +26,11 @@
         self.handleButton = function (e) {
             e.preventDefault();
 
-            // noinspection ES6ConvertVarToLetConst
-            var $button = $(this);
-            // noinspection ES6ConvertVarToLetConst
-            var $input = $button.closest(selector).find('.input');
-            // noinspection ES6ConvertVarToLetConst
-            var value = parseInt(String($input.val())) || 1;
-            // noinspection ES6ConvertVarToLetConst
-            var step = parseInt($input.prop('step')) || 1;
-            // noinspection ES6ConvertVarToLetConst
-            var side = $button.hasClass('minus') ? -1 : 1;
+            const $button = $(this);
+            const $input = $button.closest(selector).find('.input');
+            const value = parseInt(String($input.val())) || 1;
+            const step = parseInt($input.prop('step')) || 1;
+            const side = $button.hasClass('minus') ? -1 : 1;
 
             $input.val(value + step * side);
             $input.trigger('change');
@@ -50,21 +45,16 @@
             e.preventDefault();
             e.stopPropagation();
 
-            // noinspection ES6ConvertVarToLetConst
-            var $input = $(this);
-            // noinspection ES6ConvertVarToLetConst
-            var val = parseInt(String($input.val()));
-            // noinspection ES6ConvertVarToLetConst
-            var newVal = val || 1;
+            const $input = $(this);
+            const val = parseInt(String($input.val()));
+            let newVal = val || 1;
 
-            // noinspection ES6ConvertVarToLetConst
-            var min = parseInt($input.prop("min")) || 1;
+            const min = parseInt($input.prop("min")) || 1;
             if (newVal < min) {
                 newVal = min;
             }
 
-            // noinspection ES6ConvertVarToLetConst
-            var max = parseInt($input.prop("max"));
+            const max = parseInt($input.prop("max"));
             if (!isNaN(max) && newVal > max) {
                 newVal = max;
             }
@@ -79,7 +69,7 @@
         /**
          * Инициализация виджета.
          */
-        self.init = function () {
+        self.init = () => {
             // noinspection JSCheckFunctionSignatures,JSStringConcatenationToES6Template
             $(window.document)
                 .off(selector)

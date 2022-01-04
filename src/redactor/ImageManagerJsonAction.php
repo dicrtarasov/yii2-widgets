@@ -1,16 +1,15 @@
 <?php
 /*
- * @copyright 2019-2021 Dicr http://dicr.org
+ * @copyright 2019-2022 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
  * @license MIT
- * @version 19.01.21 19:42:43
+ * @version 04.01.22 18:41:27
  */
 
 declare(strict_types = 1);
 namespace dicr\widgets\redactor;
 
 use Yii;
-use yii\base\Exception;
 use yii\helpers\FileHelper;
 use yii\web\BadRequestHttpException;
 
@@ -22,8 +21,7 @@ use function count;
 class ImageManagerJsonAction extends RedactorAction
 {
     /**
-     * @return array
-     * @throws Exception
+     * @inheritDoc
      */
     public function run(): array
     {

@@ -1,7 +1,9 @@
 <?php
 /*
+ * @copyright 2019-2022 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 30.10.20 21:31:02
+ * @license MIT
+ * @version 04.01.22 18:19:10
  */
 
 declare(strict_types = 1);
@@ -10,7 +12,7 @@ namespace dicr\widgets;
 use yii\base\InvalidConfigException;
 use yii\helpers\ArrayHelper;
 
-use function get_class;
+use function gettype;
 use function is_array;
 use function is_string;
 use function ob_get_clean;
@@ -22,7 +24,7 @@ use function ob_start;
 class HoverGallery extends Widget
 {
     /** @var string корневой тег галереи */
-    public $tag = 'figure';
+    public string $tag = 'figure';
 
     /**
      * @var string[]|array[] картинки
@@ -31,16 +33,16 @@ class HoverGallery extends Widget
      * - string url - картинки
      * - array [0 => url картинки, остальные - опции для Html::img]
      */
-    public $images;
+    public array $images;
 
     /** @var float соотношение сторон картинок */
-    public $ratio = 4 / 3;
+    public float $ratio = 4 / 3;
 
     /**
      * @inheritDoc
      * @throws InvalidConfigException
      */
-    public function init() : void
+    public function init(): void
     {
         parent::init();
 
@@ -61,7 +63,7 @@ class HoverGallery extends Widget
             } elseif (is_string($image)) {
                 $image = [$image];
             } else {
-                throw new InvalidConfigException('неизвестный тип image: ' . get_class($image));
+                throw new InvalidConfigException('неизвестный тип image: ' . gettype($image));
             }
         }
 
@@ -84,7 +86,7 @@ class HoverGallery extends Widget
     /**
      * @inheritDoc
      */
-    public function run() : string
+    public function run(): string
     {
         if (empty($this->images)) {
             return '';
@@ -96,6 +98,7 @@ class HoverGallery extends Widget
         echo Html::beginTag($this->tag, $this->options);
         echo $this->renderSlides();
         echo Html::endTag($this->tag);
+
         return ob_get_clean();
     }
 
@@ -118,6 +121,7 @@ class HoverGallery extends Widget
         }
 
         echo Html::endTag('div');
+
         return ob_get_clean();
     }
 
@@ -141,6 +145,7 @@ class HoverGallery extends Widget
         echo Html::img($src, $options);
         echo Html::tag('div', '', ['class' => 'gallery-label']);
         echo Html::endTag('div');
+
         return ob_get_clean();
     }
 }

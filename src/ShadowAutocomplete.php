@@ -1,9 +1,9 @@
 <?php
 /*
- * @copyright 2019-2021 Dicr http://dicr.org
+ * @copyright 2019-2022 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
  * @license MIT
- * @version 12.08.21 22:11:23
+ * @version 04.01.22 18:37:59
  */
 
 declare(strict_types = 1);
@@ -17,7 +17,6 @@ use yii\web\JsExpression;
 
 use function ob_get_clean;
 use function ob_start;
-use function trim;
 
 /**
  * Авто-подсказка по текстовому полю при заполнении значения скрытого поля, например id.
@@ -27,20 +26,19 @@ use function trim;
 class ShadowAutocomplete extends InputWidget
 {
     /** @var string название аттрибута suggestion, значение которого заполняется в скрытое поле */
-    public $shadowValueField = 'id';
+    public string $shadowValueField = 'id';
 
     /** @var string начальное значение, отображаемое в поле подсказки */
-    public $initialDisplayValue = '';
+    public string $initialDisplayValue = '';
 
     /**
      * @inheritDoc
      * @throws InvalidConfigException
      */
-    public function init() : void
+    public function init(): void
     {
         parent::init();
 
-        $this->shadowValueField = trim($this->shadowValueField);
         if (empty($this->shadowValueField)) {
             throw new InvalidConfigException('shadowValueField');
         }
@@ -74,7 +72,7 @@ class ShadowAutocomplete extends InputWidget
      * @inheritDoc
      * @throws InvalidConfigException
      */
-    public function run() : string
+    public function run(): string
     {
         /** @var string тип поля подсказки */
         $type = ArrayHelper::remove($this->options, 'type', 'search');

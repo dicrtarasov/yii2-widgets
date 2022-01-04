@@ -1,7 +1,9 @@
 <?php
 /*
+ * @copyright 2019-2022 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 30.10.20 21:33:29
+ * @license MIT
+ * @version 04.01.22 18:39:14
  */
 
 declare(strict_types = 1);
@@ -20,20 +22,19 @@ use function ob_start;
  */
 class Stripe extends Widget
 {
-    /** @var string HTML-код иконки в заголовке */
-    public $icon;
+    /** @var ?string HTML-код иконки в заголовке */
+    public ?string $icon = null;
 
-    /** @var string */
-    public $title;
+    public ?string $title = null;
 
     /** @var bool стрелки в заголовке виджета */
-    public $headArrows = false;
+    public bool $headArrows = false;
 
     /** @var bool стрелки в теле виджета */
-    public $bodyArrows = true;
+    public bool $bodyArrows = true;
 
     /** @var string[] блоки ленты */
-    public $slides;
+    public array $slides;
 
     /**
      * @inheritDoc

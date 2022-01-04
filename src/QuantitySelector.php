@@ -1,7 +1,9 @@
 <?php
 /*
+ * @copyright 2019-2022 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 20.12.20 18:18:23
+ * @license MIT
+ * @version 04.01.22 18:31:58
  */
 
 declare(strict_types = 1);
@@ -21,22 +23,22 @@ class QuantitySelector extends InputWidget
     public const BUTTONS_MODE_PANEL = 'panel';
 
     /** @var string схема кнопок */
-    public $buttonsMode = self::BUTTONS_MODE_ASIDE;
+    public string $buttonsMode = self::BUTTONS_MODE_ASIDE;
 
     /** @var string контент кнопки минус */
-    public $buttonMinusContent = '-';
+    public string $buttonMinusContent = '-';
 
     /** @var string контент кнопки плюс */
-    public $buttonPlusContent = '+';
+    public string $buttonPlusContent = '+';
 
     /** @var ?int минимальное значение */
-    public $min = 1;
+    public ?int $min = 1;
 
     /** @var ?int|null максимальное значение */
-    public $max = 99999;
+    public ?int $max = 99999;
 
     /** @var ?int шаг */
-    public $step = 1;
+    public ?int $step = 1;
 
     /**
      * @inheritDoc
@@ -51,7 +53,7 @@ class QuantitySelector extends InputWidget
     /**
      * @inheritDoc
      */
-    public function run()
+    public function run(): string
     {
         QuantitySelectorAsset::register($this->view);
 

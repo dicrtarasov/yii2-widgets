@@ -1,11 +1,11 @@
 /*
- * @copyright 2019-2021 Dicr http://dicr.org
+ * @copyright 2019-2022 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
  * @license MIT
- * @version 03.10.21 20:01:28
+ * @version 04.01.22 18:18:02
  */
 
-(function (window, $) {
+((window, $) => {
     'use strict';
 
     /**
@@ -31,13 +31,13 @@
          * @param {object|null} opts
          * @return {JQuery}
          */
-        self.addToast = function (content, opts = {}) {
+        self.addToast = (content, opts = {}) => {
             opts = $.extend({}, self.options, opts || {});
 
             // noinspection JSCheckFunctionSignatures
             const $toast = $(`<div class="toast"></div>`).append(content);
 
-            $toast.on('hidden.bs.toast', function (e) {
+            $toast.on('hidden.bs.toast', e => {
                 // noinspection JSUnresolvedFunction
                 $(e.target).toast('dispose');
                 $(e.target).remove();
@@ -67,16 +67,14 @@
          * @param {object} opts
          * @return {JQuery}
          */
-        self.createToast = function (textClass, header, message, opts) {
-            return self.addToast(
-                `<div class="toast-header">
+        self.createToast = (textClass, header, message, opts) => self.addToast(
+            `<div class="toast-header">
                 <strong class="${textClass || ''}">${header}</strong>
                 <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
             </div>
             <div class="toast-body ${textClass || ''}">${message}</div>`,
-                opts
-            );
-        };
+            opts
+        );
 
         /**
          * Добавить тост с ошибкой.
@@ -115,22 +113,22 @@
         };
 
         // создаем тосты из опций
-        options.success && options.success.forEach(function (msg) {
+        options.success && options.success.forEach(msg => {
             self.success(msg);
         });
 
         // noinspection JSUnresolvedVariable
-        options.warnings && options.warnings.forEach(function (msg) {
+        options.warnings && options.warnings.forEach(msg => {
             self.warning(msg);
         });
 
         // noinspection JSUnresolvedVariable
-        options.errors && options.errors.forEach(function (msg) {
+        options.errors && options.errors.forEach(msg => {
             self.error(msg);
         });
 
         // noinspection JSUnresolvedVariable
-        options.toasts && options.toasts.forEach(function (content) {
+        options.toasts && options.toasts.forEach(content => {
             self.addToast(content);
         });
     }

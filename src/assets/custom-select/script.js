@@ -1,16 +1,15 @@
 /*
- * @copyright 2019-2021 Dicr http://dicr.org
+ * @copyright 2019-2022 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
  * @license MIT
- * @version 03.10.21 20:03:24
+ * @version 04.01.22 18:15:04
  */
 
 "use strict";
 
-(function (window, $) {
-    // noinspection ES6ConvertVarToLetConst
+((window, $) => {
     /** @var {string} селектор класса виджета */
-    var selector = '.widget-custom-select';
+    const selector = '.widget-custom-select';
 
     /**
      * Искусственный элемент select.
@@ -32,8 +31,7 @@
      */
     function CustomSelectWidget(target)
     {
-        // noinspection ES6ConvertVarToLetConst
-        var self = this;
+        const self = this;
         self.dom = $(target);
         self.dom.$input = self.dom.children('input');
         self.dom.$btn = self.dom.children('button');
@@ -45,9 +43,8 @@
          *
          * @return {JQueryDeferred} ожидание установки меток
          */
-        self.updateWidth = function () {
-            // noinspection ES6ConvertVarToLetConst
-            var $def = $.Deferred();
+        self.updateWidth = () => {
+            const $def = $.Deferred();
             if (!self.dom.is(':visible')) {
                 return $def.resolve(false);
             }
@@ -58,13 +55,12 @@
             self.dom.$list.children('label').css({padding: 0});
 
             // ожидаем отрисовки
-            window.requestAnimationFrame(function () {
+            window.requestAnimationFrame(() => {
                 // рассчитываем максимальную ширину меток
                 self.labelWidth = 0;
 
                 self.dom.$list.children('label').each(function () {
-                    // noinspection ES6ConvertVarToLetConst
-                    var width = $(this).width();
+                    const width = $(this).width();
                     if (width > self.labelWidth) {
                         self.labelWidth = width;
                     }
@@ -79,12 +75,10 @@
                     self.labelWidth = undefined;
                 } else {
                     // метка кнопки
-                    // noinspection ES6ConvertVarToLetConst
-                    var $btnLabel = self.dom.$btn.children('label');
+                    const $btnLabel = self.dom.$btn.children('label');
 
                     // учитываем паддинги метки кнопки
-                    // noinspection ES6ConvertVarToLetConst
-                    var style = window.getComputedStyle($btnLabel[0]);
+                    const style = window.getComputedStyle($btnLabel[0]);
                     self.labelWidth = Math.ceil(
                         self.labelWidth + parseFloat(style.paddingLeft) + parseFloat(style.paddingRight)
                     );
@@ -102,21 +96,19 @@
         /**
          * Обновляет метки виджета по состоянию текущего значения
          */
-        self.updateLabels = function () {
+        self.updateLabels = () => {
             // удаляем пометку selected
             self.dom.$list.children('label.selected').removeClass('selected');
 
             // получаем текущее значение
-            // noinspection ES6ConvertVarToLetConst
-            var value = self.dom.$input.val();
+            const value = self.dom.$input.val();
 
             // находим метку с текущим значением
-            // noinspection ES6ConvertVarToLetConst
-            var $label = self.dom.$list.children('label[data-value="' + value + '"]');
+            const $label = self.dom.$list.children('label[data-value="' + value + '"]');
+
             if ($label.length > 0) {
                 // клонируем метку для кнопки
-                // noinspection ES6ConvertVarToLetConst
-                var $buttonLabel = $label.clone();
+                const $buttonLabel = $label.clone();
                 if (self.labelWidth) {
                     $buttonLabel.width(self.labelWidth);
                 }
@@ -139,7 +131,7 @@
          * @param {string|undefined} value
          * @returns {string|JQuery}
          */
-        self.val = function (value) {
+        self.val = value => {
             if (typeof value === 'undefined') {
                 return self.dom.$input.val();
             }
@@ -158,15 +150,14 @@
          * @param {object} items значения value => string| item{label, encode}
          * @return {JQueryDeferred} ожидание окончания добавления
          */
-        self.items = function (items) {
+        self.items = items => {
             // удаляем все элементы кроме placeholder
             self.dom.$list.children('label:not([data-value=""])').remove();
 
-            // noinspection ES6ConvertVarToLetConst
-            var values = Object.keys(items);
+            const values = Object.keys(items);
             if (values.length > 0) {
                 // конвертируем в объекты
-                values.forEach(function (i) {
+                values.forEach(i => {
                     if (typeof items[i] !== 'object') {
                         items[i] = {
                             label: items[i],
@@ -177,29 +168,23 @@
                 });
 
                 // сортируем по названию
-                values.sort(function (k1, k2) {
-                    return items[k1].label.localeCompare(items[k2].label);
-                });
+                values.sort((k1, k2) => items[k1]
+                    .label.localeCompare(items[k2].label));
 
                 // готовим новые метки
-                // noinspection ES6ConvertVarToLetConst
-                var labels = [];
-                // noinspection ES6ConvertVarToLetConst
-                var currentValue = String(self.dom.$input.val());
+                const labels = [];
+                const currentValue = String(self.dom.$input.val());
 
                 // конвертируем в метки
-                values.forEach(function (value) {
+                values.forEach(value => {
                     value = String(value);
 
-                    // noinspection ES6ConvertVarToLetConst
-                    var item = items[value];
-
+                    const item = items[value];
                     if (value === currentValue) {
                         item.class = item.class ? item.class + ' ' + 'selected' : 'selected';
                     }
 
-                    // noinspection ES6ConvertVarToLetConst
-                    var $label = $('<label/>', {class: item.class, 'data-value': value});
+                    const $label = $('<label/>', {class: item.class, 'data-value': value});
                     $label[item.encode ? 'text' : 'html'](item.label);
                     labels.push($label);
                 });
@@ -225,8 +210,8 @@
          * @param {Object|undefined} query параметры запроса url
          * @param {string} param название параметра запроса значением master
          */
-        self.setMaster = function ($master, url, query, param) {
-            $master.on('change', function (e, val) {
+        self.setMaster = ($master, url, query, param) => {
+            $master.on('change', (e, val) => {
                 const masterValue = parseInt(String(val)) || 0;
 
                 // отключенное состояние
@@ -250,7 +235,7 @@
                     // параметры загрузки
                     query[param] = masterValue;
 
-                    $.get(url, query).done(function (values) {
+                    $.get(url, query).done(values => {
                         self.items(values);
                     });
                 }
@@ -260,17 +245,16 @@
         // клики по кнопке
         // noinspection JSStringConcatenationToES6Template
         self.dom.$btn
-            .on('click' + selector, function (e) {
+            .on('click' + selector, e => {
                 e.preventDefault();
 
-                // noinspection ES6ConvertVarToLetConst
-                var isOpen = self.dom.hasClass('open');
+                const isOpen = self.dom.hasClass('open');
                 if (isOpen) {
                     // закрываем
                     self.dom.removeClass('open');
                 } else {
                     // если элемент был скрыт ранее и не рассчитался размер
-                    $.when(self.labelWidth || self.updateWidth()).done(function () {
+                    $.when(self.labelWidth || self.updateWidth()).done(() => {
                         // открываем
                         self.dom.addClass('open');
 
@@ -289,8 +273,7 @@
                 self.dom.removeClass('open');
 
                 // выбранное значение
-                // noinspection ES6ConvertVarToLetConst
-                var value = $(this).data('value');
+                const value = $(this).data('value');
 
                 // устанавливаем новое значение
                 self.val(value);
@@ -313,10 +296,9 @@
 
         // клики по документу
         // noinspection JSStringConcatenationToES6Template
-        $(window.document).on('click' + selector, function (e) {
+        $(window.document).on('click' + selector, e => {
             // пропускаем клики по кнопке виджета
-            // noinspection ES6ConvertVarToLetConst
-            var $widget = $(e.target).closest(selector);
+            const $widget = $(e.target).closest(selector);
             if ($widget.length < 1 || $widget[0] !== self.dom[0]) {
                 self.dom.removeClass('open');
             }

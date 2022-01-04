@@ -1,9 +1,9 @@
 <?php
 /*
- * @copyright 2019-2021 Dicr http://dicr.org
+ * @copyright 2019-2022 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
  * @license MIT
- * @version 19.01.21 19:42:12
+ * @version 04.01.22 18:24:17
  */
 
 declare(strict_types = 1);
@@ -27,8 +27,7 @@ use const PATHINFO_FILENAME;
 class FileManagerJsonAction extends RedactorAction
 {
     /**
-     * @return array
-     * @throws HttpException
+     * @inheritDoc
      */
     public function run(): array
     {

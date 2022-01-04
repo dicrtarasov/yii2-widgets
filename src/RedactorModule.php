@@ -1,7 +1,9 @@
 <?php
 /*
+ * @copyright 2019-2022 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
- * @version 30.10.20 21:33:12
+ * @license MIT
+ * @version 04.01.22 18:37:20
  */
 
 declare(strict_types = 1);
@@ -29,25 +31,25 @@ class RedactorModule extends Module
     public $defaultRoute = 'upload';
 
     /** @var string директория для загрузки картинок */
-    public $uploadDir = '@webroot/uploads';
+    public string $uploadDir = '@webroot/uploads';
 
     /** @var string базовый URL загруженных картинок */
-    public $uploadUrl = '@web/uploads';
+    public string $uploadUrl = '@web/uploads';
 
     /** @var array расширения картинок, разрешенных для загрузки */
-    public $imageAllowExtensions = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'svg'];
+    public array $imageAllowExtensions = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'svg'];
 
-    /** @var array расширения файлов, разрешенных для загрузки */
-    public $fileAllowExtensions;
+    /** @var array|null расширения файлов, разрешенных для загрузки */
+    public ?array $fileAllowExtensions = null;
 
     /** @var bool раздельно хранить файлы пользователей */
-    public $separateOwner = false;
+    public bool $separateOwner = false;
 
     /**
      * {@inheritDoc}
      * @throws InvalidConfigException
      */
-    public function init() : void
+    public function init(): void
     {
         parent::init();
 
@@ -99,7 +101,7 @@ class RedactorModule extends Module
      * @param string $filename
      * @return string
      */
-    public function filePath(string $filename) : string
+    public function filePath(string $filename): string
     {
         return $this->saveDir . DIRECTORY_SEPARATOR . $filename;
     }
@@ -110,7 +112,7 @@ class RedactorModule extends Module
      * @param string $filename
      * @return string
      */
-    public function fileUrl(string $filename) : string
+    public function fileUrl(string $filename): string
     {
         $url = $this->uploadUrl;
 
