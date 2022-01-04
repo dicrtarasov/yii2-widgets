@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "79e51f4a15db2e0b66971a7f7e7108bc",
+    "content-hash": "896f6e6c3b35a20e08286b4e85afbfe4",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -162,7 +162,7 @@
         },
         {
             "name": "dicr/yii2-asset",
-            "version": "2.1.0",
+            "version": "3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/dicr/yii2-asset.git",
