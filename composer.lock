@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "14ccfd8d5390eca0488092faeaa969be",
+    "content-hash": "79e51f4a15db2e0b66971a7f7e7108bc",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -214,16 +214,16 @@
         },
         {
             "name": "dicr/yii2-helper",
-            "version": "5.0.3",
+            "version": "6.0.0",
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/dicr/yii2-helper.git",
-                "reference": "282610886a2526fcbd8387b4aa597883d96fbb69"
+                "reference": "76d441e38027289a70f07ed4aa029913f20c5326"
             },
             "require": {
                 "ext-intl": "*",
                 "ext-mbstring": "*",
-                "php": "~7.4 || ~8.0.1",
+                "php": "~8.0",
                 "yiisoft/yii2": "~2.0",
                 "yiisoft/yii2-bootstrap5": "~2.0"
             },
@@ -269,7 +269,7 @@
             "support": {
                 "source": "https://gitlab.com/dicr/yii2-helper.git"
             },
-            "time": "2021-10-31T21:07:48+00:00"
+            "time": "2022-01-04T16:03:47+00:00"
         },
         {
             "name": "ezyang/htmlpurifier",
