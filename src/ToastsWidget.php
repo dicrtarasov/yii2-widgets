@@ -3,7 +3,7 @@
  * @copyright 2019-2022 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
  * @license MIT
- * @version 04.01.22 18:20:49
+ * @version 05.01.22 07:04:59
  */
 
 declare(strict_types = 1);
@@ -17,17 +17,17 @@ use yii\helpers\Json;
  */
 class ToastsWidget extends Widget
 {
-    /** @var string[] ошибки */
-    public array $errors = [];
+    /** @var string[]|null ошибки */
+    public ?array $errors = null;
 
-    /** @var string[] предупреждения */
-    public array $warnings = [];
+    /** @var string[]|null предупреждения */
+    public ?array $warnings = null;
 
-    /** @var string[] сообщения об успехе */
-    public array $success = [];
+    /** @var string[]|null сообщения об успехе */
+    public ?array $success = null;
 
-    /** @var string[] произвольный контент внутри <div class="toast"></div> */
-    public array $toasts = [];
+    /** @var string[]|null произвольный контент внутри <div class="toast"></div> */
+    public ?array $toasts = null;
 
     /** @var bool анимация */
     public bool $animation = true;
@@ -35,8 +35,8 @@ class ToastsWidget extends Widget
     /** @var int задержка скрытия, 0/false - запретить авто-скрытие */
     public int $autohide = 10000;
 
-    /** @var string|false ключ сессии flash */
-    public string|false $flashKey = 'toasts';
+    /** @var ?string ключ сессии flash */
+    public ?string $flashKey = 'toasts';
 
     /**
      * @inheritDoc
