@@ -3,7 +3,7 @@
  * @copyright 2019-2022 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
  * @license MIT
- * @version 04.01.22 18:28:01
+ * @version 20.01.22 03:54:20
  */
 
 declare(strict_types = 1);
@@ -29,13 +29,13 @@ class FileUploadModel extends Model
     /** @var UploadedFile[] */
     public array $files = [];
 
-    /** @var string[] разрешенные расширения */
-    protected array $allowedExtensions = [];
+    /** @var string[]|null разрешенные расширения */
+    protected ?array $allowedExtensions = null;
 
     /**
      * Инициализация.
      */
-    public function init() : void
+    public function init(): void
     {
         parent::init();
 
