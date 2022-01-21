@@ -2,7 +2,7 @@
  * @copyright 2019-2022 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
  * @license MIT
- * @version 04.01.22 18:18:02
+ * @version 22.01.22 02:06:55
  */
 
 ((window, $) => {
@@ -113,22 +113,22 @@
         };
 
         // создаем тосты из опций
-        options.success && options.success.forEach(msg => {
+        options.success && Object.values(options.success).forEach(msg => {
             self.success(msg);
         });
 
         // noinspection JSUnresolvedVariable
-        options.warnings && options.warnings.forEach(msg => {
+        options.warnings && Object.values(options.warnings).forEach(msg => {
             self.warning(msg);
         });
 
         // noinspection JSUnresolvedVariable
-        options.errors && options.errors.forEach(msg => {
+        options.errors && Object.values(options.errors).forEach(msg => {
             self.error(msg);
         });
 
         // noinspection JSUnresolvedVariable
-        options.toasts && options.toasts.forEach(content => {
+        options.toasts && Object.values(options.toasts).forEach(content => {
             self.addToast(content);
         });
     }
