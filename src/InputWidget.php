@@ -9,10 +9,27 @@
 declare(strict_types = 1);
 namespace dicr\widgets;
 
+use yii\helpers\Json;
+
 /**
  * Class InputWidget
  */
 class InputWidget extends \yii\bootstrap5\InputWidget
 {
-    // noop
+    /**
+     * @inheritDoc
+     */
+    protected function registerPlugin(string $name): void
+    {
+        $view = $this->getView();
+        $id = $this->options['id'];
+
+        if ($this->clientOptions !== false) {
+            $options = empty($this->clientOptions) ? '' : Json::htmlEncode($this->clientOptions);
+            $js = "jQuery('#$id').$name($options);";
+            $view->registerJs($js);
+        }
+
+        $this->registerClientEvents();
+    }
 }
